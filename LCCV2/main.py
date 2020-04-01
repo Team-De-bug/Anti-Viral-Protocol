@@ -1,21 +1,21 @@
-#imports
+# Imports
 import os
 import pygame
 
-#working filepaths
-WRKFOLDER = os.path.dirname(__file__)
-FINALPATH = os.path.join(WRKFOLDER, 'resources/final')
+# Working file paths
+WORK_FOLDER = os.path.dirname(__file__)
+FINAL_PATH = os.path.join(WORK_FOLDER, 'resources/final')
 
-#initialise
+# Starting pygame
 pygame.init()
 
-#setup
+# Setting the screen up
 SCREEN = pygame.display.set_mode((800, 640))
 pygame.display.set_caption("LCC GAME")
-ICON = pygame.image.load(os.path.join(FINALPATH, 'GameIcon_64.png'))
+ICON = pygame.image.load(os.path.join(FINAL_PATH, 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
-#keeping screen open
+# Running the game
 RUNNING = True
 while RUNNING:
     for event in pygame.event.get():
