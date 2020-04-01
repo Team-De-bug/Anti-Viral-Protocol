@@ -20,5 +20,6 @@ RUNNING = True
 while RUNNING:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            RUNNING = False   
-    SCREEN.fill((133, 37, 20))
+            RUNNING = False
+    SCREEN.fill((105, 26, 26))
+    pygame.display.update()
