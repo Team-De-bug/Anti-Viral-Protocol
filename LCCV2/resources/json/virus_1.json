@@ -1,0 +1,15 @@
+{
+    "name" : "Virus_1",
+    "level" : 1,
+    "health" : 100,
+    "attributes" : [
+        {
+            "type" : ["Virus", "NPC", "Enemy", "Level-1"],
+            "immunity" : 100, //out of 100
+            "damageFromBullet" : [50, 75, 100, 100, 100], //[pistol, machine-rifle, shotgun, sniper-body, sniper-headshot]
+            "DamageFromVirus_1" : 0,
+            "damageFromInfection" : 0 //per tick
+        }
+    ]
+    
+}
