@@ -22,6 +22,11 @@ class Entity:
     def re_gen(self, hp):
         self.hp += hp
 
+    # Load animations
+    @classmethod
+    def load_anim(cls):
+        print("animation lot loaded")
+
 
 class Enemy(Entity):
 
