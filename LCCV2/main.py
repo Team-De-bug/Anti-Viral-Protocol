@@ -4,7 +4,7 @@ import pygame
 
 # Working file paths
 WORK_FOLDER = os.path.dirname(__file__)
-FINAL_PATH = os.path.join(WORK_FOLDER, 'resources/final')
+FINAL_PATH = os.path.join(WORK_FOLDER, 'resources/Images/Icon')
 
 # Starting pygame
 pygame.init()
