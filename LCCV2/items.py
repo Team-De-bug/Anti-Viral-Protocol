@@ -2,7 +2,6 @@ class Weapons:
 
     # Variables
     ammo = 100
-    damage = 10
     hold_limit = 25
     on_load = 25
 
@@ -22,3 +21,8 @@ class Weapons:
     # Loading ammo func
     def load(self):
         self.ammo -= self.hold_limit - self.on_load
+
+    # draw method fallback
+    @staticmethod
+    def draw():
+        print("implement draw method")
