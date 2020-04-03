@@ -15,11 +15,17 @@ pygame.display.set_caption("LCC GAME")
 ICON = pygame.image.load(os.path.join(IMAGES_PATH, 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
+
 # Running the game
-RUNNING = True
-while RUNNING:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            RUNNING = False
-    SCREEN.fill((105, 26, 26))
-    pygame.display.update()
+def main():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        SCREEN.fill((105, 26, 26))
+        pygame.display.update()
+
+
+if __name__ == "__main__":
+    main()
