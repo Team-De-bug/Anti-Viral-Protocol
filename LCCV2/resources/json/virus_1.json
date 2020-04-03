@@ -1,6 +1,6 @@
 {
     "name" : "Virus_1",
-    "level" : 1,
+    "difficulty" : 1,
     "health" : 100,
     "attributes" : [
         {
