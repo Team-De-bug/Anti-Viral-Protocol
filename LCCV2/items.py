@@ -19,5 +19,6 @@ class Weapons:
     def fire(self):
         self.ammo -= 1
 
+    # Loading ammo func
     def load(self):
         self.ammo -= self.hold_limit - self.on_load

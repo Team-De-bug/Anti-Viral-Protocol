@@ -6,13 +6,14 @@ class Entity:
     facing = None
     speed = 10
 
-    def __init__(self, x, y, width, height):
+    width = 50
+    height = 50
+
+    def __init__(self, x, y,):
 
         # Getting the character location setup
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
 
     # Taking health away
     def hurt(self, damage):
@@ -37,3 +38,13 @@ class Enemy(Entity):
     # Class initialization
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    # Move function fall back
+    @staticmethod
+    def move():
+        print("move not created")
+
+    # Draw method fallback
+    @staticmethod
+    def draw(self):
+        print("draw method not made")
