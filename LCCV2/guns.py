@@ -1,5 +1,4 @@
 from .items import Weapons
-import pygame
 
 
 # Pistol
