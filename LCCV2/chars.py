@@ -1,3 +1,6 @@
+import pygame
+
+
 # Entity class for all characters
 class Entity:
 
@@ -23,11 +26,6 @@ class Entity:
     def re_gen(self, hp):
         self.hp += hp
 
-    # Load animations
-    @classmethod
-    def load_anim(cls):
-        print("animation lot loaded")
-
 
 class Enemy(Entity):
 
@@ -39,12 +37,16 @@ class Enemy(Entity):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    # load anim_function
+    def load_anim(self, path):
+        self.idle = pygame.image.load(path)
+        self.moving = pygame.image.load(path)
+        self.attack = pygame.image.load(path)
+
     # Move function fall back
-    @staticmethod
-    def move():
-        print("move not created")
+    def move(self):
+        pass
 
     # Draw method fallback
-    @staticmethod
     def draw(self):
-        print("draw method not made")
+        pass

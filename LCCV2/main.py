@@ -1,7 +1,6 @@
 # Imports
 import os
 import pygame
-from LCCV2.guns import Pistol
 
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
