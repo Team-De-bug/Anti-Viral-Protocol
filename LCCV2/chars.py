@@ -50,3 +50,33 @@ class Enemy(Entity):
     # Draw method fallback
     def draw(self):
         pass
+
+
+# Main player class
+class Player(Entity):
+
+    speed = 1
+
+    # loading animation function
+    def load_anim(self, path):
+
+        # empty hand animations
+        self.anim = pygame.image.load(path)
+        '''
+        self.anim = {"idle_L": [], "jumping_L": [], "running_L": [],
+                     "idle_R": [], "jumping_R": [], "running_R": []}
+        '''
+    # Moving control
+    def move(self):
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_RIGHT]:
+            self.x += self.speed
+
+        if keys[pygame.K_LEFT]:
+            self.x -= self.speed
+
+    # rendering function
+    def draw(self, win):
+        win.blit(self.anim, (self.x, self.y))
