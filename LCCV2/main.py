@@ -24,7 +24,8 @@ man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
 clock = pygame.time.Clock()
 
 # Setting up the platform
-platform = MockPlatform(800, 50, x=0, y=600)
+platform = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=500)]
+
 
 # Running the game
 def main():
@@ -43,7 +44,8 @@ def main():
 def redraw(win):
     win.fill((105, 26, 26))
     man.draw(win)
-    platform.draw(win)
+    platform[0].draw(win)
+    platform[1].draw(win)
     pygame.display.update()
 
 

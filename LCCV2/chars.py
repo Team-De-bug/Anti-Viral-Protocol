@@ -57,7 +57,7 @@ class Player(Entity):
 
     height = 128
     speed = 10
-    vel = 5
+    vel = 20
     jumping = False
     on_platform = False
 
@@ -83,7 +83,7 @@ class Player(Entity):
 
         if keys[pygame.K_UP] and self.on_platform:
             if not self.jumping:
-                self.vel = 10
+                self.vel = 20
                 self.jumping = True
 
         if self.jumping and self.vel > 0:
@@ -97,14 +97,18 @@ class Player(Entity):
             self.y += self.vel
             self.vel += 1
 
-    def on_ground(self, platform):
-        if (platform.y + platform.height) > (self.y + self.height) >= platform.y:
-            self.on_platform = True
-            self.vel = 10
-            self.y = platform.y - self.height
+    def on_ground(self, platforms):
 
-        else:
-            self.on_platform = False
+        for platform in platforms:
+            x_on_platform = platform.x + platform.width > self.x > platform.x or platform.x + platform.width > (self.x + self.width) > platform.x
+            if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
+                self.on_platform = True
+                self.vel = 20
+                self.y = platform.y - self.height
+                break
+
+            else:
+                self.on_platform = False
 
     # rendering function
     def draw(self, win):
