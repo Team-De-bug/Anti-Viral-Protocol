@@ -1,4 +1,4 @@
-from .items import Weapons
+from LCCV2.items import Weapons
 
 
 # Pistol
@@ -8,7 +8,6 @@ class Pistol(Weapons):
     on_load = 10
     width = 10
     height = 10
-    anim = None
 
 
 # Shotgun
@@ -18,7 +17,6 @@ class Shotgun(Weapons):
     on_load = 1
     width = 10
     height = 10
-    anim = None
 
 
 # Machine-gun
@@ -28,7 +26,6 @@ class MachineGun(Weapons):
     on_load = 50
     width = 10
     height = 10
-    anim = None
 
 
 # rocket-Launcher
@@ -38,4 +35,3 @@ class RocketLauncher(Weapons):
     on_load = 5
     width = 10
     height = 10
-    anim = None
