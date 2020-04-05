@@ -2,6 +2,7 @@
 import os
 import pygame
 from LCCV2.chars import Player
+from LCCV2.platforms import MockPlatform
 
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
@@ -19,6 +20,11 @@ pygame.display.set_icon(ICON)
 man = Player(x=10, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
 
+# Setting up the clock
+clock = pygame.time.Clock()
+
+# Setting up the platform
+platform = MockPlatform(800, 50, x=0, y=600)
 
 # Running the game
 def main():
@@ -28,6 +34,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         man.move()
+        man.on_ground(platform)
+        clock.tick(30)
         redraw(win)
 
 
@@ -35,6 +43,7 @@ def main():
 def redraw(win):
     win.fill((105, 26, 26))
     man.draw(win)
+    platform.draw(win)
     pygame.display.update()
 
 
