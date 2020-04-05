@@ -77,20 +77,47 @@ class Player(Entity):
 
         if keys[pygame.K_RIGHT]:
 
-            if self.x < 650:
-                self.x += self.speed
+            collision_x = None
+            collision_y = None
 
-            else:
-                for platform in platforms:
-                    platform.scrollx(self.speed, -1)
+            for platform in platforms:
+                collision_x = [(self.x + self.width) > platform.x > self.x,
+                               (self.x + self.width) > platform.x + platform.width > self.x]
+                collision_y = [(self.y + self.height) > platform.y > self.y,
+                               (self.y + self.height) > platform.y + platform.height > self.y]
+
+                if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
+                    break
+
+            if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
+                if self.x < 650:
+                    self.x += self.speed
+
+                else:
+                    for platform in platforms:
+                        platform.scrollx(self.speed, -1)
 
         elif keys[pygame.K_LEFT]:
-            if self.x > 100:
-                self.x -= self.speed
 
-            else:
-                for platform in platforms:
-                    platform.scrollx(self.speed, 1)
+            collision_x = None
+            collision_y = None
+
+            for platform in platforms:
+                collision_x = [(self.x + self.width) > platform.x > self.x,
+                               (self.x + self.width) > platform.x + platform.width > self.x]
+                collision_y = [(self.y + self.height) > platform.y > self.y,
+                               (self.y + self.height) > platform.y + platform.height > self.y]
+
+                if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
+                    break
+
+            if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
+                if self.x < 650:
+                    self.x += self.speed
+
+                else:
+                    for platform in platforms:
+                        platform.scrollx(self.speed, 1)
 
         if keys[pygame.K_UP] and self.on_platform:
             if not self.jumping:

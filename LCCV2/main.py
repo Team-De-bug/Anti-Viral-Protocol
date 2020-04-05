@@ -17,14 +17,16 @@ ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
 # Setting up the player
-man = Player(x=150, y=100)
+man = Player(x=280, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
 
 # Setting up the clock
 clock = pygame.time.Clock()
 
 # Setting up the platform
-platform = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=400)]
+platforms = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=400),
+            MockPlatform(800, 50, x=800, y=600), MockPlatform(128, 25, x=900, y=400),
+            MockPlatform(800, 50, x=1600, y=600), MockPlatform(128, 25, x=1300, y=400)]
 
 
 # Running the game
@@ -34,8 +36,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        man.move(platform)
-        man.on_ground(platform)
+        man.move(platforms)
+        man.on_ground(platforms)
         clock.tick(30)
         redraw(win)
 
@@ -44,8 +46,8 @@ def main():
 def redraw(win):
     win.fill((105, 26, 26))
     man.draw(win)
-    platform[0].draw(win)
-    platform[1].draw(win)
+    for platform in platforms:
+        platform.draw(win)
     pygame.display.update()
 
 
