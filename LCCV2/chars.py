@@ -185,10 +185,10 @@ class Player(Entity):
             self.current_weapon = 2
 
         if keys[pygame.K_4]:
-            self.current_weapon = 3
+            self.current_weapon = 4
 
         if keys[pygame.K_5]:
-            self.current_weapon = 4
+            self.current_weapon = 3
 
     # rendering function
     def draw(self, win):
