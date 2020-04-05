@@ -18,7 +18,8 @@ pygame.display.set_icon(ICON)
 
 # Setting up the player
 man = Player(x=300, y=100)
-man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
+man.load_anim(IMAGES_PATH+"Characters/Player/Idle/Idle.png")
+man.init_guns()
 
 # Setting up the clock
 clock = pygame.time.Clock()
@@ -36,7 +37,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        man.move(platforms)
+        keys = pygame.key.get_pressed()
+        man.move(keys, platforms)
+        man.change_weapon(keys)
         man.on_ground(platforms)
         clock.tick(30)
         redraw(win)

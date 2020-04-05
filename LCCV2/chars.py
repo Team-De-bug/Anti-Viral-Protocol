@@ -1,4 +1,5 @@
 import pygame
+import LCCV2.guns as guns
 
 
 # Entity class for all characters
@@ -60,6 +61,24 @@ class Player(Entity):
     vel = 20
     jumping = False
     on_platform = False
+    weapon_list = ["none", "pistol"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
+    current_weapon = 0
+    weapons = {}
+
+    # Init guns
+    def init_guns(self):
+        # making the gun instances
+        self.weapons["none"] = None
+        self.weapons["pistol"] = guns.Pistol()
+        self.weapons["shotgun"] = guns.Shotgun()
+        self.weapons["RPG"] = guns.RocketLauncher()
+        self.weapons["AR"] = guns.MachineGun()
+
+        # loading the gun animations
+        self.weapons["pistol"].Load_anim("resources/Images/Characters/Player/Wielding_pistol_Idle/Weilding_Pistol.png")
+     #   self.weapons["shotgun"].Load_anim("resources/Images/Characters/Player/Wielding_Shotgun_Idle/Weilding_Shotgun.png")
+     #   self.weapons["RPG"].Load_anim("resources/Images/Characters/Player/Wielding_RPG_Idle/Weilding_RPG.png")
+     #   self.weapons["AR"].Load_anim("resources/Images/Characters/Player/Wielding_AR_Idle/Weilding_AR.png")
 
     # loading animation function
     def load_anim(self, path):
@@ -71,11 +90,9 @@ class Player(Entity):
                      "idle_R": [], "jumping_R": [], "running_R": []}
         '''
     # Moving control
-    def move(self, platforms):
+    def move(self, keys, platforms):
 
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_d]:
 
             collision_x = None
             collision_y = None
@@ -97,7 +114,7 @@ class Player(Entity):
                     for platform in platforms:
                         platform.scrollx(self.speed, -1)
 
-        elif keys[pygame.K_LEFT]:
+        elif keys[pygame.K_a]:
 
             collision_x = None
             collision_y = None
@@ -119,7 +136,7 @@ class Player(Entity):
                     for platform in platforms:
                         platform.scrollx(self.speed, 1)
 
-        if keys[pygame.K_UP] and self.on_platform:
+        if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
                 self.vel = 20
                 self.jumping = True
@@ -155,6 +172,20 @@ class Player(Entity):
             else:
                 self.on_platform = False
 
+    # Changing weapon function
+    def change_weapon(self, keys):
+
+        # Switching foreward
+        if keys[pygame.K_q] and self.current_weapon < 1:
+            self.current_weapon += 1
+        # Switching Back
+        if keys[pygame.K_e] and self.current_weapon > 0:
+            self.current_weapon -= 1
+
     # rendering function
     def draw(self, win):
-        win.blit(self.anim, (self.x, self.y))
+        if not self.weapons[self.weapon_list[self.current_weapon]]:
+            win.blit(self.anim, (self.x, self.y))
+
+        else:
+            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y))

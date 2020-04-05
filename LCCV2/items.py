@@ -1,3 +1,6 @@
+import os
+import pygame
+
 
 class Weapons:
 
@@ -6,8 +9,9 @@ class Weapons:
     ammo = 100
     hold_limit = 25
     on_load = 25
-    width = 10
-    height = 10
+
+    # animations
+    anim = []
 
     # ammo firing function
     def fire(self):
@@ -22,3 +26,7 @@ class Weapons:
         self.ammo += bullets
         if self.ammo > self.ammo_limit:
             self.ammo = self.ammo_limit
+
+    # Load animations
+    def Load_anim(self, path):
+        self.anim = pygame.image.load(path)
