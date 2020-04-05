@@ -165,7 +165,7 @@ class Player(Entity):
             x_on_platform = platform.x + platform.width > self.x > platform.x or platform.x + platform.width > (self.x + self.width) > platform.x
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
-                self.vel = 20
+                self.vel = 0
                 self.y = platform.y - self.height
                 break
 
