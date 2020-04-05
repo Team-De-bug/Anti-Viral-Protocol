@@ -112,8 +112,8 @@ class Player(Entity):
                     break
 
             if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
-                if self.x < 650:
-                    self.x += self.speed
+                if self.x > 200:
+                    self.x -= self.speed
 
                 else:
                     for platform in platforms:
