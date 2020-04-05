@@ -25,8 +25,8 @@ clock = pygame.time.Clock()
 
 # Setting up the platform
 platforms = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=400),
-            MockPlatform(800, 50, x=800, y=600), MockPlatform(128, 25, x=900, y=400),
-            MockPlatform(800, 50, x=1600, y=600), MockPlatform(128, 25, x=1300, y=400)]
+             MockPlatform(800, 50, x=800, y=600), MockPlatform(128, 25, x=900, y=400),
+             MockPlatform(800, 50, x=1600, y=600), MockPlatform(128, 25, x=1300, y=400)]
 
 
 # Running the game
