@@ -24,7 +24,7 @@ man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
 clock = pygame.time.Clock()
 
 # Setting up the platform
-platform = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=500)]
+platform = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=400)]
 
 
 # Running the game

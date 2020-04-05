@@ -108,6 +108,13 @@ class Player(Entity):
             self.y += self.vel
             self.vel += 1
 
+        if self.jumping:
+            for platform in platforms:
+                if (platform.x + platform.width > self.x > platform.x) or (platform.x + platform.width > self.x + self.width> platform.x):
+                    if platform.y + platform.height > self.y > platform.y:
+                        self.vel = 0
+                        break
+
     def on_ground(self, platforms):
 
         for platform in platforms:
