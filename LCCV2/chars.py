@@ -61,7 +61,7 @@ class Player(Entity):
     vel = 20
     jumping = False
     on_platform = False
-    weapon_list = ["none", "pistol"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
+    weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
     current_weapon = 0
     weapons = {}
 
@@ -75,10 +75,10 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].Load_anim("resources/Images/Characters/Player/Weilding_Pistol_Idle/Weilding_Pistol.png")
-        #self.weapons["shotgun"].Load_anim("resources/Images/Characters/Player/Weilding_Shotgun_Idle/Weilding_Shotgun.png")
-        #self.weapons["RPG"].Load_anim("resources/Images/Characters/Player/Weilding_RPG_Idle/Weilding_RPG.png")
-        #self.weapons["AR"].Load_anim("resources/Images/Characters/Player/Weilding_AR_Idle/Weilding_AR.png")
+        self.weapons["pistol"].load_anim("resources/Images/Characters/Player/Weilding_Pistol_Idle/Weilding_Pistol.png")
+        self.weapons["shotgun"].load_anim("resources/Images/Characters/Player/Weilding_Shotgun_Idle/Weilding_Shotgun.png")
+        self.weapons["RPG"].load_anim("resources/Images/Characters/Player/Weilding_RPG_Idle/Weilding_RPG.png")
+        self.weapons["AR"].load_anim("resources/Images/Characters/Player/Weilding_AR_Idle/Weilding_AR.png")
 
     # loading animation function
     def load_anim(self, path):
@@ -175,12 +175,20 @@ class Player(Entity):
     # Changing weapon function
     def change_weapon(self, keys):
 
-        # Switching foreward
-        if keys[pygame.K_q] and self.current_weapon < 1:
-            self.current_weapon += 1
-        # Switching Back
-        if keys[pygame.K_e] and self.current_weapon > 0:
-            self.current_weapon -= 1
+        if keys[pygame.K_1]:
+            self.current_weapon = 0
+
+        if keys[pygame.K_2]:
+            self.current_weapon = 1
+
+        if keys[pygame.K_3]:
+            self.current_weapon = 2
+
+        if keys[pygame.K_4]:
+            self.current_weapon = 3
+
+        if keys[pygame.K_5]:
+            self.current_weapon = 4
 
     # rendering function
     def draw(self, win):
