@@ -71,15 +71,26 @@ class Player(Entity):
                      "idle_R": [], "jumping_R": [], "running_R": []}
         '''
     # Moving control
-    def move(self):
+    def move(self, platforms):
 
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
-            self.x += self.speed
+
+            if self.x < 650:
+                self.x += self.speed
+
+            else:
+                for platform in platforms:
+                    platform.scrollx(self.speed, -1)
 
         elif keys[pygame.K_LEFT]:
-            self.x -= self.speed
+            if self.x > 100:
+                self.x -= self.speed
+
+            else:
+                for platform in platforms:
+                    platform.scrollx(self.speed, 1)
 
         if keys[pygame.K_UP] and self.on_platform:
             if not self.jumping:

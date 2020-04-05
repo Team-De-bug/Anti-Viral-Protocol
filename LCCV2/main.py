@@ -17,7 +17,7 @@ ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
 # Setting up the player
-man = Player(x=10, y=100)
+man = Player(x=150, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/idle.png")
 
 # Setting up the clock
@@ -34,7 +34,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        man.move()
+        man.move(platform)
         man.on_ground(platform)
         clock.tick(30)
         redraw(win)
