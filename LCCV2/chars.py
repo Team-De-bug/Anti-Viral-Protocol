@@ -59,16 +59,21 @@ class Enemy(Entity):
 class Player(Entity):
 
     height = 128
-    width = 50
+    width = 45
     speed = 10
     vel = 20
-    jumping = False
-    on_platform = False
-    weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
-    current_weapon = 0
-    status = ["walking", "running", "jumping"]
+
     weapons = {}
     anim = {}
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.status = ["idle_R", "walking_R", "running_R", "jumping_R", "idle_L", "walking_L", "running_L", "jumping_L"]
+        self.current_weapon = 0
+        self.weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
+        self.jumping = False
+        self.on_platform = False
+        self.status_num = 0
 
     # Init guns
     def init_guns(self):
@@ -158,8 +163,9 @@ class Player(Entity):
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, 1)
+
         else:
-            self.status = []
+            self.status_num = 0
 
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
@@ -218,7 +224,7 @@ class Player(Entity):
     # rendering function
     def draw(self, win):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
-            win.blit(self.anim["idle_R"], (self.x, self.y), (0, 0, self.width, self.height))
+            win.blit(self.anim[self.status[self.status_num]], (self.x, self.y), (0, 0, self.width, self.height))
 
         else:
             win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y),

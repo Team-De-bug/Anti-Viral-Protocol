@@ -10,9 +10,8 @@ class Platform:
         self.y = y
 
     # Loading sprite
-    @classmethod
-    def load_anim(cls, path):
-        cls.anim = pygame.image.load(path)
+    def load_anim(self, path):
+        self.anim = pygame.image.load(path)
 
     # moving platform function
     def scrollx(self, vel, direction):
@@ -35,3 +34,45 @@ class MockPlatform(Platform):
 
     def draw(self, win):
         pygame.draw.rect(win, (255, 255, 255), [self.x, self.y, self.width, self.height])
+
+
+class MovingTile(Platform):
+
+    x = 72
+    y = 32
+    width = 70
+    height = 50
+    dist_x = 70
+    dir_x = True
+    dist_y = 70
+    dir_y = True
+
+    def move_x(self, speed):
+        if self.dir_x:
+            self.x += speed
+            self.dist_x -= speed
+
+        else:
+            self.x -= speed
+            self.dist_x += speed
+
+        if self.dist_x > 64:
+            self.dir_x = True
+
+        elif self.dist_x < 0:
+            self.dir_x = False
+
+    def move_y(self, speed):
+        if self.dir_y:
+            self.y += speed
+            self.dist_y -= speed
+
+        else:
+            self.y -= speed
+            self.dist_y += speed
+
+        if self.dist_y > 64:
+            self.dir_y = True
+
+        elif self.dist_y < 0:
+            self.dir_y = False
