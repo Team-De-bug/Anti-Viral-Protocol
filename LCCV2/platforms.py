@@ -15,7 +15,7 @@ class Platform:
         self.anim = pygame.image.load(path)
 
     # moving platform function
-    def scrollx(self, vel, direction):
+    def scroll_x(self, vel, direction):
         self.x += vel * direction
 
     # rendering the sprite for the game

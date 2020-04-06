@@ -115,7 +115,7 @@ class Player(Entity):
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
     # Moving control
-    def move(self, keys, platforms, enemies):
+    def move(self, keys, platforms, enemies, bg_layers):
 
         # Update hitbox
         frame_num = self.frame % 8
@@ -151,15 +151,22 @@ class Player(Entity):
                     break
 
             if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
+
+                top = bg_layers[0]
+                bottom = bg_layers[1]
+
                 if self.x < 650:
                     self.x += self.speed
 
                 else:
                     for platform in platforms:
-                        platform.scrollx(self.speed, -1)
+                        platform.scroll_x(self.speed, -1)
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, -1)
+
+                    top.scroll_x(self.speed / 2, -1)
+                    bottom.scroll_x(self.speed / 4, -1)
 
                 if self.frame_time < self.frame_timer:
                     self.frame_time += 1
@@ -192,15 +199,22 @@ class Player(Entity):
                     break
 
             if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
+
+                top = bg_layers[0]
+                bottom = bg_layers[1]
+
                 if self.x > 200:
                     self.x -= self.speed
 
                 else:
                     for platform in platforms:
-                        platform.scrollx(self.speed, 1)
+                        platform.scroll_x(self.speed, 1)
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, 1)
+
+                    top.scroll_x(self.speed/2, 1)
+                    bottom.scroll_x(self.speed/4, 1)
 
                 if self.frame_time < self.frame_timer:
                     self.frame_time += 1
