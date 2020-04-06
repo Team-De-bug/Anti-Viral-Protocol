@@ -49,9 +49,11 @@ class MovingTile(Platform):
     dir_y = True
     is_moving = True
     moving_dir = 1
+    move_style = None
     moving_speed = 1
 
     def move_x(self, speed):
+        self.move_style = "x"
         self.moving_speed = speed
         if self.dir_x:
             self.x += speed
@@ -70,6 +72,7 @@ class MovingTile(Platform):
             self.dir_x = False
 
     def move_y(self, speed):
+        self.move_style = "y"
         if self.dir_y:
             self.y += speed
             self.dist_y -= speed

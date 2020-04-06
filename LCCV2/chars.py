@@ -193,7 +193,7 @@ class Player(Entity):
                         self.vel = 0
                         break
 
-        if self.on_moving_platform:
+        if self.on_moving_platform and self.platform.move_style == "x":
             self.x += self.platform.moving_speed * self.plat_move_dir
 
     # checking for being on platform
