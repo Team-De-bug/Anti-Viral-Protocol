@@ -2,7 +2,7 @@
 import os
 import pygame
 from LCCV2.chars import Player
-from LCCV2.platforms import MockPlatform, MovingTile
+from LCCV2.platforms import MockPlatform, FloatingPlatflorm, MovingTile
 from LCCV2.enemies import Virus1
 
 # Working file paths

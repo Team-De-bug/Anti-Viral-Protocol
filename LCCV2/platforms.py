@@ -23,6 +23,11 @@ class Platform:
         win.blit(self.anim, (self.x, self.y))
 
 
+class FloatingPlatflorm(Platform):
+    width = 128
+    height = 25
+
+
 class MockPlatform(Platform):
 
     x = 5
@@ -98,3 +103,12 @@ class MovingTile(Platform):
     def set_distance_y(self, dist):
         self.dist_y = dist
         self.dist_y_max = dist
+
+
+class BasePlatform(Platform):
+    width = 1600
+    height = 50
+    y = 600
+
+    def __init__(self, x):
+        super().__init__(x, self.y)
