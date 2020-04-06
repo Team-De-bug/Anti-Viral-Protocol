@@ -23,7 +23,7 @@ class Platform:
         win.blit(self.anim, (self.x, self.y))
 
 
-class FloatingPlatflorm(Platform):
+class FloatingPlatform(Platform):
     width = 128
     height = 25
 
@@ -46,8 +46,8 @@ class MovingTile(Platform):
 
     x = 72
     y = 32
-    width = 70
-    height = 50
+    width = 144
+    height = 64
     dist_x = 70
     dist_x_max = 70
     dir_x = True

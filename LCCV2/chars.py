@@ -61,7 +61,7 @@ class Player(Entity):
 
     height = 128
     width = 70
-    speed = 10
+    speed = 8
     vel = 20
 
     weapons = {}
@@ -120,7 +120,7 @@ class Player(Entity):
                 self.speed = 15
 
             else:
-                self.speed = 10
+                self.speed = 8
 
             collision_x = None
             collision_y = None
@@ -160,7 +160,7 @@ class Player(Entity):
                 self.speed = 15
 
             else:
-                self.speed = 10
+                self.speed = 8
 
             collision_x = None
             collision_y = None

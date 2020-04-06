@@ -2,7 +2,7 @@
 import os
 import pygame
 from LCCV2.chars import Player
-from LCCV2.platforms import MockPlatform, FloatingPlatflorm, MovingTile
+from LCCV2.platforms import MockPlatform, FloatingPlatform, MovingTile, BasePlatform
 from LCCV2.enemies import Virus1
 
 # Working file paths
@@ -26,13 +26,19 @@ man.init_guns()
 clock = pygame.time.Clock()
 
 # Setting up the platform
-platforms = [MockPlatform(800, 50, x=0, y=600), MovingTile(400, 400),
-             MockPlatform(800, 50, x=800, y=600), MockPlatform(128, 25, x=900, y=400),
-             MockPlatform(800, 50, x=1600, y=600), MockPlatform(128, 25, x=1300, y=400),
+platforms = [BasePlatform(0), MovingTile(400, 400),
+             BasePlatform(801), FloatingPlatform(900, 400),
+             BasePlatform(1601), FloatingPlatform(1300, 400),
              MovingTile(1650, 400)]
 
+platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
 platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
 platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+
 
 # Setting up Enemy
 enemy = [Virus1(x=400, y=500)]
