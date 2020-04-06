@@ -32,7 +32,7 @@ platforms = [MockPlatform(800, 50, x=0, y=600), MovingTile(400, 400),
              MovingTile(1650, 400)]
 
 platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
-platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/platforms/moving_tile.png")
+platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
 
 # Setting up Enemy
 enemy = [Virus1(x=400, y=500)]
