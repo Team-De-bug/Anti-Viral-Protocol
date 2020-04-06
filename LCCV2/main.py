@@ -19,7 +19,7 @@ pygame.display.set_icon(ICON)
 
 # Setting up the player
 man = Player(x=300, y=100)
-man.load_anim(IMAGES_PATH+"Characters/Player/Idle/Idle.png")
+man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
 # Setting up the clock

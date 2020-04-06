@@ -66,7 +66,9 @@ class Player(Entity):
     on_platform = False
     weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
     current_weapon = 0
+    status = ["walking", "running", "jumping"]
     weapons = {}
+    anim = {}
 
     # Init guns
     def init_guns(self):
@@ -78,20 +80,18 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim("resources/Images/Characters/Player/Weilding_Pistol_Idle/Weilding_Pistol.png")
-        self.weapons["shotgun"].load_anim("resources/Images/Characters/Player/Weilding_Shotgun_Idle/Weilding_Shotgun.png")
-        self.weapons["RPG"].load_anim("resources/Images/Characters/Player/Weilding_RPG_Idle/Weilding_RPG.png")
-        self.weapons["AR"].load_anim("resources/Images/Characters/Player/Weilding_AR_Idle/Weilding_AR.png")
+        self.weapons["pistol"].load_anim("resources/Images/Characters/Player/Pistol/idle_R.png")
+        self.weapons["shotgun"].load_anim("resources/Images/Characters/Player/Shotgun/idle_R.png")
+        self.weapons["RPG"].load_anim("resources/Images/Characters/Player/RPG/idle_R.png")
+        self.weapons["AR"].load_anim("resources/Images/Characters/Player/AR/idle_R.png")
 
     # loading animation function
     def load_anim(self, path):
 
         # empty hand animations
-        self.anim = pygame.image.load(path)
-        '''
-        self.anim = {"idle_L": [], "jumping_L": [], "running_L": [],
-                     "idle_R": [], "jumping_R": [], "running_R": []}
-        '''
+        self.anim["idle_R"] = pygame.image.load(path+"no_weapons/idle_R.png")
+        self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
+
     # Moving control
     def move(self, keys, platforms, enemies):
 
@@ -158,6 +158,8 @@ class Player(Entity):
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, 1)
+        else:
+            self.status = []
 
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
@@ -216,7 +218,8 @@ class Player(Entity):
     # rendering function
     def draw(self, win):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
-            win.blit(self.anim, (self.x, self.y), (0, 0, self.width, self.height))
+            win.blit(self.anim["idle_R"], (self.x, self.y), (0, 0, self.width, self.height))
 
         else:
-            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y),(0, 0, self.width * 2, self.height))
+            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y),
+                     (0, 0, self.width * 2, self.height))
