@@ -115,4 +115,10 @@ class BasePlatform(Platform):
 
 
 class BackDrop(Platform):
-    pass
+    height = 640
+    width = 1600
+    x = 0
+    y = 0
+
+    def __init__(self):
+        super().__init__(self.x, self.y)
