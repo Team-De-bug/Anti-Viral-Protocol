@@ -59,6 +59,7 @@ class Enemy(Entity):
 class Player(Entity):
 
     height = 128
+    width = 50
     speed = 10
     vel = 20
     jumping = False
@@ -215,7 +216,7 @@ class Player(Entity):
     # rendering function
     def draw(self, win):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
-            win.blit(self.anim, (self.x, self.y))
+            win.blit(self.anim, (self.x, self.y), (0, 0, self.width, self.height))
 
         else:
-            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y))
+            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y),(0, 0, self.width * 2, self.height))
