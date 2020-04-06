@@ -26,18 +26,16 @@ man.init_guns()
 clock = pygame.time.Clock()
 
 # Setting up the platform
-platforms = [BasePlatform(0), MovingTile(400, 400),
-             BasePlatform(801), FloatingPlatform(900, 400),
+platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
              BasePlatform(1601), FloatingPlatform(1300, 400),
              MovingTile(1650, 400)]
 
 platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
 platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
-platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
-platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
 platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
 
 
 # Setting up Enemy
@@ -55,7 +53,7 @@ def main():
         keys = pygame.key.get_pressed()
         man.move(keys, platforms, enemy)
         platforms[1].move_x(1)
-        platforms[6].move_y(1)
+        platforms[5].move_y(1)
         man.change_weapon(keys)
         man.on_ground(platforms)
         clock.tick(30)
