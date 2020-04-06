@@ -116,10 +116,10 @@ class Player(Entity):
             self.facing = "right"
 
             for platform in platforms:
-                collision_x = [(self.x + self.width) > platform.x > self.x,
-                               (self.x + self.width) > platform.x + platform.width > self.x]
-                collision_y = [(self.y + self.height) > platform.y > self.y,
-                               (self.y + self.height) > platform.y + platform.height > self.y]
+                collision_x = [(platform.x + platform.width) > self.x > platform.x,
+                               (platform.x + platform.width) > (self.x + self.width) > platform.x]
+                collision_y = [(platform.y + platform.height) > self.y > platform.y,
+                               (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
                 if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
                     break
@@ -148,10 +148,11 @@ class Player(Entity):
             self.facing = "left"
 
             for platform in platforms:
-                collision_x = [(self.x + self.width) > platform.x > self.x,
-                               (self.x + self.width) > platform.x + platform.width > self.x]
-                collision_y = [(self.y + self.height) > platform.y > self.y,
-                               (self.y + self.height) > platform.y + platform.height > self.y]
+
+                collision_x = [(platform.x + platform.width) > self.x > platform.x,
+                               (platform.x + platform.width) > (self.x + self.width) > platform.x]
+                collision_y = [(platform.y + platform.height) > self.y > platform.y,
+                               (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
                 if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
                     break
@@ -195,6 +196,10 @@ class Player(Entity):
 
         if self.on_moving_platform and self.platform.move_style == "x":
             self.x += self.platform.moving_speed * self.plat_move_dir
+
+        if self.on_moving_platform and self.platform.move_style == "y":
+            self.y += self.platform.moving_speed * self.plat_move_dir
+
 
     # checking for being on platform
     def on_ground(self, platforms):
