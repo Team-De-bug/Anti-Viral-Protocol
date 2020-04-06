@@ -44,7 +44,9 @@ class MovingTile(Platform):
     width = 70
     height = 50
     dist_x = 70
+    dist_x_max = 70
     dir_x = True
+    dist_y_max = 70
     dist_y = 70
     dir_y = True
     is_moving = True
@@ -81,8 +83,18 @@ class MovingTile(Platform):
             self.y -= speed
             self.dist_y += speed
 
-        if self.dist_y > 64:
+        if self.dist_y > self.dist_x_max:
             self.dir_y = True
 
         elif self.dist_y < 0:
             self.dir_y = False
+
+    # Set the distance to move in x axis
+    def set_distance_x(self, dist):
+        self.dist_x = dist
+        self.dist_x_max = dist
+
+    # Set the distance to move in y axis
+    def set_distance_y(self, dist):
+        self.dist_y = dist
+        self.dist_y_max = dist
