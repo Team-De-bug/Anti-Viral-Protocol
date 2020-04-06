@@ -3,6 +3,7 @@ import os
 import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import MockPlatform
+from LCCV2.enemies import Virus1
 
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
@@ -29,6 +30,10 @@ platforms = [MockPlatform(800, 50, x=0, y=600), MockPlatform(128, 25, x=400, y=4
              MockPlatform(800, 50, x=800, y=600), MockPlatform(128, 25, x=900, y=400),
              MockPlatform(800, 50, x=1600, y=600), MockPlatform(128, 25, x=1300, y=400)]
 
+# Seting up Enemy
+enemy = [Virus1(x=400, y=500)]
+enemy[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/Idle/virus_1.png")
+
 
 # Running the game
 def main():
@@ -38,7 +43,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         keys = pygame.key.get_pressed()
-        man.move(keys, platforms)
+        man.move(keys, platforms, enemy)
         man.change_weapon(keys)
         man.on_ground(platforms)
         clock.tick(30)
@@ -49,6 +54,7 @@ def main():
 def redraw(win):
     win.fill((105, 26, 26))
     man.draw(win)
+    enemy[0].draw(win)
     for platform in platforms:
         platform.draw(win)
     pygame.display.update()

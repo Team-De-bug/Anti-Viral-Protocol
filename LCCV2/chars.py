@@ -40,18 +40,20 @@ class Enemy(Entity):
 
     # load anim_function
     def load_anim(self, path):
-        self.idle = pygame.image.load(path)
-        self.moving = pygame.image.load(path)
-        self.attack = pygame.image.load(path)
+        self.anim = pygame.image.load(path)
+        #self.moving = pygame.image.load(path)
+        #self.attack = pygame.image.load(path)
 
     # Move function fall back
     def move(self):
         pass
 
     # Draw method fallback
-    def draw(self):
-        pass
+    def draw(self, win):
+        win.blit(self.anim, (self.x, self.y))
 
+    def scroll_x(self, speed, dir):
+        self.x += speed * dir
 
 # Main player class
 class Player(Entity):
@@ -90,7 +92,7 @@ class Player(Entity):
                      "idle_R": [], "jumping_R": [], "running_R": []}
         '''
     # Moving control
-    def move(self, keys, platforms):
+    def move(self, keys, platforms, enemies):
 
         if keys[pygame.K_d]:
 
@@ -121,6 +123,9 @@ class Player(Entity):
                     for platform in platforms:
                         platform.scrollx(self.speed, -1)
 
+                    for enemy in enemies:
+                        enemy.scroll_x(self.speed, -1)
+
         elif keys[pygame.K_a]:
 
             if keys[pygame.K_LSHIFT]:
@@ -149,6 +154,9 @@ class Player(Entity):
                 else:
                     for platform in platforms:
                         platform.scrollx(self.speed, 1)
+
+                    for enemy in enemies:
+                        enemy.scroll_x(self.speed, 1)
 
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
