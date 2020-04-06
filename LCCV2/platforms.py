@@ -112,3 +112,7 @@ class BasePlatform(Platform):
 
     def __init__(self, x):
         super().__init__(x, self.y)
+
+
+class BackDrop(Platform):
+    pass

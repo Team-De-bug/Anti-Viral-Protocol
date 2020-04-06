@@ -60,9 +60,12 @@ class Enemy(Entity):
 class Player(Entity):
 
     height = 128
-    width = 70
+    width = 50
+    width_var = [24, 42, 78]
+    width_num = 0
     speed = 8
     vel = 20
+    hit_x = [33, 24, 10]
 
     weapons = {}
     anim = {}
@@ -114,6 +117,17 @@ class Player(Entity):
     # Moving control
     def move(self, keys, platforms, enemies):
 
+        # Update hitbox
+        frame_num = self.frame % 8
+        if frame_num in [1, 5]:
+            self.width_num = 0
+
+        if frame_num in [2, 4, 6, 8]:
+            self.width_num = 1
+
+        if frame_num in [3, 7]:
+            self.width_num = 2
+
         if keys[pygame.K_d]:
 
             if keys[pygame.K_LSHIFT]:
@@ -128,8 +142,8 @@ class Player(Entity):
             self.status_num = 1
 
             for platform in platforms:
-                collision_x = [(platform.x + platform.width) > self.x > platform.x,
-                               (platform.x + platform.width) > (self.x + self.width) > platform.x]
+                collision_x = [(platform.x + platform.width) > self.hit_x[self.width_num] > platform.x,
+                               (platform.x + platform.width) > (self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
                 collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
@@ -169,8 +183,8 @@ class Player(Entity):
 
             for platform in platforms:
 
-                collision_x = [(platform.x + platform.width) > self.x > platform.x,
-                               (platform.x + platform.width) > (self.x + self.width) > platform.x]
+                collision_x = [(platform.x + platform.width) > self.hit_x[self.width_num] > platform.x,
+                               (platform.x + platform.width) > (self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
                 collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
@@ -197,6 +211,7 @@ class Player(Entity):
 
         else:
             self.status_num = 0
+            self.width_num = 0
 
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
@@ -216,7 +231,7 @@ class Player(Entity):
 
         if self.jumping:
             for platform in platforms:
-                if (platform.x + platform.width > self.x > platform.x) or (platform.x + platform.width > self.x + self.width> platform.x):
+                if (platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x) or (platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x):
                     if platform.y + platform.height > self.y > platform.y:
                         self.vel = 0
                         self.frame = 0
@@ -233,7 +248,7 @@ class Player(Entity):
     def on_ground(self, platforms):
 
         for platform in platforms:
-            x_on_platform = platform.x + platform.width > self.x > platform.x or platform.x + platform.width > (self.x + self.width) > platform.x
+            x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
                 self.vel = 0
@@ -272,13 +287,15 @@ class Player(Entity):
     # rendering function
     def draw(self, win):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
+            #pygame.draw.rect(win, (255, 255, 255),
+            #                 [self.x + self.hit_x[self.width_num], self.y, self.width_var[self.width_num], self.height], 1)
             if self.status_num == 0:
                 win.blit(self.anim[self.status[self.status_num] + self.direction], (self.x, self.y),
-                         (0, 0, self.width, self.height))
+                         (0, 0, self.width * 2, self.height))
 
             else:
                 win.blit(self.anim[self.status[self.status_num]+self.direction], (self.x, self.y),
-                         self.frames[self.frame%8])
+                         self.frames[self.width_num])
 
         else:
             win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim,
