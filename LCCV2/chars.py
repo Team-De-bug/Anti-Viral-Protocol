@@ -59,7 +59,7 @@ class Enemy(Entity):
 class Player(Entity):
 
     height = 128
-    width = 45
+    width = 70
     speed = 10
     vel = 20
 
@@ -74,6 +74,9 @@ class Player(Entity):
         self.jumping = False
         self.on_platform = False
         self.status_num = 0
+        self.on_moving_platform = False
+        self.plat_move_dir = 1
+        self.platform = None
 
     # Init guns
     def init_guns(self):
@@ -190,6 +193,10 @@ class Player(Entity):
                         self.vel = 0
                         break
 
+        if self.on_moving_platform:
+            self.x += self.platform.moving_speed * self.plat_move_dir
+
+    # checking for being on platform
     def on_ground(self, platforms):
 
         for platform in platforms:
@@ -198,9 +205,17 @@ class Player(Entity):
                 self.on_platform = True
                 self.vel = 0
                 self.y = platform.y - self.height
+                if platform.is_moving:
+                    self.on_moving_platform = True
+                    self.plat_move_dir = platform.moving_dir
+                    self.platform = platform
+                else:
+                    self.on_moving_platform = False
+
                 break
 
             else:
+                self.on_moving_platform = False
                 self.on_platform = False
 
     # Changing weapon function

@@ -4,6 +4,7 @@ import pygame
 class Platform:
     width = 600
     height = 50
+    is_moving = False
 
     def __init__(self, x, y):
         self.x = x
@@ -46,15 +47,21 @@ class MovingTile(Platform):
     dir_x = True
     dist_y = 70
     dir_y = True
+    is_moving = True
+    moving_dir = 1
+    moving_speed = 1
 
     def move_x(self, speed):
+        self.moving_speed = speed
         if self.dir_x:
             self.x += speed
             self.dist_x -= speed
+            self.moving_dir = 1
 
         else:
             self.x -= speed
             self.dist_x += speed
+            self.moving_dir = -1
 
         if self.dist_x > 64:
             self.dir_x = True
