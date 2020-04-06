@@ -94,8 +94,15 @@ class Player(Entity):
 
         if keys[pygame.K_d]:
 
+            if keys[pygame.K_LSHIFT]:
+                self.speed = 15
+
+            else:
+                self.speed = 10
+
             collision_x = None
             collision_y = None
+            self.facing = "right"
 
             for platform in platforms:
                 collision_x = [(self.x + self.width) > platform.x > self.x,
@@ -116,8 +123,15 @@ class Player(Entity):
 
         elif keys[pygame.K_a]:
 
+            if keys[pygame.K_LSHIFT]:
+                self.speed = 15
+
+            else:
+                self.speed = 10
+
             collision_x = None
             collision_y = None
+            self.facing = "left"
 
             for platform in platforms:
                 collision_x = [(self.x + self.width) > platform.x > self.x,
