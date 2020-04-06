@@ -55,6 +55,7 @@ class Enemy(Entity):
     def scroll_x(self, speed, dir):
         self.x += speed * dir
 
+
 # Main player class
 class Player(Entity):
 
@@ -66,9 +67,12 @@ class Player(Entity):
     weapons = {}
     anim = {}
 
+    frames = [(0, 0, 128, 128), (129, 0, 128, 128), (259, 0, 128, 128), (385, 0, 128, 128),
+              (513, 0, 128, 128), (641, 0, 128, 128), (769, 0, 128, 128), (897, 0, 128, 128)]
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.status = ["idle_R", "walking_R", "running_R", "jumping_R", "idle_L", "walking_L", "running_L", "jumping_L"]
+        self.status = ["idle_", "walking_"]
         self.current_weapon = 0
         self.weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
         self.jumping = False
@@ -77,6 +81,11 @@ class Player(Entity):
         self.on_moving_platform = False
         self.plat_move_dir = 1
         self.platform = None
+        self.direction = "R"
+        self.frame = 0
+        self.frame_timer = 3
+        self.frame_time = 0
+
 
     # Init guns
     def init_guns(self):
@@ -99,6 +108,8 @@ class Player(Entity):
         # empty hand animations
         self.anim["idle_R"] = pygame.image.load(path+"no_weapons/idle_R.png")
         self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
+        self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
+        self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
     # Moving control
     def move(self, keys, platforms, enemies):
@@ -113,7 +124,8 @@ class Player(Entity):
 
             collision_x = None
             collision_y = None
-            self.facing = "right"
+            self.direction = "R"
+            self.status_num = 1
 
             for platform in platforms:
                 collision_x = [(platform.x + platform.width) > self.x > platform.x,
@@ -135,6 +147,13 @@ class Player(Entity):
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, -1)
 
+                if self.frame_time < self.frame_timer:
+                    self.frame_time += 1
+
+                else:
+                    self.frame_time = 0
+                    self.frame += 1
+
         elif keys[pygame.K_a]:
 
             if keys[pygame.K_LSHIFT]:
@@ -145,7 +164,8 @@ class Player(Entity):
 
             collision_x = None
             collision_y = None
-            self.facing = "left"
+            self.direction = "L"
+            self.status_num = 1
 
             for platform in platforms:
 
@@ -167,6 +187,13 @@ class Player(Entity):
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, 1)
+
+                if self.frame_time < self.frame_timer:
+                    self.frame_time += 1
+
+                else:
+                    self.frame_time = 0
+                    self.frame += 1
 
         else:
             self.status_num = 0
@@ -192,6 +219,7 @@ class Player(Entity):
                 if (platform.x + platform.width > self.x > platform.x) or (platform.x + platform.width > self.x + self.width> platform.x):
                     if platform.y + platform.height > self.y > platform.y:
                         self.vel = 0
+                        self.frame = 0
                         break
 
         if self.on_moving_platform and self.platform.move_style == "x":
@@ -244,8 +272,14 @@ class Player(Entity):
     # rendering function
     def draw(self, win):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
-            win.blit(self.anim[self.status[self.status_num]], (self.x, self.y), (0, 0, self.width, self.height))
+            if self.status_num == 0:
+                win.blit(self.anim[self.status[self.status_num] + self.direction], (self.x, self.y),
+                         (0, 0, self.width, self.height))
+
+            else:
+                win.blit(self.anim[self.status[self.status_num]+self.direction], (self.x, self.y),
+                         self.frames[self.frame%8])
 
         else:
-            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim, (self.x, self.y),
-                     (0, 0, self.width * 2, self.height))
+            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim,
+                     (self.x, self.y), (0, 0, self.width * 2, self.height))

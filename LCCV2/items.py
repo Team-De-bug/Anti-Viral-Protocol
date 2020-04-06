@@ -1,4 +1,3 @@
-import os
 import pygame
 
 
@@ -29,4 +28,9 @@ class Weapons:
 
     # Load animations
     def load_anim(self, path):
+        # empty hand animations
         self.anim = pygame.image.load(path)
+        #self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
+        #self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
+        #self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
+
