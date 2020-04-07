@@ -24,3 +24,7 @@ class RPGShells(Shells):
 
 class PistolShells(Shells):
     pass
+
+
+class Virus1shell(Shells):
+    pass

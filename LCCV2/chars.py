@@ -38,10 +38,13 @@ class Enemy(Entity):
     dist = 50
     dir_x = True
 
+    cooldown = 60
+
     # Class initialization
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.on_player = False
+        self.ammo_list = []
 
     # load anim_function
     def load_anim(self, path):
@@ -95,6 +98,18 @@ class Enemy(Entity):
     def set_max_distance(self, dist):
         self.dist_max = dist
         self.dist = dist
+
+    def update_bullets(self, win):
+        for ammo in self.ammo_list:
+            if ammo.dist < ammo.dist_limit:
+                ammo.move()
+                ammo.draw(win)
+            else:
+                self.ammo_list.pop(self.ammo_list.index(ammo))
+
+    def scroll_bullets(self, vel, direction):
+        for ammo in self.ammo_list:
+            ammo.scroll_x(vel, direction)
 
 
 # Main player class

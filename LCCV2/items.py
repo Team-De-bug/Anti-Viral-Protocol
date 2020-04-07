@@ -59,6 +59,7 @@ class Weapons:
         for ammo in self.ammo_list:
             ammo.scroll_x(vel, direction)
 
+
 class Shells:
 
     dist_limit = 300
