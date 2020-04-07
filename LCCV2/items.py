@@ -8,6 +8,7 @@ class Weapons:
     ammo_count = 100
     hold_limit = 25
     on_load = 25
+    cooldown = 3
 
     ammo = None
 
