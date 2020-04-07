@@ -1,6 +1,7 @@
 import pygame
 import LCCV2.guns as guns
 
+IMAGE_PATH = "resources/Images/"
 
 # Entity class for all characters
 class Entity:
@@ -141,10 +142,10 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim("resources/Images/Characters/Player/Pistol/idle_R.png")
-        self.weapons["shotgun"].load_anim("resources/Images/Characters/Player/Shotgun/idle_R.png")
-        self.weapons["RPG"].load_anim("resources/Images/Characters/Player/RPG/idle_R.png")
-        self.weapons["AR"].load_anim("resources/Images/Characters/Player/AR/idle_R.png")
+        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
 
     # loading animation function
     def load_anim(self, path):
