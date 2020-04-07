@@ -145,13 +145,13 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png",
+        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
                                          IMAGE_PATH + "Projectiles/pistol.png")
-        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png",
+        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
                                           IMAGE_PATH + "Projectiles/shotgun.png")
-        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png",
+        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
                                       IMAGE_PATH + "Ammo/bullet_basic.png")
-        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png",
+        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
                                      IMAGE_PATH + "Ammo/bullet_basic.png")
 
     # loading animation function
