@@ -351,6 +351,8 @@ class Player(Entity):
                 width = 0
             self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
+        if keys[pygame.K_e] and not keys[pygame.K_SPACE]:
+            self.weapons[self.weapon_list[self.current_weapon]].reload()
 
     # checking for being on platform
     def on_ground(self, platforms):
