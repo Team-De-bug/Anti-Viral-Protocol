@@ -39,6 +39,17 @@ class Weapons:
 
         self.ammo.load_anim(ammo_path)
 
+    def update_bullets(self, win):
+        for ammo in self.ammo_list:
+            if ammo.dist < ammo.dist_limit:
+                ammo.move()
+                ammo.draw(win)
+            else:
+                self.ammo_list.pop(self.ammo_list.index(ammo))
+
+    def scroll_bullets(self, vel, direction):
+        for ammo in self.ammo_list:
+            ammo.scroll_x(vel, direction)
 
 class Shells:
 
@@ -68,3 +79,6 @@ class Shells:
         if self.dist < self.dist_limit:
             self.x += self.vel * self.direction
             self.dist += self.vel
+
+    def draw(self, win):
+        win.blit(self.anim, (self.x, self.y))
