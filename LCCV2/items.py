@@ -40,10 +40,10 @@ class Weapons:
 
     # Load animations
     def load_anim(self, path, ammo_path):
-        self.anim = pygame.image.load(path)
-        #self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
-        #self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
-        #self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
+        self.anim["idle_R"] = pygame.image.load(path)
+        self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
+        self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
+        self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
         self.ammo.load_anim(ammo_path)
 

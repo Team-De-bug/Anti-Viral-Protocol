@@ -417,7 +417,12 @@ class Player(Entity):
                          self.frames[self.width_num])
 
         else:
-            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim,
-                     (self.x, self.y), (0, 0, self.width * 2, self.height))
+            if self.status_num == 0:
+                win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num] + self.direction], (self.x, self.y),
+                         (0, 0, self.width * 2, self.height))
+
+            else:
+                win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num]+self.direction],
+                         (self.x, self.y), self.frames[self.width_num])
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)
