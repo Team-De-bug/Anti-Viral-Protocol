@@ -77,7 +77,8 @@ class Shells:
     # animation loader function
     @classmethod
     def load_anim(cls, path):
-        cls.anim = pygame.image.load(path)
+        cls.anim = [pygame.image.load(path + "L.png"),
+                    pygame.image.load(path + "R.png")]
 
     # scrolling function
     def scroll_x(self, vel, direction):
@@ -89,4 +90,7 @@ class Shells:
             self.dist += self.vel
 
     def draw(self, win):
-        win.blit(self.anim, (self.x, self.y))
+        if self.direction > 0:
+            win.blit(self.anim[1], (self.x, self.y))
+        else:
+            win.blit(self.anim[0], (self.x, self.y))
