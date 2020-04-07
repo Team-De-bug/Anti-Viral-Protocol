@@ -106,6 +106,7 @@ class Player(Entity):
     width_num = 0
     speed = 8
     vel = 20
+    hit_nudge = 26
     hit_x = [33, 24, 10]
 
     weapons = {}
@@ -189,10 +190,17 @@ class Player(Entity):
         # Updating the collisions
         for platform in platforms:
 
-            self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
-                                (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
-                                self.x + self.hit_x[self.width_num] + self.width > platform.x > self.x,
-                                self.x + self.hit_x[self.width_num] + self.width > platform.x + platform.width > self.x]
+            if self.direction == "L":
+                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x,
+                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num]) > platform.x,
+                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x > self.x,
+                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x + platform.width > self.x]
+
+            else:
+                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
+                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
+                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x > self.x,
+                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x + platform.width > self.x]
 
             self.collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                 (platform.y + platform.height) > (self.y + self.height) > platform.y,
