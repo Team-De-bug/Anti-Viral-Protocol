@@ -131,6 +131,7 @@ class Player(Entity):
         self.frame_time = 0
         self.collision_x = None
         self.collision_y = None
+        self.score = 0
 
     # Init guns
     def init_guns(self):
@@ -224,7 +225,8 @@ class Player(Entity):
 
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
-                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
+                    if self.current_weapon != 0:
+                        self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
 
                 if self.on_platform:
                     self.status_num = 1
@@ -265,7 +267,9 @@ class Player(Entity):
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
-                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
+
+                    if self.current_weapon != 0:
+                        self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
 
                 # Updating the character animation
                 if self.on_platform:

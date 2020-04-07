@@ -5,6 +5,10 @@ from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform
 from LCCV2.enemies import Virus1
 
+# Setting up the font
+pygame.font.init()
+font = pygame.font.Font("resources/fonts/Anonymous.ttf", 20)
+
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
 
@@ -52,6 +56,12 @@ enemy = [Virus1(x=400, y=500)]
 enemy[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
 enemy[0].set_max_distance(200)
 
+# Loading images for hud
+weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
+                pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
+                pygame.image.load(IMAGES_PATH + "Weapons/gun_ar.png"),
+                pygame.image.load(IMAGES_PATH + "Weapons/gun_rpg.png")]
+
 
 # Running the game
 def main():
@@ -78,6 +88,17 @@ def redraw(win):
     top.draw(win)
     man.draw(win)
     enemy[0].draw(win)
+
+    # Stats part
+    pygame.draw.rect(win, (104, 20, 20), (0, 0, 800, 50))
+    score = font.render(f"score: {man.score}", 1, (255, 255, 255))
+    life_left = font.render(f"life left: {man.hp}", 1, (255, 255, 255))
+    win.blit(score, (0, 0))
+    win.blit(life_left, (400, 0))
+    if man.current_weapon != 0:
+        ammo_left = font.render(f"ammo left: {man.weapons[man.weapon_list[man.current_weapon]].ammo_count}", 1, (255, 255, 255))
+        win.blit(ammo_left, (0, 25))
+        win.blit(weapons_list[man.current_weapon - 1], (200, 0))
 
     for platform in platforms:
         platform.draw(win)
