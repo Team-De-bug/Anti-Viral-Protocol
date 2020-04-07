@@ -34,3 +34,28 @@ class Weapons:
         #self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
         #self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
+
+class Shells:
+
+    dist_limit = 300
+    damage = 10
+
+    # setting up the bullet loc
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.anim = None
+        self.dist = 0
+
+    # animation loader function
+    def load_anim(self, path):
+        self.anim = pygame.image.load(path)
+
+    # scrolling function
+    def scroll_x(self, vel, direction):
+        self.x += vel * direction
+
+    def move(self, vel):
+        if self.dist < self.dist_limit:
+            self.x += vel
+            self.dist += vel

@@ -54,7 +54,7 @@ class Enemy(Entity):
         check_y = [player.y + player.height > self.y > player.y,
                    player.y + player.height > self.y + self.width > player.y]
 
-        if 0 <abs(player.x - self.x) < 10:
+        if 0 < abs(player.x - self.x) < 10:
             self.on_player = True
         else:
             self.on_player = False
