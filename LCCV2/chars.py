@@ -1,6 +1,7 @@
 import pygame
 import LCCV2.guns as guns
 
+IMAGE_PATH = "resources/Images/"
 
 # Entity class for all characters
 class Entity:
@@ -141,10 +142,10 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim("resources/Images/Characters/Player/Pistol/idle_R.png")
-        self.weapons["shotgun"].load_anim("resources/Images/Characters/Player/Shotgun/idle_R.png")
-        self.weapons["RPG"].load_anim("resources/Images/Characters/Player/RPG/idle_R.png")
-        self.weapons["AR"].load_anim("resources/Images/Characters/Player/AR/idle_R.png")
+        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
 
     # loading animation function
     def load_anim(self, path):
@@ -219,6 +220,7 @@ class Player(Entity):
 
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
+                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
 
                 if self.on_platform:
                     self.status_num = 1
@@ -259,7 +261,9 @@ class Player(Entity):
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
+                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
 
+                # Updating the character animation
                 if self.on_platform:
                     self.status_num = 1
                     if self.frame_time < self.frame_timer:
@@ -310,6 +314,23 @@ class Player(Entity):
 
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
+
+        # Firing weapon
+        if self.current_weapon != 0:
+            bull_num = len(self.weapons[self.weapon_list[self.current_weapon]].ammo_list)
+            print(bull_num)
+        else:
+            bull_num = 0
+
+        if keys[pygame.K_SPACE] and self.current_weapon > 0 and bull_num < 5:
+
+            if self.direction == "R":
+                direction = 1
+
+            else:
+                direction = -1
+            self.weapons[self.weapon_list[self.current_weapon]].fire(self.x, self.y, direction)
+
 
     # checking for being on platform
     def on_ground(self, platforms):
@@ -367,3 +388,5 @@ class Player(Entity):
         else:
             win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim,
                      (self.x, self.y), (0, 0, self.width * 2, self.height))
+
+            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)

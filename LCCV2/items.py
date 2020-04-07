@@ -5,57 +5,80 @@ class Weapons:
 
     # Variables
     ammo_limit = 100
-    ammo = 100
+    ammo_count = 100
     hold_limit = 25
     on_load = 25
 
+    ammo = None
+
     def __init__(self):
         self.anim = None
+        self.ammo_list = []
 
     # ammo firing function
-    def fire(self):
-        self.ammo -= 1
+    def fire(self, x, y, direction):
+        self.ammo_count -= 1
+        self.ammo_list.append(self.ammo(x, y, direction))
 
     # Reloading ammo function
     def reload(self):
-        self.ammo -= self.hold_limit - self.on_load
+        self.ammo_count -= self.hold_limit - self.on_load
 
     # Loading ammo function
     def load_ammo(self, bullets):
-        self.ammo += bullets
-        if self.ammo > self.ammo_limit:
-            self.ammo = self.ammo_limit
+        self.ammo_count += bullets
+        if self.ammo_count > self.ammo_limit:
+            self.ammo_count = self.ammo_limit
 
     # Load animations
-    def load_anim(self, path):
-        # empty hand animations
+    def load_anim(self, path, ammo_path):
         self.anim = pygame.image.load(path)
-        #self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
-        #self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
-        #self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
+        # self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
+        # self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
+        # self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
+        self.ammo.load_anim(ammo_path)
+
+    def update_bullets(self, win):
+        for ammo in self.ammo_list:
+            if ammo.dist < ammo.dist_limit:
+                ammo.move()
+                ammo.draw(win)
+            else:
+                self.ammo_list.pop(self.ammo_list.index(ammo))
+
+    def scroll_bullets(self, vel, direction):
+        for ammo in self.ammo_list:
+            ammo.scroll_x(vel, direction)
 
 class Shells:
 
     dist_limit = 300
     damage = 10
+    vel = 10
+    width = 20
+    height = 10
 
     # setting up the bullet loc
-    def __init__(self, x, y):
+    def __init__(self, x, y, direction):
         self.x = x
         self.y = y
-        self.anim = None
         self.dist = 0
+        self.direction = direction
 
     # animation loader function
-    def load_anim(self, path):
-        self.anim = pygame.image.load(path)
+    @classmethod
+    def load_anim(cls, path):
+        cls.anim = pygame.image.load(path)
 
     # scrolling function
     def scroll_x(self, vel, direction):
         self.x += vel * direction
 
-    def move(self, vel):
+    def move(self):
         if self.dist < self.dist_limit:
-            self.x += vel
-            self.dist += vel
+            self.x += self.vel * self.direction
+            self.dist += self.vel
+
+    def draw(self, win):
+        win.blit(self.anim, (self.x, self.y))
