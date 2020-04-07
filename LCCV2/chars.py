@@ -142,10 +142,14 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
-        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
-        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
-        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png", IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png",
+                                         IMAGE_PATH + "Projectiles/pistol.png")
+        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png",
+                                          IMAGE_PATH + "Projectiles/shotgun.png")
+        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png",
+                                      IMAGE_PATH + "Ammo/bullet_basic.png")
+        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png",
+                                     IMAGE_PATH + "Ammo/bullet_basic.png")
 
     # loading animation function
     def load_anim(self, path):
@@ -318,7 +322,6 @@ class Player(Entity):
         # Firing weapon
         if self.current_weapon != 0:
             bull_num = len(self.weapons[self.weapon_list[self.current_weapon]].ammo_list)
-            print(bull_num)
         else:
             bull_num = 0
 
@@ -326,10 +329,12 @@ class Player(Entity):
 
             if self.direction == "R":
                 direction = 1
+                width = self.width * 3/2
 
             else:
                 direction = -1
-            self.weapons[self.weapon_list[self.current_weapon]].fire(self.x, self.y, direction)
+                width = 0
+            self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
 
     # checking for being on platform
