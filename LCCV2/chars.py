@@ -142,8 +142,8 @@ class Player(Entity):
             self.status_num = 1
 
             for platform in platforms:
-                collision_x = [(platform.x + platform.width) > self.hit_x[self.width_num] > platform.x,
-                               (platform.x + platform.width) > (self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
+                collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
+                               (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
                 collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
@@ -175,6 +175,9 @@ class Player(Entity):
                     self.frame_time = 0
                     self.frame += 1
 
+            else:
+                print("colliding with platform")
+
         elif keys[pygame.K_a]:
 
             if keys[pygame.K_LSHIFT]:
@@ -190,8 +193,8 @@ class Player(Entity):
 
             for platform in platforms:
 
-                collision_x = [(platform.x + platform.width) > self.hit_x[self.width_num] > platform.x,
-                               (platform.x + platform.width) > (self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
+                collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
+                               (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
                 collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                (platform.y + platform.height) > (self.y + self.height) > platform.y]
 
