@@ -14,8 +14,8 @@ class Pistol(Weapons):
 # Shotgun
 class Shotgun(Weapons):
     ammo_count = 50
-    hold_limit = 1
-    on_load = 1
+    hold_limit = 7
+    on_load = 7
     cooldown = 20
     ammo = shells.ShotShells
 
@@ -23,8 +23,8 @@ class Shotgun(Weapons):
 # Machine-gun
 class MachineGun(Weapons):
     ammo_count = 300
-    hold_limit = 50
-    on_load = 50
+    hold_limit = 30
+    on_load = 30
     cooldown = 3
     ammo = shells.ARShells
 

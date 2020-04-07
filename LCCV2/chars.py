@@ -379,20 +379,29 @@ class Player(Entity):
     # Changing weapon function
     def change_weapon(self, keys):
 
-        if keys[pygame.K_1]:
-            self.current_weapon = 0
+        if self.current_weapon != 0:
+            if not self.weapons[self.weapon_list[self.current_weapon]].ammo_list:
+                can_switch = True
+            else:
+                can_switch = False
+        else:
+            can_switch = True
 
-        if keys[pygame.K_2]:
-            self.current_weapon = 1
+        if can_switch:
+            if keys[pygame.K_1]:
+                self.current_weapon = 0
 
-        if keys[pygame.K_3]:
-            self.current_weapon = 2
+            if keys[pygame.K_2]:
+                self.current_weapon = 1
 
-        if keys[pygame.K_4]:
-            self.current_weapon = 4
+            if keys[pygame.K_3]:
+                self.current_weapon = 2
 
-        if keys[pygame.K_5]:
-            self.current_weapon = 3
+            if keys[pygame.K_4]:
+                self.current_weapon = 4
+
+            if keys[pygame.K_5]:
+                self.current_weapon = 3
 
     # rendering function
     def draw(self, win):
