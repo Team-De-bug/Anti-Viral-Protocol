@@ -8,6 +8,7 @@ class Weapons:
     ammo_count = 100
     hold_limit = 25
     on_load = 25
+    cooldown = 3
 
     ammo = None
 
@@ -17,12 +18,19 @@ class Weapons:
 
     # ammo firing function
     def fire(self, x, y, direction):
-        self.ammo_count -= 1
-        self.ammo_list.append(self.ammo(x, y, direction))
+        if self.on_load > 0:
+            self.on_load -= 1
+            self.ammo_list.append(self.ammo(x, y, direction))
 
     # Reloading ammo function
     def reload(self):
-        self.ammo_count -= self.hold_limit - self.on_load
+        if self.on_load >= 0:
+            if self.ammo_count > self.hold_limit:
+                self.ammo_count -= self.hold_limit - self.on_load
+                self.on_load = self.hold_limit
+            else:
+                self.on_load = self.ammo_count
+                self.ammo_count = 0
 
     # Loading ammo function
     def load_ammo(self, bullets):

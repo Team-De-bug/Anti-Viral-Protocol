@@ -132,6 +132,7 @@ class Player(Entity):
         self.collision_x = None
         self.collision_y = None
         self.w_cool_down = 0
+        self.fired = False
         self.score = 0
 
     # Init guns
@@ -177,11 +178,13 @@ class Player(Entity):
             self.width_num = 2
 
         # firing cool down
-        if self.w_cool_down < 3:
-            self.w_cool_down += 1
+        if self.current_weapon > 0 and self.fired:
+            if self.w_cool_down < self.weapons[self.weapon_list[self.current_weapon]].cooldown:
+                self.w_cool_down += 1
 
-        else:
-            self.w_cool_down = 0
+            else:
+                self.fired = False
+                self.w_cool_down = 0
 
         # Updating the collisions
         for platform in platforms:
@@ -338,7 +341,7 @@ class Player(Entity):
             bull_num = 0
 
         if keys[pygame.K_SPACE] and self.current_weapon > 0 and bull_num < 5 and self.w_cool_down == 0:
-
+            self.fired = True
             if self.direction == "R":
                 direction = 1
                 width = self.width * 3/2
@@ -348,6 +351,8 @@ class Player(Entity):
                 width = 0
             self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
+        if keys[pygame.K_e] and not keys[pygame.K_SPACE]:
+            self.weapons[self.weapon_list[self.current_weapon]].reload()
 
     # checking for being on platform
     def on_ground(self, platforms):
