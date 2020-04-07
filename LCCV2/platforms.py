@@ -108,7 +108,7 @@ class MovingTile(Platform):
 class BasePlatform(Platform):
     width = 1600
     height = 50
-    y = 600
+    y = 602
 
     def __init__(self, x):
         super().__init__(x, self.y)

@@ -121,6 +121,8 @@ class Player(Entity):
         self.frame = 0
         self.frame_timer = 3
         self.frame_time = 0
+        self.collision_x = None
+        self.collision_y = None
 
 
     # Init guns
@@ -161,36 +163,47 @@ class Player(Entity):
         if frame_num in [3, 7]:
             self.width_num = 2
 
+        # Updating the collisions
+        for platform in platforms:
+
+            self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
+                                (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
+                                self.x + self.hit_x[self.width_num] + self.width > platform.x > self.x,
+                                self.x + self.hit_x[self.width_num] + self.width > platform.x + platform.width > self.x]
+
+            self.collision_y = [(platform.y + platform.height) > self.y > platform.y,
+                                (platform.y + platform.height) > (self.y + self.height) > platform.y,
+                                (self.y + self.height) > platform.y > self.y,
+                                (self.y + self.height) > (platform.y + platform.height) > self.y]
+
+            if (self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1]):
+                break
+
+        # increase speed if L_shift key is pressed
+        if keys[pygame.K_LSHIFT]:
+            self.speed = 15
+
+        else:
+            self.speed = 8
+
+        # move right
         if keys[pygame.K_d]:
 
-            if keys[pygame.K_LSHIFT]:
-                self.speed = 15
-
-            else:
-                self.speed = 8
-
-            collision_x = None
-            collision_y = None
+            # setting the character facing direction
             self.direction = "R"
-            self.status_num = 1
 
-            for platform in platforms:
-                collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
-                               (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
-                collision_y = [(platform.y + platform.height) > self.y > platform.y,
-                               (platform.y + platform.height) > (self.y + self.height) > platform.y]
+            # checking for collisions
+            if not ((self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1])):
 
-                if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
-                    break
-
-            if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
-
+                # selecting the background images for scorlling
                 top = bg_layers[0]
                 bottom = bg_layers[1]
 
+                # Checking wether to scroll or move the player
                 if self.x < 650:
                     self.x += self.speed
 
+                # scrolling
                 else:
                     for platform in platforms:
                         platform.scroll_x(self.speed, -1)
@@ -201,44 +214,36 @@ class Player(Entity):
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
 
-                if self.frame_time < self.frame_timer:
-                    self.frame_time += 1
+                if self.on_platform:
+                    self.status_num = 1
+                    if self.frame_time < self.frame_timer:
+                        self.frame_time += 1
 
+                    else:
+                        self.frame_time = 0
+                        self.frame += 1
+
+                # updating frame and hitbox
                 else:
-                    self.frame_time = 0
-                    self.frame += 1
+                    self.width_num = 0
+                    self.status_num = 0
 
         elif keys[pygame.K_a]:
 
-            if keys[pygame.K_LSHIFT]:
-                self.speed = 15
-
-            else:
-                self.speed = 8
-
-            collision_x = None
-            collision_y = None
+            # setting the facing direction
             self.direction = "L"
-            self.status_num = 1
 
-            for platform in platforms:
-
-                collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
-                               (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x]
-                collision_y = [(platform.y + platform.height) > self.y > platform.y,
-                               (platform.y + platform.height) > (self.y + self.height) > platform.y]
-
-                if (collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1]):
-                    break
-
-            if not ((collision_x[0] or collision_x[1]) and (collision_y[0] or collision_y[1])):
+            # checking for collision
+            if not ((self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1])):
 
                 top = bg_layers[0]
                 bottom = bg_layers[1]
 
+                # checking wether to scroll or move the player
                 if self.x > 200:
                     self.x -= self.speed
 
+                # scrolling
                 else:
                     for platform in platforms:
                         platform.scroll_x(self.speed, 1)
@@ -249,17 +254,26 @@ class Player(Entity):
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
 
-                if self.frame_time < self.frame_timer:
-                    self.frame_time += 1
+                if self.on_platform:
+                    self.status_num = 1
+                    if self.frame_time < self.frame_timer:
+                        self.frame_time += 1
 
+                    else:
+                        self.frame_time = 0
+                        self.frame += 1
+
+                # updating frame and hitbox
                 else:
-                    self.frame_time = 0
-                    self.frame += 1
+                    self.status_num = 0
+                    self.width_num = 0
 
+        # updating frame and hitbox
         else:
             self.status_num = 0
             self.width_num = 0
 
+        # checking for starting the jump
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
                 self.vel = 20
@@ -272,24 +286,24 @@ class Player(Entity):
         elif self.jumping and self.vel <= 0:
             self.jumping = False
 
+        # falling
         if not self.on_platform and not self.jumping:
             self.y += self.vel
             self.vel += 1
 
+        # Jumping
         if self.jumping:
-            for platform in platforms:
-                if (platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x) or (platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x):
-                    if platform.y + platform.height > self.y > platform.y:
-                        self.vel = 0
-                        self.frame = 0
-                        break
+            if self.collision_x[0] or self.collision_x[1] or self.collision_x[2] or self.collision_x[3]:
+                if self.collision_y[0] or self.collision_y[2]:
+                    self.vel = 0
+                    self.frame = 0
 
+        # moving the character if on a moving platform
         if self.on_moving_platform and self.platform.move_style == "x":
             self.x += self.platform.moving_speed * self.plat_move_dir
 
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
-
 
     # checking for being on platform
     def on_ground(self, platforms):

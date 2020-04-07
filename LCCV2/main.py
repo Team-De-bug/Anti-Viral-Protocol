@@ -52,6 +52,7 @@ enemy = [Virus1(x=400, y=500)]
 enemy[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
 enemy[0].set_max_distance(200)
 
+
 # Running the game
 def main():
     running = True
