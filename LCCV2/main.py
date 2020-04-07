@@ -50,7 +50,7 @@ bg_layers = [top, bottom]
 # Setting up Enemy
 enemy = [Virus1(x=400, y=500)]
 enemy[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/Idle/virus_1.png")
-
+enemy[0].set_max_distance(200)
 
 # Running the game
 def main():
@@ -63,6 +63,7 @@ def main():
         man.move(keys, platforms, enemy, bg_layers)
         platforms[1].move_x(1)
         platforms[5].move_y(1)
+        enemy[0].move(3, man)
         man.change_weapon(keys)
         man.on_ground(platforms)
         clock.tick(30)

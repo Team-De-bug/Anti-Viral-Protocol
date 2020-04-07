@@ -33,6 +33,9 @@ class Enemy(Entity):
     # Variables
     points = 100
     hit = 5
+    dist_max = 50
+    dist = 50
+    dir_x = True
 
     # Class initialization
     def __init__(self, *args, **kwargs):
@@ -45,15 +48,45 @@ class Enemy(Entity):
         #self.attack = pygame.image.load(path)
 
     # Move function fall back
-    def move(self):
-        pass
+
+    def move(self, speed, player):
+        check_y = [player.y + player.height > self.y > player.y,
+                   player.y + player.height > self.y + self.width > player.y]
+
+        if not ((0 < abs(player.x - self.x) < 300) and (check_y[0] or check_y[1])):
+
+            if self.dir_x:
+                self.x += speed
+                self.dist -= speed
+
+            else:
+                self.x -= speed
+                self.dist += speed
+
+            if self.dist > self.dist_max:
+                self.dir_x = True
+
+            elif self.dist < 0:
+                self.dir_x = False
+
+        else:
+
+            if self.x > player.x:
+                self.x -= speed
+
+            else:
+                self.x += speed
 
     # Draw method fallback
     def draw(self, win):
         win.blit(self.anim, (self.x, self.y))
 
-    def scroll_x(self, speed, dir):
-        self.x += speed * dir
+    def scroll_x(self, speed, direction):
+        self.x += speed * direction
+
+    def set_max_distance(self, dist):
+        self.dist_max = dist
+        self.dist = dist
 
 
 # Main player class
@@ -174,9 +207,6 @@ class Player(Entity):
                 else:
                     self.frame_time = 0
                     self.frame += 1
-
-            else:
-                print("colliding with platform")
 
         elif keys[pygame.K_a]:
 
