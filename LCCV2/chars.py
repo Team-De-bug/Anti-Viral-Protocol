@@ -131,6 +131,8 @@ class Player(Entity):
         self.frame_time = 0
         self.collision_x = None
         self.collision_y = None
+        self.w_cool_down = 0
+        self.score = 0
 
     # Init guns
     def init_guns(self):
@@ -173,6 +175,13 @@ class Player(Entity):
 
         if frame_num in [3, 7]:
             self.width_num = 2
+
+        # firing cool down
+        if self.w_cool_down < 3:
+            self.w_cool_down += 1
+
+        else:
+            self.w_cool_down = 0
 
         # Updating the collisions
         for platform in platforms:
@@ -224,7 +233,8 @@ class Player(Entity):
 
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
-                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
+                    if self.current_weapon != 0:
+                        self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
 
                 if self.on_platform:
                     self.status_num = 1
@@ -265,7 +275,9 @@ class Player(Entity):
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
-                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
+
+                    if self.current_weapon != 0:
+                        self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
 
                 # Updating the character animation
                 if self.on_platform:
@@ -325,7 +337,7 @@ class Player(Entity):
         else:
             bull_num = 0
 
-        if keys[pygame.K_SPACE] and self.current_weapon > 0 and bull_num < 5:
+        if keys[pygame.K_SPACE] and self.current_weapon > 0 and bull_num < 5 and self.w_cool_down == 0:
 
             if self.direction == "R":
                 direction = 1
