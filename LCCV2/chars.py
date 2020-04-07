@@ -40,6 +40,7 @@ class Enemy(Entity):
     # Class initialization
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.on_player = False
 
     # load anim_function
     def load_anim(self, path):
@@ -52,6 +53,11 @@ class Enemy(Entity):
     def move(self, speed, player):
         check_y = [player.y + player.height > self.y > player.y,
                    player.y + player.height > self.y + self.width > player.y]
+
+        if 0 <abs(player.x - self.x) < 10:
+            self.on_player = True
+        else:
+            self.on_player = False
 
         if not ((0 < abs(player.x - self.x) < 300) and (check_y[0] or check_y[1])):
 
@@ -71,11 +77,12 @@ class Enemy(Entity):
 
         else:
 
-            if self.x > player.x:
-                self.x -= speed
+            if not self.on_player:
+                if self.x > player.x:
+                    self.x -= speed
 
-            else:
-                self.x += speed
+                else:
+                    self.x += speed
 
     # Draw method fallback
     def draw(self, win):
@@ -123,7 +130,6 @@ class Player(Entity):
         self.frame_time = 0
         self.collision_x = None
         self.collision_y = None
-
 
     # Init guns
     def init_guns(self):
