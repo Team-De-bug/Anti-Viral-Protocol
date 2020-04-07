@@ -15,6 +15,9 @@ IMAGES_PATH = 'resources/Images/'
 # Starting pygame
 pygame.init()
 
+# Loading the image for hud
+hud = pygame.image.load(IMAGES_PATH + "HUD/hud.png")
+
 # Setting the screen up
 win = pygame.display.set_mode((800, 640))
 pygame.display.set_caption("LCC GAME")
@@ -89,21 +92,27 @@ def redraw(win):
     man.draw(win)
     enemy[0].draw(win)
 
-    # Stats part
-    pygame.draw.rect(win, (104, 20, 20), (0, 0, 800, 50))
-    score = font.render(f"score: {man.score}", 1, (255, 255, 255))
-    life_left = font.render(f"life left: {man.hp}", 1, (255, 255, 255))
-    win.blit(score, (0, 0))
-    win.blit(life_left, (400, 0))
-    if man.current_weapon != 0:
-        ammo_left = font.render(f"ammo left: {man.weapons[man.weapon_list[man.current_weapon]].ammo_count}/{man.weapons[man.weapon_list[man.current_weapon]].ammo_limit}", 1, (255, 255, 255))
-        ammo_on_load = font.render(f"loaded ammo: {man.weapons[man.weapon_list[man.current_weapon]].on_load}/{man.weapons[man.weapon_list[man.current_weapon]].hold_limit}",1, (255, 255, 255))
-        win.blit(ammo_left, (0, 15))
-        win.blit(ammo_on_load, (0, 30))
-        win.blit(weapons_list[man.current_weapon - 1], (200, 0))
-
     for platform in platforms:
         platform.draw(win)
+
+    # Stats part
+    win.blit(hud, (0, 0))
+    score = font.render(f"score: {man.score}", 1, (255, 255, 255))
+    life_left = font.render(f"life left: {man.hp}", 1, (255, 255, 255))
+    win.blit(life_left, (18, 14))
+    win.blit(score, (18, 37))
+    if man.current_weapon != 0:
+        weapon_name = font.render(man.weapon_list[man.current_weapon], 1, (255, 255, 255))
+        ammo_left = font.render(
+            f"ammo left: {man.weapons[man.weapon_list[man.current_weapon]].ammo_count}/{man.weapons[man.weapon_list[man.current_weapon]].ammo_limit}",
+            1, (255, 255, 255))
+        ammo_on_load = font.render(
+            f"loaded ammo: {man.weapons[man.weapon_list[man.current_weapon]].on_load}/{man.weapons[man.weapon_list[man.current_weapon]].hold_limit}",
+            1, (255, 255, 255))
+        win.blit(weapon_name, (28, 565))
+        win.blit(ammo_left, (100, 620))
+        win.blit(ammo_on_load, (100, 630))
+        win.blit(weapons_list[man.current_weapon - 1], (28, 580))
 
     pygame.display.update()
 
