@@ -38,10 +38,13 @@ class Enemy(Entity):
     dist = 50
     dir_x = True
 
+    cooldown = 60
+
     # Class initialization
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.on_player = False
+        self.ammo_list = []
 
     # load anim_function
     def load_anim(self, path):
@@ -96,6 +99,18 @@ class Enemy(Entity):
         self.dist_max = dist
         self.dist = dist
 
+    def update_bullets(self, win):
+        for ammo in self.ammo_list:
+            if ammo.dist < ammo.dist_limit:
+                ammo.move()
+                ammo.draw(win)
+            else:
+                self.ammo_list.pop(self.ammo_list.index(ammo))
+
+    def scroll_bullets(self, vel, direction):
+        for ammo in self.ammo_list:
+            ammo.scroll_x(vel, direction)
+
 
 # Main player class
 class Player(Entity):
@@ -106,6 +121,7 @@ class Player(Entity):
     width_num = 0
     speed = 8
     vel = 20
+    hit_nudge = 26
     hit_x = [33, 24, 10]
 
     weapons = {}
@@ -146,13 +162,13 @@ class Player(Entity):
 
         # loading the gun animations
         self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
-                                         IMAGE_PATH + "Projectiles/pistol.png")
+                                         IMAGE_PATH + "Projectiles/pistol_")
         self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
                                           IMAGE_PATH + "Projectiles/shotgun.png")
         self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
-                                      IMAGE_PATH + "Ammo/bullet_basic.png")
+                                      IMAGE_PATH + "Projectiles/rpg_")
         self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
-                                     IMAGE_PATH + "Ammo/bullet_basic.png")
+                                     IMAGE_PATH + "Projectiles/ar_")
 
     # loading animation function
     def load_anim(self, path):
@@ -189,10 +205,17 @@ class Player(Entity):
         # Updating the collisions
         for platform in platforms:
 
-            self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
-                                (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
-                                self.x + self.hit_x[self.width_num] + self.width > platform.x > self.x,
-                                self.x + self.hit_x[self.width_num] + self.width > platform.x + platform.width > self.x]
+            if self.direction == "L":
+                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x,
+                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num]) > platform.x,
+                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x > self.x,
+                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x + platform.width > self.x]
+
+            else:
+                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
+                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
+                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x > self.x,
+                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x + platform.width > self.x]
 
             self.collision_y = [(platform.y + platform.height) > self.y > platform.y,
                                 (platform.y + platform.height) > (self.y + self.height) > platform.y,
