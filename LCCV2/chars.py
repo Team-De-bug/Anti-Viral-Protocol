@@ -145,13 +145,13 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/idle_R.png",
+        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
                                          IMAGE_PATH + "Projectiles/pistol.png")
-        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/idle_R.png",
+        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
                                           IMAGE_PATH + "Projectiles/shotgun.png")
-        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/idle_R.png",
+        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
                                       IMAGE_PATH + "Ammo/bullet_basic.png")
-        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/idle_R.png",
+        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
                                      IMAGE_PATH + "Ammo/bullet_basic.png")
 
     # loading animation function
@@ -379,20 +379,29 @@ class Player(Entity):
     # Changing weapon function
     def change_weapon(self, keys):
 
-        if keys[pygame.K_1]:
-            self.current_weapon = 0
+        if self.current_weapon != 0:
+            if not self.weapons[self.weapon_list[self.current_weapon]].ammo_list:
+                can_switch = True
+            else:
+                can_switch = False
+        else:
+            can_switch = True
 
-        if keys[pygame.K_2]:
-            self.current_weapon = 1
+        if can_switch:
+            if keys[pygame.K_1]:
+                self.current_weapon = 0
 
-        if keys[pygame.K_3]:
-            self.current_weapon = 2
+            if keys[pygame.K_2]:
+                self.current_weapon = 1
 
-        if keys[pygame.K_4]:
-            self.current_weapon = 4
+            if keys[pygame.K_3]:
+                self.current_weapon = 2
 
-        if keys[pygame.K_5]:
-            self.current_weapon = 3
+            if keys[pygame.K_4]:
+                self.current_weapon = 4
+
+            if keys[pygame.K_5]:
+                self.current_weapon = 3
 
     # rendering function
     def draw(self, win):
@@ -408,7 +417,12 @@ class Player(Entity):
                          self.frames[self.width_num])
 
         else:
-            win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim,
-                     (self.x, self.y), (0, 0, self.width * 2, self.height))
+            if self.status_num == 0:
+                win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num] + self.direction], (self.x, self.y),
+                         (0, 0, self.width * 2, self.height))
+
+            else:
+                win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num]+self.direction],
+                         (self.x, self.y), self.frames[self.width_num])
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)
