@@ -69,7 +69,12 @@ weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_rpg.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_ar.png")]
-infection_img = pygame.image.load(IMAGES_PATH + "HUD/infection.png")
+
+infection_img = [pygame.image.load(IMAGES_PATH + "HUD/infection_0.png"),
+                 pygame.image.load(IMAGES_PATH + "HUD/infection_1.png"),
+                 pygame.image.load(IMAGES_PATH + "HUD/infection_2.png"),
+                 pygame.image.load(IMAGES_PATH + "HUD/infection_3.png"),
+                 pygame.image.load(IMAGES_PATH + "HUD/infection_4.png")]
 
 
 # Running the game
@@ -87,6 +92,8 @@ def main():
         man.change_weapon(keys)
         man.on_ground(platforms)
         man.move(keys, platforms, enemies, bg_layers)
+        hit_player(man, enemies)
+        man.infection_damage()
         clock.tick(30)
         redraw(win)
 
@@ -108,7 +115,7 @@ def redraw(win):
     score = font.render(f"Score: {man.score}", 1, (132, 0, 255))
     life_left = font.render(f"Health: {man.hp}", 1, (255, 32, 32))
     infection = font_20.render(f"Infection", 1, (250, 0, 0))
-    win.blit(infection_img, (1064, 8))
+    update_infection(man, win)
     win.blit(life_left, (18, 12))
     win.blit(score, (18, 35))
     win.blit(infection, (1075, 105))
@@ -129,6 +136,21 @@ def redraw(win):
         enemy.update_bullets(win)
 
     pygame.display.update()
+
+
+# player damage by projectiles from enemies
+def hit_player(man, enemies):
+    for enemy in enemies:
+        for ammo in enemy.ammo_list:
+            if man.x + man.width > ammo.x > man.x:
+                man.hp -= enemy.ammo.damage
+                if man.infection < 4:
+                    man.infection += 1
+                enemy.ammo_list.pop(enemy.ammo_list.index(ammo))
+
+
+def update_infection(man, win):
+    win.blit(infection_img[man.infection],  (1064, 8))
 
 
 if __name__ == "__main__":
