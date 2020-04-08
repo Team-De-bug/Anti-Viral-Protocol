@@ -137,6 +137,7 @@ class Player(Entity):
     vel = 20
     hit_nudge = 26
     hit_x = [33, 24, 10]
+    infection = 0
 
     weapons = {}
     anim = {}
@@ -162,6 +163,7 @@ class Player(Entity):
         self.w_cool_down = 0
         self.fired = False
         self.score = 0
+        self.infection_cooldown = 100
 
     # Init guns
     def init_guns(self):
@@ -503,6 +505,14 @@ class Player(Entity):
                          (self.x, self.y), self.frames[self.width_num])
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)
+
+    def infection_damage(self):
+        if self.infection_cooldown <= 0:
+            self.hp -= self.infection
+            self.infection_cooldown = 100
+        else:
+            self.infection_cooldown -= 1
+
 
     def enemy_killed(self, enemies):
         for enemy in enemies:
