@@ -55,9 +55,13 @@ top.load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 bg_layers = [top, bottom]
 
 # Setting up Enemy
-enemies = [Virus1(x=400, y=500)]
+enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500)]
 enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
 enemies[0].set_max_distance(200)
+
+enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
+enemies[1].set_max_distance(200)
+
 
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),

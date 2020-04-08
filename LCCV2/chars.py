@@ -357,13 +357,7 @@ class Player(Entity):
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
 
-        # Firing weapon
-        if self.current_weapon != 0:
-            bull_num = len(self.weapons[self.weapon_list[self.current_weapon]].ammo_list)
-        else:
-            bull_num = 0
-
-        if keys[pygame.K_SPACE] and self.current_weapon > 0 and bull_num < 5 and self.w_cool_down == 0:
+        if keys[pygame.K_SPACE] and self.current_weapon > 0 and self.w_cool_down == 0:
             self.fired = True
             if self.direction == "R":
                 direction = 1
@@ -465,4 +459,5 @@ class Player(Entity):
                         enemy.hp -= ammo.damage
 
                     else:
+                        self.score += enemy.points
                         enemies.pop(enemies.index(enemy))
