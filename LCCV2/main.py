@@ -120,6 +120,9 @@ def redraw(win):
         win.blit(ammo_on_load, (100, 630))
         win.blit(weapons_list[man.current_weapon - 1], (28, 580))
 
+    for enemy in enemies:
+        enemy.update_bullets(win)
+
     pygame.display.update()
 
 
