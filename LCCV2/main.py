@@ -88,6 +88,7 @@ def main():
 
         if man.hp <= 0:
             game_over(win)
+            clock.tick(5)
 
         else:
             keys = pygame.key.get_pressed()
@@ -160,15 +161,16 @@ def update_infection(man, win):
     win.blit(infection_img[man.infection],  (1064, 8))
 
 
-def game_over(win):
-    img_limit = 14
-    img = 0
+img_limit = 14
+img = [0]
 
-    if img < img_limit:
-        img += 1
-    else:
-        win.blit(game_over_img, (0, 0), (img, 0, 1200, 640))
-        img = 0
+
+def game_over(win):
+
+    if img[0] < img_limit:
+        img[0] += 1
+        win.blit(game_over_img, (0, 0), (img[0] * 1200, 0, 1200, 640))
+
 
 if __name__ == "__main__":
     main()
