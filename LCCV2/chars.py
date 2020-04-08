@@ -133,7 +133,8 @@ class Enemy(Entity):
                 player.hurt(self.damage)
                 self.meele_cooldown = 20
             else:
-                self.meele_cooldown -=1
+                self.meele_cooldown -= 1
+
 
 # Main player class
 class Player(Entity):
@@ -426,7 +427,7 @@ class Player(Entity):
                 width = 0
             self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
-        if keys[pygame.K_e] and not keys[pygame.K_SPACE]:
+        if keys[pygame.K_e] and not keys[pygame.K_SPACE] and self.current_weapon != 0:
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
         # check for enemy hit by bullets
