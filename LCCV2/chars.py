@@ -377,6 +377,10 @@ class Player(Entity):
         if keys[pygame.K_e] and not keys[pygame.K_SPACE]:
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
+        # check for enemy hit by bullets
+        if self.current_weapon != 0:
+            self.enemy_killed(enemies)
+
     # checking for being on platform
     def on_ground(self, platforms):
 
@@ -449,3 +453,16 @@ class Player(Entity):
                          (self.x, self.y), self.frames[self.width_num])
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)
+
+    def enemy_killed(self, enemies):
+        for enemy in enemies:
+            ammo_list = self.weapons[self.weapon_list[self.current_weapon]].ammo_list
+            for ammo in ammo_list:
+                if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y >enemy.y:
+                    print("enemy hit")
+                    ammo_list.pop(ammo_list.index(ammo))
+                    if enemy.hp > 0:
+                        enemy.hp -= ammo.damage
+
+                    else:
+                        enemies.pop(enemies.index(enemy))

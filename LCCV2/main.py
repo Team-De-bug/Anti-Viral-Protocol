@@ -55,9 +55,9 @@ top.load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 bg_layers = [top, bottom]
 
 # Setting up Enemy
-enemy = [Virus1(x=400, y=500)]
-enemy[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
-enemy[0].set_max_distance(200)
+enemies = [Virus1(x=400, y=500)]
+enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
+enemies[0].set_max_distance(200)
 
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
@@ -74,10 +74,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         keys = pygame.key.get_pressed()
-        man.move(keys, platforms, enemy, bg_layers)
+        man.move(keys, platforms, enemies, bg_layers)
         platforms[1].move_x(1)
         platforms[5].move_y(1)
-        enemy[0].move(3, man)
+        for enemy in enemies:
+            enemy.move(3, man)
         man.change_weapon(keys)
         man.on_ground(platforms)
         clock.tick(30)
@@ -90,7 +91,8 @@ def redraw(win):
     bottom.draw(win)
     top.draw(win)
     man.draw(win)
-    enemy[0].draw(win)
+    for enemy in enemies:
+        enemy.draw(win)
 
     for platform in platforms:
         platform.draw(win)
