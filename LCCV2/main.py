@@ -89,6 +89,7 @@ def main():
         platforms[5].move_y(1)
         for enemy in enemies:
             enemy.move(3, man)
+            enemy.hurt_player(man)
         man.change_weapon(keys)
         man.on_ground(platforms)
         man.move(keys, platforms, enemies, bg_layers)

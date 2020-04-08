@@ -38,6 +38,7 @@ class Enemy(Entity):
     dist = 50
     dir_x = True
     ammo = None
+    damage = 15
 
     cooldown = 60
 
@@ -46,6 +47,7 @@ class Enemy(Entity):
         super().__init__(*args, **kwargs)
         self.on_player = False
         self.ammo_list = []
+        self.meele_cooldown = 20
 
     # load anim_function
     def load_anim(self, path, ammo_path):
@@ -125,6 +127,13 @@ class Enemy(Entity):
         else:
             self.cooldown -= 1
 
+    def hurt_player(self, player):
+        if player.x + player.width > self.x > player.x:
+            if self.meele_cooldown <= 0:
+                player.hurt(self.damage)
+                self.meele_cooldown = 20
+            else:
+                self.meele_cooldown -=1
 
 # Main player class
 class Player(Entity):
@@ -235,7 +244,6 @@ class Player(Entity):
             on_yh = None
             on_xw = None
 
-            PLATFORM = None
             # checking for collisions
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
@@ -248,7 +256,6 @@ class Player(Entity):
                 on_y = self.y+self.height > platform.y > self.y
                 on_yh = self.y+self.height > platform.y + platform.height > self.y
 
-                PLATFORM = platform
                 if (on_x or on_xw) and (on_y or on_yh):
                     break
 
@@ -299,7 +306,6 @@ class Player(Entity):
 
             on_yh = None
             on_xw = None
-            PLATFORM = None
             # checking for collision
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
@@ -311,7 +317,6 @@ class Player(Entity):
 
                 on_y = self.y + self.height > platform.y > self.y
                 on_yh = self.y + self.height > platform.y + platform.height > self.y
-                PLATFORM = platform
                 if (on_x or on_xw) and (on_y or on_yh):
                     break
 
@@ -512,7 +517,6 @@ class Player(Entity):
             self.infection_cooldown = 100
         else:
             self.infection_cooldown -= 1
-
 
     def enemy_killed(self, enemies):
         for enemy in enemies:
