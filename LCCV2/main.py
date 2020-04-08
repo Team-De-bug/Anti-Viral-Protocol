@@ -7,7 +7,7 @@ from LCCV2.enemies import Virus1
 
 # Setting up the font
 pygame.font.init()
-font = pygame.font.Font("resources/fonts/Anonymous.ttf", 14)
+font = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 14)
 
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
@@ -103,22 +103,22 @@ def redraw(win):
 
     # Stats part
     win.blit(hud, (0, 0))
-    score = font.render(f"score: {man.score}", 1, (255, 255, 255))
-    life_left = font.render(f"life left: {man.hp}", 1, (255, 255, 255))
-    win.blit(life_left, (18, 14))
-    win.blit(score, (18, 37))
+    score = font.render(f"Score: {man.score}", 1, (132, 0, 255))
+    life_left = font.render(f"Health: {man.hp}", 1, (255, 32, 32))
+    win.blit(life_left, (18, 12))
+    win.blit(score, (18, 35))
     if man.current_weapon != 0:
-        weapon_name = font.render(man.weapon_list[man.current_weapon], 1, (255, 255, 255))
+        weapon_name = font.render(man.weapon_list[man.current_weapon], 1, (255, 168, 0))
         ammo_left = font.render(
-            f"ammo left: {man.weapons[man.weapon_list[man.current_weapon]].ammo_count}/{man.weapons[man.weapon_list[man.current_weapon]].ammo_limit}",
-            1, (255, 255, 255))
+            f" - Ammo: {man.weapons[man.weapon_list[man.current_weapon]].ammo_count}/{man.weapons[man.weapon_list[man.current_weapon]].ammo_limit}",
+            1, (255, 168, 0))
         ammo_on_load = font.render(
-            f"loaded ammo: {man.weapons[man.weapon_list[man.current_weapon]].on_load}/{man.weapons[man.weapon_list[man.current_weapon]].hold_limit}",
-            1, (255, 255, 255))
-        win.blit(weapon_name, (28, 565))
-        win.blit(ammo_left, (100, 620))
-        win.blit(ammo_on_load, (100, 630))
-        win.blit(weapons_list[man.current_weapon - 1], (28, 580))
+            f"Loaded: {man.weapons[man.weapon_list[man.current_weapon]].on_load}/{man.weapons[man.weapon_list[man.current_weapon]].hold_limit}",
+            1, (255, 168, 0))
+        win.blit(weapon_name, (25, 66))
+        win.blit(ammo_left, (70, 66))
+        win.blit(weapons_list[man.current_weapon - 1], (23, 84))
+        win.blit(ammo_on_load, (70, 105))
 
     for enemy in enemies:
         enemy.update_bullets(win)
