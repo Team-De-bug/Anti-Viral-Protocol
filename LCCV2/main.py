@@ -76,6 +76,7 @@ infection_img = [pygame.image.load(IMAGES_PATH + "HUD/infection_0.png"),
                  pygame.image.load(IMAGES_PATH + "HUD/infection_3.png"),
                  pygame.image.load(IMAGES_PATH + "HUD/infection_4.png")]
 
+game_over_img = pygame.image.load(IMAGES_PATH + "HUD/game-over.png")
 
 # Running the game
 def main():
@@ -86,9 +87,7 @@ def main():
                 running = False
 
         if man.hp <= 0:
-            win.fill((255, 255, 255))
-            over = font_20.render("game over", 1, (0, 0, 0))
-            win.blit(over, (400,400))
+            game_over(win)
 
         else:
             keys = pygame.key.get_pressed()
@@ -162,8 +161,14 @@ def update_infection(man, win):
 
 
 def game_over(win):
-    win.fill((255,255,255))
+    img_limit = 14
+    img = 0
 
+    if img < img_limit:
+        img += 1
+    else:
+        win.blit(game_over_img, (0, 0), (img, 0, 1200, 640))
+        img = 0
 
 if __name__ == "__main__":
     main()
