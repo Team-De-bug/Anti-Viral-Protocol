@@ -174,6 +174,8 @@ class Player(Entity):
         self.fired = False
         self.score = 0
         self.infection_cooldown = 100
+        self.on_healer = False
+        self.healer = None
 
     # Init guns
     def init_guns(self):
@@ -434,6 +436,17 @@ class Player(Entity):
         if self.current_weapon != 0:
             self.enemy_killed(enemies)
 
+        # restock if on healer
+        if keys[pygame.K_r] and self.on_healer:
+            self.hp = 100
+            if not self.healer.used:
+                for weapon in self.weapon_list:
+                    if weapon == "none":
+                        pass
+                    else:
+                        self.weapons[weapon].ammo_count = self.weapons[weapon].ammo_limit
+                self.healer.used = True
+
     # checking for being on platform
     def on_ground(self, platforms):
 
@@ -455,11 +468,22 @@ class Player(Entity):
                 else:
                     self.on_moving_platform = False
 
+                if platform.healer:
+                    self.infection = 0
+                    self.on_healer = True
+                    self.healer = platform
+                else:
+                    self.on_healer = False
+                    self.healer = None
+
                 break
 
             else:
                 self.on_moving_platform = False
                 self.on_platform = False
+
+            if self.y > 660:
+                self.hp = 0
 
     # Changing weapon function
     def change_weapon(self, keys):
