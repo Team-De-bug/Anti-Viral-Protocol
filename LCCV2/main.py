@@ -84,18 +84,28 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        keys = pygame.key.get_pressed()
-        platforms[1].move_x(1)
-        platforms[5].move_y(1)
-        for enemy in enemies:
-            enemy.move(3, man)
-        man.change_weapon(keys)
-        man.on_ground(platforms)
-        man.move(keys, platforms, enemies, bg_layers)
-        hit_player(man, enemies)
-        man.infection_damage()
-        clock.tick(30)
-        redraw(win)
+
+        if man.hp <= 0:
+            win.fill((255, 255, 255))
+            over = font_20.render("game over", 1, (0, 0, 0))
+            win.blit(over, (400,400))
+
+        else:
+            keys = pygame.key.get_pressed()
+            platforms[1].move_x(1)
+            platforms[5].move_y(1)
+            for enemy in enemies:
+                enemy.move(3, man)
+                enemy.hurt_player(man)
+            man.change_weapon(keys)
+            man.on_ground(platforms)
+            man.move(keys, platforms, enemies, bg_layers)
+            hit_player(man, enemies)
+            man.infection_damage()
+            clock.tick(30)
+            redraw(win)
+
+        pygame.display.update()
 
 
 # draw function
@@ -135,8 +145,6 @@ def redraw(win):
     for enemy in enemies:
         enemy.update_bullets(win)
 
-    pygame.display.update()
-
 
 # player damage by projectiles from enemies
 def hit_player(man, enemies):
@@ -151,6 +159,10 @@ def hit_player(man, enemies):
 
 def update_infection(man, win):
     win.blit(infection_img[man.infection],  (1064, 8))
+
+
+def game_over(win):
+    win.fill((255,255,255))
 
 
 if __name__ == "__main__":
