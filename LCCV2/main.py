@@ -80,13 +80,13 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         keys = pygame.key.get_pressed()
-        man.move(keys, platforms, enemies, bg_layers)
         platforms[1].move_x(1)
         platforms[5].move_y(1)
         for enemy in enemies:
             enemy.move(3, man)
         man.change_weapon(keys)
         man.on_ground(platforms)
+        man.move(keys, platforms, enemies, bg_layers)
         clock.tick(30)
         redraw(win)
 

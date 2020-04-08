@@ -159,8 +159,6 @@ class Player(Entity):
         self.frame = 0
         self.frame_timer = 3
         self.frame_time = 0
-        self.collision_x = None
-        self.collision_y = None
         self.w_cool_down = 0
         self.fired = False
         self.score = 0
@@ -216,29 +214,6 @@ class Player(Entity):
                 self.fired = False
                 self.w_cool_down = 0
 
-        # Updating the collisions
-        for platform in platforms:
-
-            if self.direction == "L":
-                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x,
-                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num]) > platform.x,
-                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x > self.x,
-                                    self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x + platform.width > self.x]
-
-            else:
-                self.collision_x = [(platform.x + platform.width) > self.x + self.hit_x[self.width_num] > platform.x,
-                                    (platform.x + platform.width) > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x,
-                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x > self.x,
-                                    self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x + platform.width > self.x]
-
-            self.collision_y = [(platform.y + platform.height) > self.y > platform.y,
-                                (platform.y + platform.height) > (self.y + self.height) > platform.y,
-                                (self.y + self.height) > platform.y > self.y,
-                                (self.y + self.height) > (platform.y + platform.height) > self.y]
-
-            if (self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1]):
-                break
-
         # increase speed if L_shift key is pressed
         if keys[pygame.K_LSHIFT]:
             self.speed = 15
@@ -252,8 +227,30 @@ class Player(Entity):
             # setting the character facing direction
             self.direction = "R"
 
+            on_y = None
+            on_x = None
+
+            on_yh = None
+            on_xw = None
+
+            PLATFORM = None
             # checking for collisions
-            if not ((self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1])):
+            for platform in platforms:
+                on_x = platform.x + platform.width > self.x > platform.x
+
+                if self.direction == "L" and self.current_weapon != 0:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
+                else:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
+
+                on_y = self.y+self.height > platform.y > self.y
+                on_yh = self.y+self.height > platform.y + platform.height > self.y
+
+                PLATFORM = platform
+                if (on_x or on_xw) and (on_y or on_yh):
+                    break
+
+            if not ((on_x or on_xw) and (on_y or on_yh)):
 
                 # selecting the background images for scorlling
                 top = bg_layers[0]
@@ -295,9 +292,28 @@ class Player(Entity):
             # setting the facing direction
             self.direction = "L"
 
-            # checking for collision
-            if not ((self.collision_x[0] or self.collision_x[1]) and (self.collision_y[0] or self.collision_y[1])):
+            on_y = None
+            on_x = None
 
+            on_yh = None
+            on_xw = None
+            PLATFORM = None
+            # checking for collision
+            for platform in platforms:
+                on_x = platform.x + platform.width > self.x > platform.x
+
+                if self.direction == "L" and self.current_weapon != 0:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
+                else:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
+
+                on_y = self.y + self.height > platform.y > self.y
+                on_yh = self.y + self.height > platform.y + platform.height > self.y
+                PLATFORM = platform
+                if (on_x or on_xw) and (on_y or on_yh):
+                    break
+
+            if not ((on_x or on_xw) and (on_y or on_yh)):
                 top = bg_layers[0]
                 bottom = bg_layers[1]
 
@@ -359,10 +375,31 @@ class Player(Entity):
 
         # Jumping
         if self.jumping:
-            if self.collision_x[0] or self.collision_x[1] or self.collision_x[2] or self.collision_x[3]:
-                if self.collision_y[0] or self.collision_y[2]:
-                    self.vel = 0
-                    self.frame = 0
+
+            on_y = None
+            on_x = None
+
+            on_yh = None
+            on_xw = None
+            # checking for collisions
+            for platform in platforms:
+                on_x = platform.x + platform.width > self.x > platform.x
+
+                if self.direction == "L" and self.current_weapon != 0:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[
+                        self.width_num] + self.hit_nudge > platform.x
+                else:
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x
+
+                on_y = self.y + self.height > platform.y > self.y
+                on_yh = self.y + self.height > platform.y + platform.height > self.y
+
+                if (on_x or on_xw) and (on_y or on_yh):
+                    break
+
+            if (on_x or on_xw) and (on_y or on_yh):
+                self.vel = 0
+                self.frame = 0
 
         # moving the character if on a moving platform
         if self.on_moving_platform and self.platform.move_style == "x":
@@ -393,7 +430,12 @@ class Player(Entity):
     def on_ground(self, platforms):
 
         for platform in platforms:
-            x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x
+            if self.direction == "L" and self.current_weapon != 0:
+                x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num]) > platform.x
+
+            else:
+                x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x
+
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
                 self.vel = 0
