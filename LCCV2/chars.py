@@ -55,7 +55,6 @@ class Enemy(Entity):
         self.ammo.load_anim(ammo_path)
 
     # Move function fall back
-
     def move(self, speed, player):
         check_y = [player.y + player.height > self.y > player.y,
                    player.y + player.height > self.y + self.width > player.y]
@@ -65,7 +64,7 @@ class Enemy(Entity):
         else:
             self.on_player = False
 
-        if not ((0 < abs(player.x - self.x) < 300) and (check_y[0] or check_y[1])):
+        if not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])):
 
             if self.dir_x:
                 self.x += speed
@@ -82,6 +81,11 @@ class Enemy(Entity):
                 self.dir_x = False
 
         else:
+            if not ((200 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])):
+                if self.x > player.x:
+                    self.fire(self.x+self.width/2, self.y+self.height/2, -1)
+                else:
+                    self.fire(self.x + self.width / 2, self.y + self.height / 2, 1)
 
             if not self.on_player:
                 if self.x > player.x:
@@ -112,6 +116,14 @@ class Enemy(Entity):
     def scroll_bullets(self, vel, direction):
         for ammo in self.ammo_list:
             ammo.scroll_x(vel, direction)
+
+    def fire(self, x, y, direction):
+        if self.cooldown <= 0:
+            self.cooldown = 60
+            self.ammo_list.append(self.ammo(x, y, direction))
+
+        else:
+            self.cooldown -= 1
 
 
 # Main player class
