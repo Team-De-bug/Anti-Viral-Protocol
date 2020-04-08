@@ -19,7 +19,7 @@ pygame.init()
 hud = pygame.image.load(IMAGES_PATH + "HUD/hud.png")
 
 # Setting the screen up
-win = pygame.display.set_mode((800, 640))
+win = pygame.display.set_mode((1200, 640))
 pygame.display.set_caption("LCC GAME")
 ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
@@ -56,10 +56,10 @@ bg_layers = [top, bottom]
 
 # Setting up Enemy
 enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500)]
-enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
+enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
 enemies[0].set_max_distance(200)
 
-enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png")
+enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
 enemies[1].set_max_distance(200)
 
 

@@ -37,6 +37,7 @@ class Enemy(Entity):
     dist_max = 50
     dist = 50
     dir_x = True
+    ammo = None
 
     cooldown = 60
 
@@ -47,10 +48,11 @@ class Enemy(Entity):
         self.ammo_list = []
 
     # load anim_function
-    def load_anim(self, path):
+    def load_anim(self, path, ammo_path):
         self.anim = pygame.image.load(path)
         #self.moving = pygame.image.load(path)
         #self.attack = pygame.image.load(path)
+        self.ammo.load_anim(ammo_path)
 
     # Move function fall back
 
@@ -246,7 +248,7 @@ class Player(Entity):
                 bottom = bg_layers[1]
 
                 # Checking wether to scroll or move the player
-                if self.x < 650:
+                if self.x < 800:
                     self.x += self.speed
 
                 # scrolling
@@ -288,7 +290,7 @@ class Player(Entity):
                 bottom = bg_layers[1]
 
                 # checking wether to scroll or move the player
-                if self.x > 200:
+                if self.x > 400:
                     self.x -= self.speed
 
                 # scrolling

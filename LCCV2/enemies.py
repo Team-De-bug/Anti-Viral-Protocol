@@ -1,9 +1,10 @@
 from .chars import Enemy
+from .shells import Virus1shell
 
 
 # virus_1
 class Virus1(Enemy):
-    pass
+    ammo = Virus1shell
 
 
 # Virus_2
