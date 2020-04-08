@@ -5,6 +5,7 @@ class Platform:
     width = 600
     height = 50
     is_moving = False
+    healer = False
 
     def __init__(self, x, y):
         self.x = x
@@ -122,3 +123,15 @@ class BackDrop(Platform):
 
     def __init__(self):
         super().__init__(self.x, self.y)
+
+
+class Boost(Platform):
+    width = 64
+    height = 25
+
+    healer = True
+    used = False
+
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.vir_y = self.y + 153
