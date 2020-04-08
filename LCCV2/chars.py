@@ -461,6 +461,9 @@ class Player(Entity):
                 self.on_moving_platform = False
                 self.on_platform = False
 
+            if self.y > 660:
+                self.hp = 0
+
     # Changing weapon function
     def change_weapon(self, keys):
 
