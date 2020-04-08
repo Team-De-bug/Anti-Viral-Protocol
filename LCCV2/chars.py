@@ -238,7 +238,7 @@ class Player(Entity):
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
 
-                if self.direction == "L":
+                if self.direction == "L" and self.current_weapon != 0:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
@@ -302,7 +302,7 @@ class Player(Entity):
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
 
-                if self.direction == "L":
+                if self.direction == "L" and self.current_weapon != 0:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
@@ -385,7 +385,7 @@ class Player(Entity):
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
 
-                if self.direction == "L":
+                if self.direction == "L" and self.current_weapon != 0:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[
                         self.width_num] + self.hit_nudge > platform.x
                 else:
@@ -430,7 +430,12 @@ class Player(Entity):
     def on_ground(self, platforms):
 
         for platform in platforms:
-            x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x
+            if self.direction == "L" and self.current_weapon != 0:
+                x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num]) > platform.x
+
+            else:
+                x_on_platform = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x or platform.x + platform.width > (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) > platform.x
+
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
                 self.vel = 0
