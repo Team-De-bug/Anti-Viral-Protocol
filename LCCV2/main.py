@@ -8,6 +8,7 @@ from LCCV2.enemies import Virus1
 # Setting up the font
 pygame.font.init()
 font = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 14)
+font_20 = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 20)
 
 # Working file paths
 IMAGES_PATH = 'resources/Images/'
@@ -68,6 +69,7 @@ weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_rpg.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_ar.png")]
+infection_img = pygame.image.load(IMAGES_PATH + "HUD/infection.png")
 
 
 # Running the game
@@ -105,8 +107,11 @@ def redraw(win):
     win.blit(hud, (0, 0))
     score = font.render(f"Score: {man.score}", 1, (132, 0, 255))
     life_left = font.render(f"Health: {man.hp}", 1, (255, 32, 32))
+    infection = font_20.render(f"Infection", 1, (250, 0, 0))
+    win.blit(infection_img, (1064, 8))
     win.blit(life_left, (18, 12))
     win.blit(score, (18, 35))
+    win.blit(infection, (1075, 105))
     if man.current_weapon != 0:
         weapon_name = font.render(man.weapon_list[man.current_weapon], 1, (255, 168, 0))
         ammo_left = font.render(

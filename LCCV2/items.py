@@ -62,9 +62,9 @@ class Weapons:
 
 class Shells:
 
-    dist_limit = 300
+    dist_limit = 1000
     damage = 10
-    vel = 10
+    vel = 30
     width = 20
     height = 10
 

@@ -4,6 +4,7 @@ import pygame
 
 # defining and creating the bullets for each gun
 class ShotShells(Shells):
+    damage = 50
 
     # animation loader function
     @classmethod
@@ -15,15 +16,17 @@ class ShotShells(Shells):
 
 
 class ARShells(Shells):
-    pass
+    damage = 10
 
 
 class RPGShells(Shells):
-    pass
+    damage = 100
+    vel = 20
 
 
 class PistolShells(Shells):
-    pass
+    damage = 15
+    
 
 
 class Virus1shell(Shells):
