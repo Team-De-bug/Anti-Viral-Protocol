@@ -37,11 +37,12 @@ man.init_guns()
 # Setting up the platform
 def level_1():
     platforms = [BasePlatform(0), MovingTile(2000, 400), FloatingPlatform(300, 400),
-                 FloatingPlatform(650, 250),MovingTile(1650, 550),  Boost(2000, 400), 
+                 FloatingPlatform(650, 250),MovingTile(1650, 146),  Boost(2000, 400), 
                  TallPlatform(3200,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350)]
-    platforms = [BasePlatform(0), MovingTile(2500, 400), FloatingPlatform(300, 400),
-                 FloatingPlatform(650, 250),MovingTile(1650, 404),  Boost(2500, 400), 
-                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350)]
+    
+    # Setting movement of moving platform
+    platforms[4].dist_y_max = 404
+    platforms[4].dist_y = 404
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
@@ -130,7 +131,7 @@ def main():
                 keys = pygame.key.get_pressed()
                 paused(win, keys)
                 PLATFORMS[1].move_x(1)
-                PLATFORMS[4].move_y(1)
+                PLATFORMS[4].move_y(2)
                 for enemy in ENEMIES:
                     enemy.move(3, man)
                     enemy.hurt_player(man)
