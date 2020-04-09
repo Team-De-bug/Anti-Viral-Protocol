@@ -1,9 +1,10 @@
-from LCCV2.items import Weapons
-import LCCV2.shells as shells
+from items import Weapons
+import shells as shells
 
 
 # Pistol
 class Pistol(Weapons):
+    ammo_limit = 90
     ammo_count = 35
     hold_limit = 7
     on_load = 7
@@ -13,6 +14,7 @@ class Pistol(Weapons):
 
 # Shotgun
 class Shotgun(Weapons):
+    ammo_limit = 25
     ammo_count = 25
     hold_limit = 5
     on_load = 5
@@ -32,6 +34,7 @@ class MachineGun(Weapons):
 
 # rocket-Launcher
 class RocketLauncher(Weapons):
+    ammo_limit = 50
     ammo_count = 50
     hold_limit = 5
     on_load = 5
