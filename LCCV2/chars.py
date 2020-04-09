@@ -472,7 +472,8 @@ class Player(Entity):
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
                 self.vel = 0
-                self.y = platform.y - self.height
+                if self.y+self.height - platform.y < 40 and not platform.Taller:
+                    self.y = platform.y - self.height
                 if platform.is_moving:
                     self.on_moving_platform = True
                     self.plat_move_dir = platform.moving_dir
@@ -488,6 +489,17 @@ class Player(Entity):
                     self.on_healer = False
                     self.healer = None
 
+                if platform.Taller:
+                    if self.y + self.height - platform.y > 50:
+                        self.y = platform.y + self.height
+
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x < 40:
+                        self.x = platform.x - (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) - 10
+                        self.on_platform = False
+
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40:
+                        self.x = platform.x + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
+                        self.on_platform = False
                 break
 
             else:
