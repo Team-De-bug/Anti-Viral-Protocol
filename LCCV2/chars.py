@@ -490,14 +490,14 @@ class Player(Entity):
                     self.healer = None
 
                 if platform.Taller:
-                    if self.y + self.height - platform.y > 50:
-                        self.y = platform.y + self.height
+                    if self.y + self.height - platform.y < 50:
+                        self.y = platform.y - self.height
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x < 40:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x < 40 and self.y + self.height - platform.y > 70:
                         self.x = platform.x - (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) - 10
                         self.on_platform = False
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40 and self.y + self.height - platform.y > 70:
                         self.x = platform.x + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
                         self.on_platform = False
                 break
