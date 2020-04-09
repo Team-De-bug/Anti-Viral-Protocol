@@ -116,22 +116,8 @@ def main():
         if PAUSED:
             keys = pygame.key.get_pressed()
             paused(win, keys)
-
+            
         else:
-
-            keys = pygame.key.get_pressed()
-            PLATFORMS[1].move_x(1)
-            PLATFORMS[4].move_y(1)
-            for enemy in ENEMIES:
-                enemy.move(3, man)
-                enemy.hurt_player(man)
-            man.change_weapon(keys)
-            man.on_ground(PLATFORMS)
-            man.move(keys, PLATFORMS, ENEMIES, BACKGROUND)
-            hit_player(man, ENEMIES)
-            man.infection_damage()
-            clock.tick(30)
-            redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
 
             if man.hp <= 0:
                 game_over(win)
