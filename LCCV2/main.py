@@ -165,7 +165,6 @@ def main():
         pygame.display.update()
 
 
-
 # draw function
 def redraw(win, background, enemies,platforms):
     win.fill((104, 98, 112))
