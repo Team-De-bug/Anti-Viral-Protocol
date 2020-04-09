@@ -33,8 +33,8 @@ man = Player(x=300, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
-# Setting up the platform
 
+# Setting up the platform
 def level_1():
     platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
                  BasePlatform(1601), FloatingPlatform(1300, 400),
@@ -184,14 +184,15 @@ def update_infection(man, win):
 
 
 img_limit = 14
-img = [0]
+img = 0
 
 
 def game_over(win):
 
-    if img[0] < img_limit:
-        img[0] += 1
-        win.blit(game_over_img, (0, 0), (img[0] * 1200, 0, 1200, 640))
+    global img
+    if img < img_limit:
+        img += 1
+        win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
 
 
 if __name__ == "__main__":
