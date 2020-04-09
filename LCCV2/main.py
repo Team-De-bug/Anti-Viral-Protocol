@@ -182,8 +182,8 @@ def level_2():
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
-                pygame.image.load(IMAGES_PATH + "Weapons/gun_rpg.png"),
-                pygame.image.load(IMAGES_PATH + "Weapons/gun_ar.png")]
+                pygame.image.load(IMAGES_PATH + "Weapons/gun_ar.png"),
+                pygame.image.load(IMAGES_PATH + "Weapons/gun_rpg.png")]
 
 infection_img = [pygame.image.load(IMAGES_PATH + "HUD/infection_0.png"),
                  pygame.image.load(IMAGES_PATH + "HUD/infection_1.png"),

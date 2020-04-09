@@ -32,6 +32,5 @@ class PistolShells(Shells):
     dist_limit =700
     
 
-
 class Virus1shell(Shells):
-    pass
+    dist_limit = 500

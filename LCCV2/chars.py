@@ -40,7 +40,7 @@ class Enemy(Entity):
     ammo = None
     damage = 15
 
-    cooldown = 60
+    cooldown = 30
 
     # Class initialization
     def __init__(self, *args, **kwargs):
@@ -83,7 +83,7 @@ class Enemy(Entity):
                 self.dir_x = False
 
         else:
-            if not ((200 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])):
+            if not ((200 < abs(player.x - self.x) < 600) and (check_y[0] or check_y[1])):
                 if self.x > player.x:
                     self.fire(self.x+self.width/2, self.y+self.height/2, -1)
                 else:
