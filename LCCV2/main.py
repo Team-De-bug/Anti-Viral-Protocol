@@ -34,6 +34,9 @@ man = Player(x=100, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
+# Loading damage splash
+WARN = pygame.image.load(IMAGES_PATH + "HUD/damage.png")
+
 
 # Setting up the platform
 def level_1():
@@ -189,6 +192,7 @@ PAUSED = False
 LEVELS = [level_1, level_2]
 LEVEL_NUM = 0
 
+DAMAGED = False
 
 # Running the game
 def main():
@@ -242,8 +246,16 @@ def main():
         pygame.display.update()
 
 
+damage_delay = 20
+
+
 # draw function
 def redraw(win, background, enemies, platforms):
+
+
+    global DAMAGED
+    global WARN
+    global damage_delay
     win.fill((104, 98, 112))
 
     for layer in background:
@@ -284,6 +296,14 @@ def redraw(win, background, enemies, platforms):
     for enemy in enemies:
         enemy.update_bullets(win)
 
+    if DAMAGED:
+        win.blit(WARN, (0, 0))
+        if damage_delay > 0:
+            damage_delay -= 1
+        else:
+            DAMAGED = False
+            damage_delay = 20
+
 
 # player damage by projectiles from enemies
 def hit_player(man, enemies):
@@ -291,6 +311,8 @@ def hit_player(man, enemies):
         for ammo in enemy.ammo_list:
             if man.x + man.width > ammo.x > man.x:
                 man.hp -= enemy.ammo.damage
+                global DAMAGED
+                DAMAGED = True
                 if man.infection < 4:
                     man.infection += 1
                 enemy.ammo_list.pop(enemy.ammo_list.index(ammo))
