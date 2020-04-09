@@ -252,7 +252,7 @@ class Player(Entity):
                 on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
-                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
 
@@ -314,7 +314,7 @@ class Player(Entity):
                 on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
-                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge > platform.x
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
 
