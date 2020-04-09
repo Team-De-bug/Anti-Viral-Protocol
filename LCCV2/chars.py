@@ -552,7 +552,3 @@ class Player(Entity):
                     ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
                         enemy.hp -= ammo.damage
-
-                    else:
-                        self.score += enemy.points
-                        enemies.pop(enemies.index(enemy))

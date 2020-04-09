@@ -140,6 +140,8 @@ def redraw(win, background, enemies,platforms):
     for enemy in enemies:
         enemy.draw(win)
 
+    enemy_health_bar(win, enemies, man)
+
     for platform in platforms:
         platform.draw(win)
 
@@ -194,6 +196,16 @@ def game_over(win):
     if img < img_limit:
         img += 1
         win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
+
+
+def enemy_health_bar(win, enemies, man):
+    for enemy in enemies:
+        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 10, enemy.y - 17, 104, 14))
+        if enemy.hp > 0:
+            pygame.draw.rect(win, (100 - enemy.hp, enemy.hp, 0), (enemy.x - 8, enemy.y - 15, enemy.hp, 10))
+        else:
+            man.score += enemy.points
+            enemies.pop(enemies.index(enemy))
 
 
 if __name__ == "__main__":
