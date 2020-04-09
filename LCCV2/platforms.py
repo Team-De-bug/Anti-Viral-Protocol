@@ -27,6 +27,10 @@ class Platform:
 class FloatingPlatform(Platform):
     width = 128
     height = 25
+    
+class TallPlatform(Platform):
+    width = 540
+    height = 404
 
 
 class MockPlatform(Platform):
