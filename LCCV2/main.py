@@ -90,6 +90,7 @@ ENEMIES = None
 BACKGROUND = None
 
 LOAD_LEVEL = True
+PAUSED = False
 
 
 # Running the game
@@ -110,26 +111,33 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        if man.hp <= 0:
-            game_over(win)
-            clock.tick(5)
+        if PAUSED:
+            keys = pygame.key.get_pressed()
+            paused(win, keys)
 
         else:
-            keys = pygame.key.get_pressed()
-            PLATFORMS[1].move_x(1)
-            PLATFORMS[5].move_y(1)
-            for enemy in ENEMIES:
-                enemy.move(3, man)
-                enemy.hurt_player(man)
-            man.change_weapon(keys)
-            man.on_ground(PLATFORMS)
-            man.move(keys, PLATFORMS, ENEMIES, BACKGROUND)
-            hit_player(man, ENEMIES)
-            man.infection_damage()
-            clock.tick(30)
-            redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
+            if man.hp <= 0:
+                game_over(win)
+                clock.tick(5)
+
+            else:
+                keys = pygame.key.get_pressed()
+                paused(win, keys)
+                PLATFORMS[1].move_x(1)
+                PLATFORMS[5].move_y(1)
+                for enemy in ENEMIES:
+                    enemy.move(3, man)
+                    enemy.hurt_player(man)
+                man.change_weapon(keys)
+                man.on_ground(PLATFORMS)
+                man.move(keys, PLATFORMS, ENEMIES, BACKGROUND)
+                hit_player(man, ENEMIES)
+                man.infection_damage()
+                clock.tick(30)
+                redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
 
         pygame.display.update()
+
 
 
 # draw function
@@ -187,6 +195,22 @@ def hit_player(man, enemies):
 
 def update_infection(man, win):
     win.blit(infection_img[man.infection],  (1064, 8))
+
+
+def paused(win, keys):
+    global PAUSED
+    if keys[pygame.K_ESCAPE] and not PAUSED:
+        PAUSED = True
+
+    if PAUSED:
+        pygame.draw.rect(win, (255, 255, 255), (500, 250, 200, 100))
+        text = font_20.render("Game Paused ", 1, (0, 0, 0))
+        text2 = font.render("press c to continue", 1, (0, 0, 0))
+        win.blit(text, (600, 300))
+        win.blit(text2, (600, 320))
+
+    if keys[pygame.K_c] and PAUSED:
+        PAUSED = False
 
 
 img_limit = 14
