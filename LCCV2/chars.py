@@ -256,8 +256,13 @@ class Player(Entity):
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x
 
-                on_y = self.y+self.height > platform.y > self.y
-                on_yh = self.y+self.height > platform.y + platform.height > self.y
+                if platform.Taller:
+                    on_y = platform.y + platform.height > self.y > platform.y
+                    on_yh = platform.y + platform.height > self.y + self.height > platform.y
+
+                else:
+                    on_y = self.y+self.height > platform.y > self.y
+                    on_yh = self.y+self.height > platform.y + platform.height > self.y
 
                 if (on_x or on_xw) and (on_y or on_yh):
                     break
@@ -309,6 +314,7 @@ class Player(Entity):
 
             on_yh = None
             on_xw = None
+
             # checking for collision
             for platform in platforms:
                 on_x = platform.x + platform.width > self.x > platform.x
@@ -318,8 +324,14 @@ class Player(Entity):
                 else:
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
 
-                on_y = self.y + self.height > platform.y > self.y
-                on_yh = self.y + self.height > platform.y + platform.height > self.y
+                if platform.Taller:
+                    on_y = platform.y + platform.height > self.y > platform.y
+                    on_yh = platform.y + platform.height > self.y + self.height > platform.y
+
+                else:
+                    on_y = self.y+self.height > platform.y > self.y
+                    on_yh = self.y+self.height > platform.y + platform.height > self.y
+
                 if (on_x or on_xw) and (on_y or on_yh):
                     break
 

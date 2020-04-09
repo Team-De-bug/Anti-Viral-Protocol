@@ -6,6 +6,7 @@ class Platform:
     height = 50
     is_moving = False
     healer = False
+    Taller = False
 
     def __init__(self, x, y):
         self.x = x
@@ -27,10 +28,12 @@ class Platform:
 class FloatingPlatform(Platform):
     width = 128
     height = 25
-    
+
+
 class TallPlatform(Platform):
     width = 540
     height = 404
+    Taller = True
 
 
 class MockPlatform(Platform):
