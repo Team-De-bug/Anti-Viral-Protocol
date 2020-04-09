@@ -202,7 +202,7 @@ def enemy_health_bar(win, enemies, man):
     for enemy in enemies:
         pygame.draw.rect(win, (50, 50, 50), (enemy.x - 10, enemy.y - 17, 104, 14))
         if enemy.hp > 0:
-            pygame.draw.rect(win, (100 - enemy.hp, enemy.hp, 0), (enemy.x - 8, enemy.y - 15, enemy.hp, 10))
+            pygame.draw.rect(win, (100 - enemy.hp + 50, enemy.hp + 50, 0), (enemy.x - 8, enemy.y - 15, enemy.hp, 10))
         else:
             man.score += enemy.points
             enemies.pop(enemies.index(enemy))
