@@ -41,12 +41,12 @@ def level_1():
                  MovingTile(1650, 400)]
 
     # Loading the images for platform
-    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
-    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
-    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
-    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-    platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_1/moving_tile.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_1/moving_tile.png")
 
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
