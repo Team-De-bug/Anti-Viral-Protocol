@@ -9,7 +9,9 @@ class Virus1(Enemy):
 
 # Virus_2
 class Virus2(Enemy):
-    pass
+    ammo = Virus1shell
+    height = 150
+    width = 150
 
 
 # Virus3

@@ -3,7 +3,7 @@ import os
 import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost
-from LCCV2.enemies import Virus1
+from LCCV2.enemies import Virus1, Virus2
 
 # Setting up the font
 pygame.font.init()
@@ -57,12 +57,15 @@ def level_1():
     background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 
     # Setting up Enemy
-    enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500)]
+    enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500), Virus2(x=2000, y=400)]
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
 
     enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[1].set_max_distance(200)
+
+    enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[2].set_max_distance(200)
 
     return platforms, enemies, background
 
