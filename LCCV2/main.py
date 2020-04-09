@@ -2,7 +2,7 @@
 import os
 import pygame
 from LCCV2.chars import Player
-from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost
+from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform
 from LCCV2.enemies import Virus1, Virus2
 
 # Setting up the font
@@ -29,16 +29,17 @@ pygame.display.set_icon(ICON)
 clock = pygame.time.Clock()
 
 # Setting up the player
-man = Player(x=300, y=100)
+man = Player(x=100, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
 
 # Setting up the platform
 def level_1():
-    platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
-                 BasePlatform(1601), FloatingPlatform(1300, 400),
-                 MovingTile(1650, 300), Boost(2000, 400)]
+    platforms = [BasePlatform(0), MovingTile(2000, 400), FloatingPlatform(300, 400),
+                 BasePlatform(1601), FloatingPlatform(650, 250),MovingTile(1650, 300), 
+                 Boost(2000, 400), TallPlatform(3200,236), FloatingPlatform(1000, 350),
+                 FloatingPlatform(1032, 350)]
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
@@ -48,6 +49,9 @@ def level_1():
     platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_1/moving_tile.png")
     platforms[6].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
 
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
