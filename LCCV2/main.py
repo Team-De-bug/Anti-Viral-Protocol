@@ -39,6 +39,9 @@ def level_1():
     platforms = [BasePlatform(0), MovingTile(2000, 400), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 550),  Boost(2000, 400), 
                  TallPlatform(3200,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350)]
+    platforms = [BasePlatform(0), MovingTile(2500, 400), FloatingPlatform(300, 400),
+                 FloatingPlatform(650, 250),MovingTile(1650, 404),  Boost(2500, 400), 
+                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350)]
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
