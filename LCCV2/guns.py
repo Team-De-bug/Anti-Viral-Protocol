@@ -4,7 +4,7 @@ import shells as shells
 
 # Pistol
 class Pistol(Weapons):
-    ammo_limit = 90
+    ammo_limit = 35
     ammo_count = 35
     hold_limit = 7
     on_load = 7
