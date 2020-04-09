@@ -159,7 +159,7 @@ class Player(Entity):
         super().__init__(**kwargs)
         self.status = ["idle_", "walking_"]
         self.current_weapon = 0
-        self.weapon_list = ["none", "pistol", "shotgun", "RPG", "AR"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
+        self.weapon_list = ["none", "pistol", "shotgun", "AR", "RPG"]  # ["none", "pistol", "shotgun", "RPG", "AR"]
         self.jumping = False
         self.on_platform = False
         self.status_num = 0
@@ -206,7 +206,7 @@ class Player(Entity):
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
     # Moving control
-    def move(self, keys, platforms, enemies, bg_layers):
+    def move(self, keys, platforms, enemies, bg_layers, portal):
 
         # Update hitbox
         frame_num = self.frame % 8
@@ -229,7 +229,7 @@ class Player(Entity):
                 self.w_cool_down = 0
 
         # increase speed if L_shift key is pressed
-        if keys[pygame.K_LSHIFT]:
+        if keys[pygame.K_LSHIFT] and self.current_weapon != 4:
             self.speed = 15
 
         else:
@@ -287,6 +287,7 @@ class Player(Entity):
 
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
+                    portal.scroll_x(self.speed, -1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
 
@@ -353,7 +354,7 @@ class Player(Entity):
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
-
+                    portal.scroll_x(self.speed, 1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
 
@@ -380,7 +381,10 @@ class Player(Entity):
         # checking for starting the jump
         if keys[pygame.K_w] and self.on_platform:
             if not self.jumping:
-                self.vel = 20
+                if self.current_weapon == 4:
+                    self.vel = 10
+                else:
+                    self.vel = 20
                 self.jumping = True
 
         if self.jumping and self.vel > 0:
@@ -531,10 +535,10 @@ class Player(Entity):
                 self.current_weapon = 2
 
             if keys[pygame.K_4]:
-                self.current_weapon = 4
+                self.current_weapon = 3
 
             if keys[pygame.K_5]:
-                self.current_weapon = 3
+                self.current_weapon = 4
 
     # rendering function
     def draw(self, win):
