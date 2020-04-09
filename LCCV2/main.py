@@ -2,7 +2,7 @@
 import os
 import pygame
 from LCCV2.chars import Player
-from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform
+from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost
 from LCCV2.enemies import Virus1
 
 # Setting up the font
@@ -38,7 +38,7 @@ man.init_guns()
 def level_1():
     platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
                  BasePlatform(1601), FloatingPlatform(1300, 400),
-                 MovingTile(1650, 400)]
+                 MovingTile(1650, 400), Boost(2000, 400)]
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
@@ -47,6 +47,7 @@ def level_1():
     platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
     platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_1/moving_tile.png")
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/heal.png")
 
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
