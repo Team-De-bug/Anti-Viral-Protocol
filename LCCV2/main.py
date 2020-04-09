@@ -38,7 +38,7 @@ man.init_guns()
 def level_1():
     platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
                  BasePlatform(1601), FloatingPlatform(1300, 400),
-                 MovingTile(1650, 400), Boost(2000, 400)]
+                 MovingTile(1650, 300), Boost(2000, 400)]
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
