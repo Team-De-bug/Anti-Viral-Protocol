@@ -206,7 +206,7 @@ class Player(Entity):
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
     # Moving control
-    def move(self, keys, platforms, enemies, bg_layers):
+    def move(self, keys, platforms, enemies, bg_layers, portal):
 
         # Update hitbox
         frame_num = self.frame % 8
@@ -287,6 +287,7 @@ class Player(Entity):
 
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 4, -1)
+                    portal.scroll_x(self.speed, -1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
 
@@ -353,7 +354,7 @@ class Player(Entity):
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/4, 1)
-
+                    portal.scroll_x(self.speed, 1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
 

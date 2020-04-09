@@ -142,3 +142,8 @@ class Boost(Platform):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.vir_y = self.y + 153
+
+
+class Endgate(Platform):
+    width = 32
+    height = 129

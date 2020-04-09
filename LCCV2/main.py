@@ -2,8 +2,8 @@
 import os
 import pygame
 from LCCV2.chars import Player
-from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform
-from LCCV2.enemies import Virus1, Virus2
+from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+from LCCV2.enemies import Virus1
 
 # Setting up the font
 pygame.font.init()
@@ -24,6 +24,7 @@ win = pygame.display.set_mode((1200, 640))
 pygame.display.set_caption("LCC GAME")
 ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
+
 
 # Setting up the clock
 clock = pygame.time.Clock()
@@ -65,6 +66,10 @@ def level_1():
     platforms[12].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
     platforms[13].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
 
+    #loading The end portal
+    portal = Endgate(5050, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
 
@@ -91,7 +96,71 @@ def level_1():
     enemies[4].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[4].set_max_distance(50)
 
-    return platforms, enemies, background
+    return platforms, enemies, background, portal
+
+
+def level_2():
+    man.x, man.y = 100, 300
+    platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
+                 FloatingPlatform(650, 250), MovingTile(1650, 236), Boost(2250, 209),
+                 TallPlatform(1850, 236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
+                 FloatingPlatform(2500, 236), FloatingPlatform(2800, 300),
+                 FloatingPlatform(2910, 300), BasePlatform(3650), FloatingPlatform(3350, 450)]
+
+    # Setting movement of moving platform
+    platforms[4].dist_y_max = 354
+    platforms[4].dist_y = 354
+
+    platforms[1].dist_y_max = 340
+    platforms[1].dist_y = 340
+
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[10].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[11].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[12].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[13].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+
+    # loading The end portal
+    portal = Endgate(5050, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
+
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+
+    # Setting up Enemy
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=275), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
+               Virus1(x=2900, y=200)]
+
+    enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[0].set_max_distance(200)
+
+    enemies[1].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[1].set_max_distance(100)
+
+    enemies[2].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[2].set_max_distance(200)
+
+    enemies[3].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[3].set_max_distance(50)
+
+    enemies[4].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[4].set_max_distance(50)
+
+    return platforms, enemies, background, portal
 
 
 # Loading images for hud
@@ -112,9 +181,13 @@ game_over_img = pygame.image.load(IMAGES_PATH + "HUD/game-over.png")
 PLATFORMS = None
 ENEMIES = None
 BACKGROUND = None
+PORTAL = None
 
 LOAD_LEVEL = True
 PAUSED = False
+
+LEVELS = [level_1, level_2]
+LEVEL_NUM = 0
 
 
 # Running the game
@@ -125,20 +198,23 @@ def main():
     global PLATFORMS
     global ENEMIES
     global BACKGROUND
-
-    if LOAD_LEVEL:
-        PLATFORMS, ENEMIES, BACKGROUND = level_1()
-        LOAD_LEVEL = False
+    global PORTAL
+    global LEVELS
+    global LEVEL_NUM
 
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
+        if LOAD_LEVEL:
+            PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+            LOAD_LEVEL = False
+
         if PAUSED:
             keys = pygame.key.get_pressed()
             paused(win, keys)
-            
+
         else:
 
             if man.hp <= 0:
@@ -146,6 +222,7 @@ def main():
                 clock.tick(5)
 
             else:
+                check_portal(PORTAL, man)
                 keys = pygame.key.get_pressed()
                 paused(win, keys)
                 PLATFORMS[1].move_y(2)
@@ -155,7 +232,7 @@ def main():
                     enemy.hurt_player(man)
                 man.change_weapon(keys)
                 man.on_ground(PLATFORMS)
-                man.move(keys, PLATFORMS, ENEMIES, BACKGROUND)
+                man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
                 hit_player(man, ENEMIES)
                 man.infection_damage()
                 clock.tick(30)
@@ -166,7 +243,7 @@ def main():
 
 
 # draw function
-def redraw(win, background, enemies,platforms):
+def redraw(win, background, enemies, platforms):
     win.fill((104, 98, 112))
 
     for layer in background:
@@ -203,6 +280,7 @@ def redraw(win, background, enemies,platforms):
         win.blit(weapons_list[man.current_weapon - 1], (23, 84))
         win.blit(ammo_on_load, (70, 105))
 
+    PORTAL.draw(win)
     for enemy in enemies:
         enemy.update_bullets(win)
 
@@ -258,6 +336,15 @@ def enemy_health_bar(win, enemies, man):
         else:
             man.score += enemy.points
             enemies.pop(enemies.index(enemy))
+
+
+# next level
+def check_portal(portal, man):
+    global LOAD_LEVEL
+    global LEVEL_NUM
+    if portal.x + portal.width > man.x + man.hit_x[man.width_num] > portal.x and portal.y + portal.height > man.y > portal.y:
+        LOAD_LEVEL = True
+        LEVEL_NUM += 1
 
 
 if __name__ == "__main__":
