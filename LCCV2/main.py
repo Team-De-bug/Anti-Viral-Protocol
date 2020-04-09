@@ -25,43 +25,45 @@ pygame.display.set_caption("LCC GAME")
 ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
+# Setting up the clock
+clock = pygame.time.Clock()
+
 # Setting up the player
 man = Player(x=300, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
-# Setting up the clock
-clock = pygame.time.Clock()
-
 # Setting up the platform
-platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
-             BasePlatform(1601), FloatingPlatform(1300, 400),
-             MovingTile(1650, 400)]
 
-# Loading the images for platform
-platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
-platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
-platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
-platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+def level_1():
+    platforms = [BasePlatform(0), MovingTile(400, 400), FloatingPlatform(900, 400),
+                 BasePlatform(1601), FloatingPlatform(1300, 400),
+                 MovingTile(1650, 400)]
 
-# Making the backdrop
-bottom = BackDrop()
-top = BackDrop()
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
 
-# Loading the images for the backdrop
-bottom.load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-top.load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
-bg_layers = [top, bottom]
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
 
-# Setting up Enemy
-enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500)]
-enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
-enemies[0].set_max_distance(200)
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 
-enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
-enemies[1].set_max_distance(200)
+    # Setting up Enemy
+    enemies = [Virus1(x=800, y=500), Virus1(x=1000, y=500)]
+    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[0].set_max_distance(200)
+
+    enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[1].set_max_distance(200)
+
+    return platforms, enemies, background
 
 
 # Loading images for hud
@@ -76,11 +78,29 @@ infection_img = [pygame.image.load(IMAGES_PATH + "HUD/infection_0.png"),
                  pygame.image.load(IMAGES_PATH + "HUD/infection_3.png"),
                  pygame.image.load(IMAGES_PATH + "HUD/infection_4.png")]
 
+# Loading image for game over screen
 game_over_img = pygame.image.load(IMAGES_PATH + "HUD/game-over.png")
+
+PLATFORMS = None
+ENEMIES = None
+BACKGROUND = None
+
+LOAD_LEVEL = True
+
 
 # Running the game
 def main():
     running = True
+
+    global LOAD_LEVEL
+    global PLATFORMS
+    global ENEMIES
+    global BACKGROUND
+
+    if LOAD_LEVEL:
+        PLATFORMS, ENEMIES, BACKGROUND = level_1()
+        LOAD_LEVEL = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -92,27 +112,29 @@ def main():
 
         else:
             keys = pygame.key.get_pressed()
-            platforms[1].move_x(1)
-            platforms[5].move_y(1)
-            for enemy in enemies:
+            PLATFORMS[1].move_x(1)
+            PLATFORMS[5].move_y(1)
+            for enemy in ENEMIES:
                 enemy.move(3, man)
                 enemy.hurt_player(man)
             man.change_weapon(keys)
-            man.on_ground(platforms)
-            man.move(keys, platforms, enemies, bg_layers)
-            hit_player(man, enemies)
+            man.on_ground(PLATFORMS)
+            man.move(keys, PLATFORMS, ENEMIES, BACKGROUND)
+            hit_player(man, ENEMIES)
             man.infection_damage()
             clock.tick(30)
-            redraw(win)
+            redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
 
         pygame.display.update()
 
 
 # draw function
-def redraw(win):
+def redraw(win, background, enemies,platforms):
     win.fill((104, 98, 112))
-    bottom.draw(win)
-    top.draw(win)
+
+    for layer in background:
+        layer.draw(win)
+
     man.draw(win)
     for enemy in enemies:
         enemy.draw(win)
