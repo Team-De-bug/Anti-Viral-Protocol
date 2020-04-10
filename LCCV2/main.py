@@ -431,6 +431,54 @@ def main_menu(win):
         else:
             pygame.draw.rect(win, (200, 0, 0), (740, 500, 60, 30))
 
+        if 610 > mouse_hover[0] > 550 and 560 > mouse_hover[1] > 500:
+            pygame.draw.rect(win, (20, 0, 220), (550, 500, 60, 30))
+            if mouse_pressed[0]:
+                get_help()
+        else:
+            pygame.draw.rect(win, (0, 0, 200), (550, 500, 60, 30))
+
+        pygame.display.update()
+
+
+def get_help():
+    image = pygame.image.load(IMAGES_PATH+"Menus/help.png")
+    pages_max = 5
+    pages = 0
+    cooldown = 3
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        keys = pygame.key.get_pressed()
+        mouse_hover = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        win.blit(image, (0, 0), (1200*pages, 0, 1200, 640))
+
+        if cooldown <= 0:
+            cooldown = 3
+            if 1019 + 105 > mouse_hover[0] > 1019 and 497 + 105 > mouse_hover[1] > 497:
+                if mouse_pressed[0] and pages < pages_max:
+                    pages += 1
+
+            if 49 + 105 > mouse_hover[0] > 49 and 497 + 105 > mouse_hover[1] > 497:
+                if mouse_pressed[0] and pages > 0:
+                    pages -= 1
+
+            if keys[pygame.K_RIGHT] and pages < pages_max:
+                pages += 1
+
+            if keys[pygame.K_LEFT] and pages > 0:
+                pages -= 1
+
+        else:
+            cooldown -= 1
+
+        clock.tick(30)
         pygame.display.update()
 
 # draw function
