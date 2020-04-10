@@ -63,4 +63,4 @@ class RocketLauncher(Weapons):
         else:
             ammo.explode_delay -= 1
 
-        win.blit(self.explode_img, (ammo.x, ammo.y), (32 * ammo.explode_stage, 0, 32, 32))
+        win.blit(self.explode_img, (ammo.x, ammo.y), (64 * ammo.explode_stage, 0, 64, 64))
