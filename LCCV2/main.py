@@ -244,39 +244,45 @@ def main():
                 running = False
 
         if LOAD_LEVEL:
-            PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
-            LOAD_LEVEL = False
-
-        if PAUSED:
-            keys = pygame.key.get_pressed()
-            paused(win, keys)
-
-        else:
-
-            if man.hp <= 0:
+            if LEVEL_NUM < 2:
+                PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                LOAD_LEVEL = False
+            else:
                 game_over(win)
                 clock.tick(5)
 
-            else:
-                check_portal(PORTAL, man)
+        else:
+
+            if PAUSED:
                 keys = pygame.key.get_pressed()
                 paused(win, keys)
 
-                for platform in PLATFORMS:
-                    if platform.is_moving:
-                        platform.move()
+            else:
 
-                for enemy in ENEMIES:
-                    enemy.move(3, man)
-                    enemy.hurt_player(man)
+                if man.hp <= 0:
+                    game_over(win)
+                    clock.tick(5)
 
-                man.change_weapon(keys)
-                man.on_ground(PLATFORMS)
-                man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
-                hit_player(man, ENEMIES)
-                man.infection_damage()
-                clock.tick(30)
-                redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
+                else:
+                    check_portal(PORTAL, man)
+                    keys = pygame.key.get_pressed()
+                    paused(win, keys)
+
+                    for platform in PLATFORMS:
+                        if platform.is_moving:
+                            platform.move()
+
+                    for enemy in ENEMIES:
+                        enemy.move(3, man)
+                        enemy.hurt_player(man)
+
+                    man.change_weapon(keys)
+                    man.on_ground(PLATFORMS)
+                    man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
+                    hit_player(man, ENEMIES)
+                    man.infection_damage()
+                    clock.tick(30)
+                    redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
 
 
         pygame.display.update()
@@ -345,7 +351,7 @@ def redraw(win, background, enemies, platforms):
 def hit_player(man, enemies):
     for enemy in enemies:
         for ammo in enemy.ammo_list:
-            if man.x + man.width > ammo.x > man.x:
+            if man.x + man.width > ammo.x > man.x and man.y + man.heighth > ammo.y > man.y:
                 man.hp -= enemy.ammo.damage
                 global DAMAGED
                 DAMAGED = True
