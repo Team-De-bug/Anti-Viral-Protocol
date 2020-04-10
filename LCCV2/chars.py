@@ -38,6 +38,7 @@ class Enemy(Entity):
     dist = 50
     dir_x = True
     ammo = None
+    Tracking = False
     damage = 15
 
     cooldown = 30
@@ -66,7 +67,7 @@ class Enemy(Entity):
         else:
             self.on_player = False
 
-        if not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])):
+        if not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])) or not self.Tracking:
 
             if self.dir_x:
                 self.x += speed
@@ -89,7 +90,7 @@ class Enemy(Entity):
                 else:
                     self.fire(self.x + self.width / 2, self.y + self.height / 2, 1)
 
-            if not self.on_player:
+            if not self.on_player and self.Tracking:
                 if self.x > player.x:
                     self.x -= speed
 
