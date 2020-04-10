@@ -194,7 +194,7 @@ def level_2():
 
     # Setting up Enemy
     enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1450, y=475), Virus1(x=2725, y=125),
-               Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900 ,y=475), Virus1(x=5610, y= 500),
+               Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900, y=475), Virus1(x=5610, y= 500),
                Virus2(x=6400, y=110)]
 
     enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
@@ -349,6 +349,8 @@ def main():
     global LEVELS
     global LEVEL_NUM
 
+    main_menu(win)
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -401,6 +403,35 @@ def main():
 
 damage_delay = 20
 
+
+def main_menu(win):
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        win.fill((255, 255, 255))
+        mouse_hover = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        if 460 > mouse_hover[0] > 400 and 560 > mouse_hover[1] > 500:
+            pygame.draw.rect(win, (0, 220, 20), (400, 500, 60, 30))
+            if mouse_pressed[0]:
+                break
+        else:
+            pygame.draw.rect(win, (0, 200, 0), (400, 500, 60, 30))
+
+        if 800 > mouse_hover[0] > 740 and 560 > mouse_hover[1] > 500:
+            pygame.draw.rect(win, (220, 0, 20), (740, 500, 60, 30))
+            if mouse_pressed[0]:
+                pygame.quit()
+                quit()
+
+        else:
+            pygame.draw.rect(win, (200, 0, 0), (740, 500, 60, 30))
+
+        pygame.display.update()
 
 # draw function
 def redraw(win, background, enemies, platforms):
