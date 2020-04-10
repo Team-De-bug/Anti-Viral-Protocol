@@ -1,5 +1,5 @@
-from .chars import Enemy
-from .shells import Virus1shell
+from chars import Enemy
+from shells import Virus1shell
 
 
 # virus_1

@@ -1,5 +1,5 @@
 from items import Weapons
-import shells as shells
+import shells
 
 
 # Pistol
