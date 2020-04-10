@@ -55,10 +55,12 @@ def level_1():
     platforms[4].move_style = "y"
     platforms[4].dist_y_max = 354
     platforms[4].dist_y = 354
+    platforms[4].speed = 3
 
     platforms[1].move_style = "y"
     platforms[1].dist_y_max = 150
     platforms[1].dist_y = 150
+    platforms[1].speed = 2
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_1/platform_base.png")
@@ -123,7 +125,7 @@ def level_1():
 def level_2():
     man.x, man.y = 50, 300
     platforms = [BasePlatform(200), MovingTile(3150, 300), FloatingPlatform(0, 500),
-                 FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3580, 350),
+                 FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(400, 350),
                  TallPlatform(2500, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
                  FloatingPlatform(1030, 250), FloatingPlatform(1200, 425),
                  FloatingPlatform(1400, 200), BasePlatform(3650), FloatingPlatform(1600, 350),
