@@ -3,7 +3,7 @@ import os
 import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from LCCV2.enemies import Virus1
+from LCCV2.enemies import Virus1, Virus2
 
 # Setting up the mixer for audio
 pygame.mixer.init()
@@ -33,7 +33,7 @@ pygame.display.set_icon(ICON)
 clock = pygame.time.Clock()
 
 # Setting up the player
-man = Player(x=100, y=100)
+man = Player(x=200, y=100)
 man.load_anim(IMAGES_PATH+"Characters/Player/")
 man.init_guns()
 
@@ -82,7 +82,7 @@ def level_1():
 
 
     #loading The end portal
-    portal = Endgate(5050, 473)
+    portal = Endgate(500, 473)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -121,12 +121,12 @@ def level_1():
 
 
 def level_2():
-    man.x, man.y = 100, 300
-    platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
-                 FloatingPlatform(650, 250), MovingTile(1650, 236), Boost(2250, 209),
-                 TallPlatform(1850, 236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
-                 FloatingPlatform(2500, 236), FloatingPlatform(2800, 300),
-                 FloatingPlatform(2910, 300), BasePlatform(3650), FloatingPlatform(3350, 450)]
+    man.x, man.y = 50, 300
+    platforms = [BasePlatform(200), MovingTile(3150, 300), FloatingPlatform(0, 500),
+                 FloatingPlatform(450, 400), MovingTile(1650, 236), Boost(2250, 209),
+                 TallPlatform(1850, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
+                 FloatingPlatform(1030, 250), FloatingPlatform(1200, 425),
+                 FloatingPlatform(1400, 200), BasePlatform(3650), FloatingPlatform(1600, 350)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "y"
@@ -165,7 +165,7 @@ def level_2():
     background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 
     # Setting up Enemy
-    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=275), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1250, y=475), Virus1(x=2000, y=130),
                Virus1(x=2900, y=200)]
 
     enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
@@ -174,7 +174,7 @@ def level_2():
     enemies[1].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[1].set_max_distance(100)
 
-    enemies[2].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[2].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[2].set_max_distance(200)
 
     enemies[3].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
