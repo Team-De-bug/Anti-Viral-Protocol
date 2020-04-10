@@ -182,7 +182,7 @@ def level_2():
 
 
     # loading The end portal
-    portal = Endgate(6800, 108)
+    portal = Endgate(6800, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -224,8 +224,8 @@ def level_2():
     enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[8].set_max_distance(100)
 
-
     return platforms, enemies, background, portal
+
 
 def level_3():
     platforms = [BasePlatform(1500), MovingTile(3150, 300), FloatingPlatform(1550, 400),
@@ -331,7 +331,7 @@ LOAD_LEVEL = True
 PAUSED = False
 
 LEVELS = [level_3, level_2, level_1]
-LEVEL_NUM = 0
+LEVEL_NUM = 1
 
 DAMAGED = False
 
