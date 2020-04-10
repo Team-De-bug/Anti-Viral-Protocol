@@ -67,7 +67,7 @@ class Enemy(Entity):
         else:
             self.on_player = False
 
-        if not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1])) or not self.Tracking:
+        if (not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1]))) or (not self.Tracking):
 
             if self.dir_x:
                 self.x += speed
@@ -84,11 +84,6 @@ class Enemy(Entity):
                 self.dir_x = False
 
         else:
-            if not ((200 < abs(player.x - self.x) < 600) and (check_y[0] or check_y[1])):
-                if self.x > player.x:
-                    self.fire(self.x+self.width/2, self.y+self.height/2, -1)
-                else:
-                    self.fire(self.x + self.width / 2, self.y + self.height / 2, 1)
 
             if not self.on_player and self.Tracking:
                 if self.x > player.x:
@@ -96,6 +91,12 @@ class Enemy(Entity):
 
                 else:
                     self.x += speed
+
+        if (not ((200 < player.x - self.x < 600) or not ((200 < self.x - player.x < 600))) and (check_y[0] or check_y[1])):
+            if self.x > player.x:
+                self.fire(self.x + self.width / 2, self.y + self.height / 2, -1)
+            else:
+                self.fire(self.x + self.width / 2, self.y + self.height / 2, 1)
 
     # Draw method fallback
     def draw(self, win):
@@ -129,7 +130,7 @@ class Enemy(Entity):
             self.cooldown -= 1
 
     def hurt_player(self, player):
-        if player.x + player.width > self.x > player.x:
+        if player.x + player.width > self.x > player.x and player.y + player.height > self.y > player.y:
             if self.meele_cooldown <= 0:
                 player.hurt(self.damage)
                 self.meele_cooldown = 20
