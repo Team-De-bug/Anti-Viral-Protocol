@@ -179,6 +179,8 @@ class Player(Entity):
         self.on_healer = False
         self.healer = None
         self.double_damage = True
+        self.double_damage_timer = 400
+        self.double_damage_count = 3
 
     # Init guns
     def init_guns(self):
@@ -469,6 +471,18 @@ class Player(Entity):
                         self.weapons[weapon].ammo_count = self.weapons[weapon].ammo_limit
                 self.healer.used = True
 
+        if keys[pygame.K_f] and not self.double_damage and self.double_damage_count > 0:
+            self.double_damage = True
+            self.double_damage_count -= 1
+
+        if self.double_damage:
+            if self.double_damage_timer > 0:
+                self.double_damage_timer -= 1
+
+            else:
+                self.double_damage = False
+                self.double_damage_timer = 300
+
     # checking for being on platform
     def on_ground(self, platforms):
 
@@ -518,6 +532,8 @@ class Player(Entity):
 
             if self.y > 660:
                 self.hp = 0
+
+
 
     # Changing weapon function
     def change_weapon(self, keys):
@@ -569,6 +585,7 @@ class Player(Entity):
                          (self.x, self.y), self.frames[self.width_num])
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, self.double_damage)
+
 
     def infection_damage(self):
         if self.infection_cooldown <= 0:
