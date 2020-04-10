@@ -95,7 +95,7 @@ def level_1():
     background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 
     # Setting up Enemy
-    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=250), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=260), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
                Virus1(x=2900, y=200), Virus1(x=3950, y=500), Virus1(x=4300, y=500)]
    
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
@@ -131,8 +131,9 @@ def level_2():
                  FloatingPlatform(1400, 200), BasePlatform(4175), FloatingPlatform(1600, 350),
                  FloatingPlatform(2300, 350), TallPlatform(3040, 236),FloatingPlatform(3580, 375),
                  FloatingPlatform(3700, 125), FloatingPlatform(4350, 400), FloatingPlatform(4600, 200),
-                 FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500,325),
-                 FloatingPlatform(5610,325)]
+                 FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
+                 FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
+                 FloatingPlatform(5215, 415)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -144,6 +145,12 @@ def level_2():
     platforms[1].dist_y_max = 495
     platforms[1].dist_y = 495
     platforms[1].speed = 3
+
+    platforms[24].move_style = "x"
+    platforms[24].dist_x_max = 470
+    platforms[24].dist_x = 470
+    platforms[24].speed = 3
+
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_2/platform_base.png")
@@ -170,10 +177,13 @@ def level_2():
     platforms[21].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
     platforms[22].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
     platforms[23].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
+    platforms[24].load_anim(IMAGES_PATH + "Tilesets/level_2/moving_tile.png")
+    platforms[25].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
+    platforms[26].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
 
 
     # loading The end portal
-    portal = Endgate(6000, 473)
+    portal = Endgate(6800, 108)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -184,8 +194,9 @@ def level_2():
     background[1].load_anim(IMAGES_PATH + "Background/level_2/bg_top.png")
 
     # Setting up Enemy
-    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1250, y=475), Virus1(x=2375, y=250),
-               Virus1(x=2700, y=125), Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900 ,y=475)]
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1250, y=475), Virus1(x=2725, y=125),
+               Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900 ,y=475), Virus1(x=5610, y= 500),
+               Virus2(x=6400, y=110)]
 
     enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
@@ -197,19 +208,102 @@ def level_2():
     enemies[2].set_max_distance(200)
 
     enemies[3].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
-    enemies[3].set_max_distance(0)
+    enemies[3].set_max_distance(100)
 
-    enemies[4].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
-    enemies[4].set_max_distance(25)
+    enemies[4].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[4].set_max_distance(200)
 
-    enemies[5].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
-    enemies[5].set_max_distance(200)
+    enemies[5].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[5].set_max_distance(100)
 
-    enemies[6].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[6].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[6].set_max_distance(200)
+
+    enemies[7].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[7].set_max_distance(100)
+
+    enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[8].set_max_distance(100)
+
+
+    return platforms, enemies, background, portal
+
+def level_3():
+    platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
+                 FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
+                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
+                 FloatingPlatform(2500,236), FloatingPlatform(2800,300), 
+                 FloatingPlatform(2910,300), BasePlatform(3650), FloatingPlatform(3350,450),
+                 FloatingPlatform(3950,400), FloatingPlatform(4200,250), FloatingPlatform(4450,350),
+                 FloatingPlatform(4700,350)]
+    
+    # Setting movement of moving platform
+    platforms[4].move_style = "y"
+    platforms[4].dist_y_max = 354
+    platforms[4].dist_y = 354
+    platforms[4].speed = 3
+
+    platforms[1].move_style = "y"
+    platforms[1].dist_y_max = 150
+    platforms[1].dist_y = 150
+    platforms[1].speed = 2
+
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[10].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[11].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[12].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
+    platforms[13].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[14].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[15].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[16].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[17].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+
+
+    #loading The end portal
+    portal = Endgate(5050, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
+
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+
+    # Setting up Enemy
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=260), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
+               Virus1(x=2900, y=200), Virus1(x=3950, y=500), Virus1(x=4300, y=500)]
+   
+    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[0].set_max_distance(200)
+
+    enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[1].set_max_distance(100)
+
+    enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[2].set_max_distance(200)
+
+    enemies[3].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[3].set_max_distance(50)
+
+    enemies[4].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[4].set_max_distance(10)
+
+    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[5].set_max_distance(100)
+
+    enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[6].set_max_distance(100)
-
-    enemies[7].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
-    enemies[7].set_max_distance(150)
 
     return platforms, enemies, background, portal
 
@@ -237,7 +331,7 @@ PORTAL = None
 LOAD_LEVEL = True
 PAUSED = False
 
-LEVELS = [level_1, level_2]
+LEVELS = [level_1, level_2, level_3]
 LEVEL_NUM = 0
 
 DAMAGED = False
@@ -261,7 +355,7 @@ def main():
                 running = False
 
         if LOAD_LEVEL:
-            if LEVEL_NUM < 2:
+            if LEVEL_NUM < 3:
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
                 LOAD_LEVEL = False
             else:
@@ -389,9 +483,9 @@ def paused(win, keys):
     if PAUSED:
         pygame.draw.rect(win, (255, 255, 255), (500, 250, 200, 100))
         text = font_20.render("Game Paused ", 1, (0, 0, 0))
-        text2 = font.render("Press C to continue", 1, (0, 0, 0))
-        win.blit(text, (545, 270))
-        win.blit(text2, (540, 300))
+        text2 = font.render("press c to continue", 1, (0, 0, 0))
+        win.blit(text, (600, 300))
+        win.blit(text2, (600, 320))
 
     if keys[pygame.K_c] and PAUSED:
         PAUSED = False
