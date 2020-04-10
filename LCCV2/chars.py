@@ -188,13 +188,13 @@ class Player(Entity):
 
         # loading the gun animations
         self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
-                                         IMAGE_PATH + "Projectiles/pistol_")
+                                         IMAGE_PATH + "Projectiles/pistol_", "resources/Sounds/Shoot_Pistol_1.wav")
         self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
-                                          IMAGE_PATH + "Projectiles/shotgun.png")
+                                          IMAGE_PATH + "Projectiles/shotgun.png", "resources/Sounds/Shotgun.wav")
         self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
-                                      IMAGE_PATH + "Projectiles/rpg_")
+                                      IMAGE_PATH + "Projectiles/rpg_", "resources/Sounds/RPG.wav")
         self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
-                                     IMAGE_PATH + "Projectiles/ar_")
+                                     IMAGE_PATH + "Projectiles/ar_", "resources/Sounds/Shoot_AR_1.wav")
 
     # loading animation function
     def load_anim(self, path):
