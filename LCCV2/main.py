@@ -5,6 +5,9 @@ from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
 from LCCV2.enemies import Virus1, Virus2
 
+# Setting up the mixer for audio
+pygame.mixer.init()
+
 # Setting up the font
 pygame.font.init()
 font = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 14)

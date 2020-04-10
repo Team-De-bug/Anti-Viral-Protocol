@@ -20,6 +20,7 @@ class Weapons:
     def fire(self, x, y, direction):
         if self.on_load > 0:
             self.on_load -= 1
+            self.sound.play()
             self.ammo_list.append(self.ammo(x, y, direction))
 
     # Reloading ammo function
@@ -39,13 +40,14 @@ class Weapons:
             self.ammo_count = self.ammo_limit
 
     # Load animations
-    def load_anim(self, path, ammo_path):
+    def load_anim(self, path, ammo_path, sound):
         self.anim["idle_R"] = pygame.image.load(path+"idle_R.png")
         self.anim["walking_R"] = pygame.image.load(path+"walking_R.png")
         self.anim["idle_L"] = pygame.image.load(path+"idle_L.png")
         self.anim["walking_L"] = pygame.image.load(path+"walking_L.png")
 
         self.ammo.load_anim(ammo_path)
+        self.sound = pygame.mixer.Sound(sound)
 
     def update_bullets(self, win):
         for ammo in self.ammo_list:
@@ -78,6 +80,7 @@ class Shells:
     # animation loader function
     @classmethod
     def load_anim(cls, path):
+
         cls.anim = [pygame.image.load(path + "L.png"),
                     pygame.image.load(path + "R.png")]
 

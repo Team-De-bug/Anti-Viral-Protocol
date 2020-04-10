@@ -1,5 +1,5 @@
 import pygame
-import LCCV2.guns as guns
+import guns as guns
 
 IMAGE_PATH = "resources/Images/"
 
@@ -47,7 +47,7 @@ class Enemy(Entity):
         super().__init__(*args, **kwargs)
         self.on_player = False
         self.ammo_list = []
-        self.meele_cooldown = 20
+        self.meele_cooldown = 0
 
     # load anim_function
     def load_anim(self, path, ammo_path):
@@ -188,13 +188,13 @@ class Player(Entity):
 
         # loading the gun animations
         self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
-                                         IMAGE_PATH + "Projectiles/pistol_")
+                                         IMAGE_PATH + "Projectiles/pistol_", "resources/Sounds/Shoot_Pistol_1.wav")
         self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
-                                          IMAGE_PATH + "Projectiles/shotgun.png")
+                                          IMAGE_PATH + "Projectiles/shotgun.png", "resources/Sounds/Shotgun.wav")
         self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
-                                      IMAGE_PATH + "Projectiles/rpg_")
+                                      IMAGE_PATH + "Projectiles/rpg_", "resources/Sounds/RPG.wav")
         self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
-                                     IMAGE_PATH + "Projectiles/ar_")
+                                     IMAGE_PATH + "Projectiles/ar_", "resources/Sounds/Shoot_AR_1.wav")
 
     # loading animation function
     def load_anim(self, path):
@@ -204,6 +204,9 @@ class Player(Entity):
         self.anim["walking_R"] = pygame.image.load(path+"no_weapons/walking_R.png")
         self.anim["idle_L"] = pygame.image.load(path+"no_weapons/idle_L.png")
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
+
+        # load sounds
+        self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
 
     # Moving control
     def move(self, keys, platforms, enemies, bg_layers, portal):
@@ -576,7 +579,7 @@ class Player(Entity):
             ammo_list = self.weapons[self.weapon_list[self.current_weapon]].ammo_list
             for ammo in ammo_list:
                 if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y >enemy.y:
-                    print("enemy hit")
+                    self.hit.play()
                     ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
                         enemy.hp -= ammo.damage
