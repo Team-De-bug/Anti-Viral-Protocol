@@ -478,6 +478,9 @@ def get_help():
         else:
             cooldown -= 1
 
+        if keys[pygame.K_ESCAPE]:
+            break
+
         clock.tick(30)
         pygame.display.update()
 
