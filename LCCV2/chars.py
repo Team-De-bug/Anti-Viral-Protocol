@@ -237,7 +237,7 @@ class Player(Entity):
                 self.w_cool_down = 0
 
         # increase speed if L_shift key is pressed
-        if keys[pygame.K_LSHIFT] and self.current_weapon != 4:
+        if keys[pygame.K_LSHIFT] and self.current_weapon != 4 and self.on_platform:
             self.speed = 15
 
         else:
@@ -522,7 +522,7 @@ class Player(Entity):
                         self.on_platform = False
 
                     elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40 and self.y + self.height - platform.y > 70:
-                        self.x = platform.x + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
+                        self.x = platform.x + platform.width + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
                         self.on_platform = False
                 break
 
