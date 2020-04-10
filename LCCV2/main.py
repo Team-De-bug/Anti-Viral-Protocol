@@ -515,7 +515,7 @@ def get_help():
     image = pygame.image.load(IMAGES_PATH+"Menus/help.png")
     pages_max = 5
     pages = 0
-    cooldown = 3
+    cooldown = 2
 
     while True:
         for event in pygame.event.get():
@@ -530,7 +530,7 @@ def get_help():
         win.blit(image, (0, 0), (1200*pages, 0, 1200, 640))
 
         if cooldown <= 0:
-            cooldown = 3
+            cooldown = 2
             if 1019 + 105 > mouse_hover[0] > 1019 and 497 + 105 > mouse_hover[1] > 497:
                 if mouse_pressed[0] and pages < pages_max:
                     pages += 1
