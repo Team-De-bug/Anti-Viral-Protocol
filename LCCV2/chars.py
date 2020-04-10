@@ -178,6 +178,7 @@ class Player(Entity):
         self.infection_cooldown = 100
         self.on_healer = False
         self.healer = None
+        self.double_damage = True
 
     # Init guns
     def init_guns(self):
@@ -192,7 +193,7 @@ class Player(Entity):
         self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
                                          IMAGE_PATH + "Projectiles/pistol_", "resources/Sounds/Shoot_Pistol_1.wav")
         self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
-                                          IMAGE_PATH + "Projectiles/shotgun.png", "resources/Sounds/Shotgun.wav")
+                                          IMAGE_PATH + "Projectiles/shotgun", "resources/Sounds/Shotgun.wav")
         self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
                                       IMAGE_PATH + "Projectiles/rpg_", "resources/Sounds/RPG.wav")
         self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
@@ -567,7 +568,7 @@ class Player(Entity):
                 win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num]+self.direction],
                          (self.x, self.y), self.frames[self.width_num])
 
-            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win)
+            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, self.double_damage)
 
     def infection_damage(self):
         if self.infection_cooldown <= 0:
@@ -584,4 +585,7 @@ class Player(Entity):
                     self.hit.play()
                     ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
-                        enemy.hp -= ammo.damage
+                        if self.double_damage:
+                            enemy.hp -= ammo.damage * 2
+                        else:
+                            enemy.hp -= ammo.damage
