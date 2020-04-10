@@ -127,7 +127,7 @@ def level_2():
                  TallPlatform(2500, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
                  FloatingPlatform(1030, 250), FloatingPlatform(1200, 425),
                  FloatingPlatform(1400, 200), BasePlatform(3650), FloatingPlatform(1600, 350),
-                 FloatingPlatform(2300, 350), TallPlatform(3040, 236),FloatingPlatform(3580, 300)]
+                 FloatingPlatform(2300, 350), TallPlatform(3040, 236),FloatingPlatform(3580, 375)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -167,8 +167,8 @@ def level_2():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_2/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_2/bg_top.png")
 
     # Setting up Enemy
     enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1250, y=475), Virus1(x=2375, y=250),
