@@ -228,6 +228,85 @@ def level_2():
 
     return platforms, enemies, background, portal
 
+def level_3():
+    platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
+                 FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
+                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
+                 FloatingPlatform(2500,236), FloatingPlatform(2800,300), 
+                 FloatingPlatform(2910,300), BasePlatform(3650), FloatingPlatform(3350,450),
+                 FloatingPlatform(3950,400), FloatingPlatform(4200,250), FloatingPlatform(4450,350),
+                 FloatingPlatform(4700,350)]
+    
+    # Setting movement of moving platform
+    platforms[4].move_style = "y"
+    platforms[4].dist_y_max = 354
+    platforms[4].dist_y = 354
+    platforms[4].speed = 3
+
+    platforms[1].move_style = "y"
+    platforms[1].dist_y_max = 150
+    platforms[1].dist_y = 150
+    platforms[1].speed = 2
+
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[10].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[11].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[12].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
+    platforms[13].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[14].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[15].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[16].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+    platforms[17].load_anim(IMAGES_PATH + "Tilesets/level_3/platform.png")
+
+
+    #loading The end portal
+    portal = Endgate(5050, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
+
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+
+    # Setting up Enemy
+    enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=260), Virus1(x=1110, y=500), Virus1(x=2000, y=130),
+               Virus1(x=2900, y=200), Virus1(x=3950, y=500), Virus1(x=4300, y=500)]
+   
+    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[0].set_max_distance(200)
+
+    enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[1].set_max_distance(100)
+
+    enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[2].set_max_distance(200)
+
+    enemies[3].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[3].set_max_distance(50)
+
+    enemies[4].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[4].set_max_distance(10)
+
+    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[5].set_max_distance(100)
+
+    enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[6].set_max_distance(100)
+
+    return platforms, enemies, background, portal
+
 
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
@@ -252,7 +331,7 @@ PORTAL = None
 LOAD_LEVEL = True
 PAUSED = False
 
-LEVELS = [level_1, level_2]
+LEVELS = [level_1, level_2, level_3]
 LEVEL_NUM = 0
 
 DAMAGED = False
