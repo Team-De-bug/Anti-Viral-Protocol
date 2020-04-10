@@ -52,9 +52,11 @@ def level_1():
                  FloatingPlatform(4700,350)]
     
     # Setting movement of moving platform
+    platforms[4].move_style = "y"
     platforms[4].dist_y_max = 354
     platforms[4].dist_y = 354
 
+    platforms[1].move_style = "y"
     platforms[1].dist_y_max = 150
     platforms[1].dist_y = 150
 
@@ -127,9 +129,11 @@ def level_2():
                  FloatingPlatform(1400, 200), BasePlatform(3650), FloatingPlatform(1600, 350)]
 
     # Setting movement of moving platform
+    platforms[4].move_style = "y"
     platforms[4].dist_y_max = 354
     platforms[4].dist_y = 354
 
+    platforms[1].move_style = "y"
     platforms[1].dist_y_max = 340
     platforms[1].dist_y = 340
 
@@ -210,6 +214,7 @@ LEVEL_NUM = 0
 
 DAMAGED = False
 
+
 # Running the game
 def main():
     running = True
@@ -245,11 +250,15 @@ def main():
                 check_portal(PORTAL, man)
                 keys = pygame.key.get_pressed()
                 paused(win, keys)
-                PLATFORMS[1].move_y(2)
-                PLATFORMS[4].move_y(3)
+
+                for platform in PLATFORMS:
+                    if platform.is_moving:
+                        platform.move()
+
                 for enemy in ENEMIES:
                     enemy.move(3, man)
                     enemy.hurt_player(man)
+
                 man.change_weapon(keys)
                 man.on_ground(PLATFORMS)
                 man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)

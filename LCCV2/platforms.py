@@ -66,41 +66,41 @@ class MovingTile(Platform):
     moving_dir = 1
     move_style = None
     moving_speed = 1
+    speed = 1
 
-    def move_x(self, speed):
-        self.move_style = "x"
-        self.moving_speed = speed
-        if self.dir_x:
-            self.x += speed
-            self.dist_x -= speed
-            self.moving_dir = 1
+    def move(self):
+        if self.move_style == "x":
+            self.moving_speed = self.speed
+            if self.dir_x:
+                self.x += self.speed
+                self.dist_x -= self.speed
+                self.moving_dir = 1
 
-        else:
-            self.x -= speed
-            self.dist_x += speed
-            self.moving_dir = -1
+            else:
+                self.x -= self.speed
+                self.dist_x += self.speed
+                self.moving_dir = -1
 
-        if self.dist_x > self.dist_x_max:
-            self.dir_x = True
+            if self.dist_x > self.dist_x_max:
+                self.dir_x = True
 
-        elif self.dist_x < 0:
-            self.dir_x = False
+            elif self.dist_x < 0:
+                self.dir_x = False
 
-    def move_y(self, speed):
-        self.move_style = "y"
-        if self.dir_y:
-            self.y += speed
-            self.dist_y -= speed
+        if self.move_style == "y":
+            if self.dir_y:
+                self.y += self.speed
+                self.dist_y -= self.speed
 
-        else:
-            self.y -= speed
-            self.dist_y += speed
+            else:
+                self.y -= self.speed
+                self.dist_y += self.speed
 
-        if self.dist_y > self.dist_y_max:
-            self.dir_y = True
+            if self.dist_y > self.dist_y_max:
+                self.dir_y = True
 
-        elif self.dist_y < 0:
-            self.dir_y = False
+            elif self.dist_y < 0:
+                self.dir_y = False
 
     # Set the distance to move in x axis
     def set_distance_x(self, dist):
