@@ -49,11 +49,11 @@ class Weapons:
         self.ammo.load_anim(ammo_path)
         self.sound = pygame.mixer.Sound(sound)
 
-    def update_bullets(self, win):
+    def update_bullets(self, win, double=False):
         for ammo in self.ammo_list:
             if ammo.dist < ammo.dist_limit:
                 ammo.move()
-                ammo.draw(win)
+                ammo.draw(win, double)
             else:
                 self.ammo_list.pop(self.ammo_list.index(ammo))
 
@@ -82,7 +82,9 @@ class Shells:
     def load_anim(cls, path):
 
         cls.anim = [pygame.image.load(path + "L.png"),
-                    pygame.image.load(path + "R.png")]
+                    pygame.image.load(path + "R.png"),
+                    pygame.image.load(path + "2x_R.png"),
+                    pygame.image.load(path + "2x_L.png")]
 
     # scrolling function
     def scroll_x(self, vel, direction):
@@ -93,8 +95,16 @@ class Shells:
             self.x += self.vel * self.direction
             self.dist += self.vel
 
-    def draw(self, win):
-        if self.direction > 0:
-            win.blit(self.anim[1], (self.x, self.y))
+    def draw(self, win, double):
+
+        if double:
+            if self.direction > 0:
+                win.blit(self.anim[2], (self.x, self.y))
+            else:
+                win.blit(self.anim[3], (self.x, self.y))
+
         else:
-            win.blit(self.anim[0], (self.x, self.y))
+            if self.direction > 0:
+                win.blit(self.anim[1], (self.x, self.y))
+            else:
+                win.blit(self.anim[0], (self.x, self.y))
