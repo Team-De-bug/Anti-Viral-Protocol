@@ -132,7 +132,7 @@ def level_2():
                  FloatingPlatform(2300, 350), TallPlatform(3040, 236),FloatingPlatform(3580, 375),
                  FloatingPlatform(3700, 125), FloatingPlatform(4350, 400), FloatingPlatform(4600, 200),
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
-                 FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6300,236),
+                 FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
                  FloatingPlatform(5215, 415)]
 
     # Setting movement of moving platform
@@ -355,7 +355,7 @@ def main():
                 running = False
 
         if LOAD_LEVEL:
-            if LEVEL_NUM < 2:
+            if LEVEL_NUM < 3:
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
                 LOAD_LEVEL = False
             else:
