@@ -351,7 +351,7 @@ def redraw(win, background, enemies, platforms):
 def hit_player(man, enemies):
     for enemy in enemies:
         for ammo in enemy.ammo_list:
-            if man.x + man.width > ammo.x > man.x and man.y + man.heighth > ammo.y > man.y:
+            if man.x + man.width > ammo.x > man.x and man.y + man.height > ammo.y > man.y:
                 man.hp -= enemy.ammo.damage
                 global DAMAGED
                 DAMAGED = True
