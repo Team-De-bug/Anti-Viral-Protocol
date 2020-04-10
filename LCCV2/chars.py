@@ -276,8 +276,8 @@ class Player(Entity):
             if not ((on_x or on_xw) and (on_y or on_yh)):
 
                 # selecting the background images for scorlling
-                top = bg_layers[0]
-                bottom = bg_layers[1]
+                top = bg_layers[1]
+                bottom = bg_layers[0]
 
                 # Checking wether to scroll or move the player
                 if self.x < 800:
@@ -292,7 +292,7 @@ class Player(Entity):
                         enemy.scroll_x(self.speed, -1)
 
                     top.scroll_x(self.speed / 2, -1)
-                    bottom.scroll_x(self.speed / 4, -1)
+                    bottom.scroll_x(self.speed / 3, -1)
                     portal.scroll_x(self.speed, -1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, -1)
@@ -343,8 +343,8 @@ class Player(Entity):
                     break
 
             if not ((on_x or on_xw) and (on_y or on_yh)):
-                top = bg_layers[0]
-                bottom = bg_layers[1]
+                top = bg_layers[1]
+                bottom = bg_layers[0]
 
                 # checking wether to scroll or move the player
                 if self.x > 400:
@@ -359,7 +359,7 @@ class Player(Entity):
                         enemy.scroll_x(self.speed, 1)
 
                     top.scroll_x(self.speed/2, 1)
-                    bottom.scroll_x(self.speed/4, 1)
+                    bottom.scroll_x(self.speed/3, 1)
                     portal.scroll_x(self.speed, 1)
                     if self.current_weapon != 0:
                         self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.speed, 1)
