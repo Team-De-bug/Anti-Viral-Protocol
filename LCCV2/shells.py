@@ -1,4 +1,4 @@
-from LCCV2.items import Shells
+from items import Shells
 import pygame
 
 
