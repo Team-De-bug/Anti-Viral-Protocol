@@ -29,6 +29,9 @@ class RPGShells(Shells):
     damage = 100
     vel = 20
     dist_limit = 600
+    exploded = False
+    explode_delay = 4
+    explode_stage = 0
 
 
 class PistolShells(Shells):

@@ -456,10 +456,6 @@ class Player(Entity):
         if keys[pygame.K_e] and not keys[pygame.K_SPACE] and self.current_weapon != 0:
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
-        # check for enemy hit by bullets
-        if self.current_weapon != 0:
-            self.enemy_killed(enemies)
-
         # restock if on healer
         if keys[pygame.K_r] and self.on_healer:
             self.hp = 100
@@ -594,13 +590,17 @@ class Player(Entity):
         else:
             self.infection_cooldown -= 1
 
-    def enemy_killed(self, enemies):
+
+    def enemy_killed(self, enemies, win):
         for enemy in enemies:
             ammo_list = self.weapons[self.weapon_list[self.current_weapon]].ammo_list
             for ammo in ammo_list:
                 if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y >enemy.y:
                     self.hit.play()
-                    ammo_list.pop(ammo_list.index(ammo))
+                    if self.current_weapon == 4:
+                        self.weapons[self.weapon_list[self.current_weapon]].explode(ammo, win)
+                    else:
+                        ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
                         if self.double_damage:
                             enemy.hp -= ammo.damage * 2

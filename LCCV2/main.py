@@ -392,6 +392,8 @@ def main():
                     man.change_weapon(keys)
                     man.on_ground(PLATFORMS)
                     man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
+                    if man.current_weapon != 0:
+                        man.enemy_killed(ENEMIES, win)
                     hit_player(man, ENEMIES)
                     man.infection_damage()
                     clock.tick(30)
@@ -484,9 +486,9 @@ def get_help():
         clock.tick(30)
         pygame.display.update()
 
+
 # draw function
 def redraw(win, background, enemies, platforms):
-
 
     global DAMAGED
     global WARN
