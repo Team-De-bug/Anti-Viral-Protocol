@@ -178,7 +178,7 @@ class Player(Entity):
         self.infection_cooldown = 100
         self.on_healer = False
         self.healer = None
-        self.double_damage = False
+        self.double_damage = True
 
     # Init guns
     def init_guns(self):
@@ -585,4 +585,7 @@ class Player(Entity):
                     self.hit.play()
                     ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
-                        enemy.hp -= ammo.damage
+                        if self.double_damage:
+                            enemy.hp -= ammo.damage * 2
+                        else:
+                            enemy.hp -= ammo.damage
