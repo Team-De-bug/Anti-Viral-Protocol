@@ -603,6 +603,6 @@ class Player(Entity):
                     ammo_list.pop(ammo_list.index(ammo))
                     if enemy.hp > 0:
                         if self.double_damage:
-                            enemy.hp -= ammo.damage * 20
+                            enemy.hp -= ammo.damage * 2
                         else:
                             enemy.hp -= ammo.damage
