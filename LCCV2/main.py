@@ -123,7 +123,7 @@ def level_1():
 def level_2():
     man.x, man.y = 50, 300
     platforms = [BasePlatform(200), MovingTile(3150, 300), FloatingPlatform(0, 500),
-                 FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3580, 275),
+                 FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3580, 350),
                  TallPlatform(2500, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
                  FloatingPlatform(1030, 250), FloatingPlatform(1200, 425),
                  FloatingPlatform(1400, 200), BasePlatform(3650), FloatingPlatform(1600, 350),
