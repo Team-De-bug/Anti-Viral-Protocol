@@ -274,11 +274,12 @@ class Player(Entity):
 
             # checking for collisions
             for platform in platforms:
-                on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge> platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x
 
                 if platform.Taller:
@@ -343,12 +344,13 @@ class Player(Entity):
 
             # checking for collision
             for platform in platforms:
-                on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge> platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
-                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x
 
                 if platform.Taller:
                     on_y = platform.y + platform.height > self.y > platform.y
@@ -531,11 +533,11 @@ class Player(Entity):
                     if self.y + self.height - platform.y < 50:
                         self.y = platform.y - self.height
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x < 40 and self.y + self.height - platform.y > 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x <= 40 and self.y + self.height - platform.y >= 70:
                         self.x = platform.x - (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) - 10
                         self.on_platform = False
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40 and self.y + self.height - platform.y > 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) <= 40 and self.y + self.height - platform.y >= 70:
                         self.x = platform.x + platform.width + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
                         self.on_platform = False
                 break
