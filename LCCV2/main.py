@@ -228,6 +228,7 @@ def level_2():
     return platforms, enemies, background, portal
 
 def level_3():
+    man.x, man.y = 50, 50
     platforms = [BasePlatform(1500), MovingTile(3150, 250), FloatingPlatform(1550, 400),
                  FloatingPlatform(650, 250), MovingTile(1300, 350),  Boost(4100, 209),
                  TallPlatform(0, 236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
