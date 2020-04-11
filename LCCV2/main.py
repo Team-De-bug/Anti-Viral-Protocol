@@ -3,7 +3,7 @@ import os
 import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4
+from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -338,8 +338,8 @@ def level_3():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_3/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_3/bg_top.png")
 
     # Setting up Enemy
     enemies = [Virus1(x=1000, y=260), Virus1(x=1600, y=500), Virus2(x=2150, y=500), Virus1(x=2000, y=150),
@@ -553,6 +553,43 @@ def level_4():
     return platforms, enemies, background, portal
 
 
+def level_5():
+    man.spawn()
+    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
+                 FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
+                 FloatingPlatform(1625, 400)]
+
+
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    
+
+    #loading The end portal
+    portal = Endgate(2150, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
+
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+
+    # Setting up Enemy
+    enemies = [VirusBoss(x=800, y=100)]
+   
+    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[0].set_max_distance(0)
+
+
+    return platforms, enemies, background, portal
+
+
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
@@ -576,7 +613,7 @@ PORTAL = None
 LOAD_LEVEL = True
 PAUSED = False
 
-LEVELS = [level_1, level_2, level_3, level_4]
+LEVELS = [level_1, level_2, level_3, level_4, level_5]
 LEVEL_NUM = 0
 
 DAMAGED = False
