@@ -41,6 +41,8 @@ class VirusBoss(Enemy):
     enemy_list = []
     enemy = Virus2
 
+    health_bar = pygame.image.load("resources/Images/HUD/bossbar.png")
+
     def spawn_enemies(self, player):
         if self.spawn_cooldown <= 0:
             self.spawn_cooldown = 70
@@ -63,5 +65,5 @@ class VirusBoss(Enemy):
 
     def update_health_bar(self, win):
         if self.hp > 0:
-            pygame.draw.rect(win, (31, 31, 31), (398, 20, 402, 20))
-            pygame.draw.rect(win, (230, 230, 230), (400, 22, (self.hp/self.health_max) * 400, 20))
+            pygame.draw.rect(win, (31, 31, 31), (398 + 30, 20, 404, 24))
+            win.blit(self.health_bar, (430, 22), (0, 0, (self.hp/self.health_max) * 400, 20))
