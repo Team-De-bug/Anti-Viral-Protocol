@@ -262,7 +262,8 @@ def level_3():
                  FloatingPlatform(6550, 350), FloatingPlatform(6850, 400), FloatingPlatform(7000, 250),
                  FloatingPlatform(7110, 250), FloatingPlatform(7220, 250),FloatingPlatform(7330,250),
                  FloatingPlatform(8250, 600), MovingTile(7825,600), MovingTile(8475, 236),
-                 TallPlatform(8700, 236), TallPlatform(9240, 236)]
+                 TallPlatform(8700, 236), TallPlatform(9240, 236), TallPlatform(-540, 236),
+                 TallPlatform(9780, 236)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "y"
@@ -340,6 +341,8 @@ def level_3():
     platforms[35].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
     platforms[36].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
     platforms[37].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
+    platforms[38].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
+    platforms[39].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
 
     #loading The end portal
     portal = Endgate(9700, 105)
