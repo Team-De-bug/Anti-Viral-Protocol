@@ -132,7 +132,7 @@ def level_2():
                  FloatingPlatform(3700, 125), FloatingPlatform(4350, 400), FloatingPlatform(4600, 200),
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
                  FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
-                 FloatingPlatform(5215, 415)]
+                 FloatingPlatform(5215, 415), Boost(6800,250)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -182,7 +182,7 @@ def level_2():
 
 
     # loading The end portal
-    portal = Endgate(6850, 106)
+    portal = Endgate(6900, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -236,8 +236,8 @@ def level_3():
                  FloatingPlatform(2550, 209), FloatingPlatform(2825, 250), FloatingPlatform(2936, 250),
                  FloatingPlatform(4700, 350), TallPlatform(3750, 236), MovingTile(4350,236),
                  FloatingPlatform(4600, 511), FloatingPlatform(4710, 511), FloatingPlatform(4820, 511),
-                 MovingTile(5075, 236), TallPlatform(5250, 236), MovingTile(5825, 236), FloatingPlatform(6200, 236),
-                 FloatingPlatform(6450, 350), FloatingPlatform(6750, 400), FloatingPlatform(7000, 250),
+                 MovingTile(5075, 236), TallPlatform(5250, 236), MovingTile(5825, 236), FloatingPlatform(6325, 236),
+                 FloatingPlatform(6550, 350), FloatingPlatform(6850, 400), FloatingPlatform(7000, 250),
                  FloatingPlatform(7110, 250), FloatingPlatform(7220, 250),FloatingPlatform(7330,250),
                  FloatingPlatform(8250, 600), MovingTile(7825,600), MovingTile(8475, 236),
                  TallPlatform(8700, 236), TallPlatform(9240, 236)]
