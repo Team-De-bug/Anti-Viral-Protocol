@@ -567,10 +567,10 @@ def level_4():
 
 def level_5():
     man.spawn()
-    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
-                 FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400), TallPlatform(-575, 236),
-                 FloatingPlatform(550, 325)]
+    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),FloatingPlatform(325, 225), 
+                 FloatingPlatform(1250, 175),FloatingPlatform(1725, 400), TallPlatform(-575, 236),
+                 FloatingPlatform(550, 325), Boost(350,200), FloatingPlatform(790, 175),
+                 Boost(1760, 375), FloatingPlatform(1540, 250)]
 
 
     # Loading the images for platform
@@ -582,6 +582,11 @@ def level_5():
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[10].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[11].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    
 
 
 
