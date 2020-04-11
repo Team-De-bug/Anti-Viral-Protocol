@@ -188,7 +188,7 @@ def level_2():
 
 
     # loading The end portal
-    portal = Endgate(6900, 106)
+    portal = Endgate(7000, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
