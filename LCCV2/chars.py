@@ -422,7 +422,8 @@ class Player(Entity):
         # falling
         if not self.on_platform and not self.jumping:
             self.y += self.vel
-            self.vel += 1
+            if self.vel < 12:
+                self.vel += 1
 
         # Jumping
         if self.jumping:
