@@ -39,7 +39,6 @@ class Enemy(Entity):
     dist = 50
     dir_x = True
     ammo = None
-    Tracking = False
     damage = 15
 
     cooldown = 30
@@ -50,6 +49,7 @@ class Enemy(Entity):
         self.on_player = False
         self.ammo_list = []
         self.meele_cooldown = 0
+        self.Tracking = False
 
     # load anim_function
     def load_anim(self, path, ammo_path):
@@ -231,7 +231,7 @@ class Player(Entity):
         self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
 
     # Moving control
-    def move(self, keys, platforms, enemies, bg_layers, portal):
+    def move(self, keys, platforms, enemies, bg_layers, portal, boss=False):
 
         # Update hitbox
         frame_num = self.frame % 8
@@ -311,6 +311,9 @@ class Player(Entity):
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, -1)
 
+                    if boss:
+                        boss.scroll_x(self.speed, -1)
+
                     top.scroll_x(self.speed / 2, -1)
                     bottom.scroll_x(self.speed / 3, -1)
                     portal.scroll_x(self.speed, -1)
@@ -378,6 +381,9 @@ class Player(Entity):
 
                     for enemy in enemies:
                         enemy.scroll_x(self.speed, 1)
+
+                    if boss:
+                        boss.scroll_x(self.speed, 1)
 
                     top.scroll_x(self.speed/2, 1)
                     bottom.scroll_x(self.speed/3, 1)

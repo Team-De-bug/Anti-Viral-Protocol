@@ -569,7 +569,7 @@ def level_5():
     man.spawn()
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
                  FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400). TallPlatform(-575, 236),
+                 FloatingPlatform(1625, 400), TallPlatform(-575, 236),
                  FloatingPlatform(2325, 236)]
 
 
@@ -580,7 +580,9 @@ def level_5():
     platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-    
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+
 
     #loading The end portal
     portal = Endgate(2150, 473)
@@ -594,13 +596,13 @@ def level_5():
     background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
 
     # Setting up Enemy
-    enemies = [VirusBoss(x=800, y=100)]
-   
-    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
-    enemies[0].set_max_distance(0)
+    enemies = []
+    boss_virus = VirusBoss(x=800, y=100)
 
+    boss_virus.load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    boss_virus.set_max_distance(0)
 
-    return platforms, enemies, background, portal
+    return platforms, enemies, background, portal, boss_virus
 
 
 # Loading images for hud
@@ -619,7 +621,6 @@ infection_img = [pygame.image.load(IMAGES_PATH + "HUD/infection_0.png"),
 game_over_img = pygame.image.load(IMAGES_PATH + "HUD/game-over.png")
 
 PLATFORMS = None
-ENEMIES = None
 BACKGROUND = None
 PORTAL = None
 
@@ -645,6 +646,7 @@ def main():
     global LEVEL_NUM
 
     main_menu(win)
+    boss = None
 
     while running:
         for event in pygame.event.get():
@@ -653,7 +655,11 @@ def main():
 
         if LOAD_LEVEL:
             if LEVEL_NUM < len(LEVELS):
-                PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                if LEVEL_NUM < 4:
+                    PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                else:
+                    PLATFORMS, ENEMIES, BACKGROUND, PORTAL, boss = LEVELS[LEVEL_NUM]()
+
                 mission_logger(win)
                 man.level = LEVEL_NUM
                 LOAD_LEVEL = False
@@ -681,20 +687,37 @@ def main():
                     for platform in PLATFORMS:
                         if platform.is_moving:
                             platform.move()
-
-                    for enemy in ENEMIES:
-                        enemy.move(3, man)
-                        enemy.hurt_player(man)
+                    if boss:
+                        boss.spawn_enemies(man)
+                        for enemy in boss.enemy_list:
+                            enemy.move(3, man)
+                            enemy.hurt_player(man)
+                    else:
+                        for enemy in ENEMIES:
+                            enemy.move(3, man)
+                            enemy.hurt_player(man)
 
                     man.change_weapon(keys)
                     man.on_ground(PLATFORMS)
-                    man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
+                    if boss:
+                        man.move(keys, PLATFORMS, boss.enemy_list, BACKGROUND, PORTAL, boss)
+                    else:
+                        man.move(keys, PLATFORMS, ENEMIES, BACKGROUND, PORTAL)
+
                     if man.current_weapon != 0:
-                        man.enemy_killed(ENEMIES, win)
-                    hit_player(man, ENEMIES)
+                        if boss:
+                            man.enemy_killed(boss.enemy_list, win)
+                            hit_player(man, boss.enemy_list)
+                        else:
+                            man.enemy_killed(ENEMIES, win)
+                            hit_player(man, ENEMIES)
+
                     man.infection_damage()
                     clock.tick(30)
-                    redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
+                    if boss:
+                        redraw(win, BACKGROUND, ENEMIES, PLATFORMS, boss)
+                    else:
+                        redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
 
         pygame.display.update()
 
@@ -725,7 +748,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 0
+                LEVEL_NUM = 4
                 LOAD_LEVEL = True
                 img = 0
                 break
@@ -818,7 +841,7 @@ def get_help():
 
 
 # draw function
-def redraw(win, background, enemies, platforms):
+def redraw(win, background, enemies, platforms, boss=None):
 
     global DAMAGED
     global WARN
@@ -829,10 +852,17 @@ def redraw(win, background, enemies, platforms):
         layer.draw(win)
 
     man.draw(win, platforms)
-    for enemy in enemies:
-        enemy.draw(win)
 
-    enemy_health_bar(win, enemies, man)
+    if boss:
+        boss.draw(win)
+        for enemy in boss.enemy_list:
+            enemy.draw(win)
+        enemy_health_bar(win, boss.enemy_list, man)
+
+    else:
+        for enemy in enemies:
+            enemy.draw(win)
+        enemy_health_bar(win, enemies, man)
 
     for platform in platforms:
         platform.draw(win)
@@ -860,8 +890,12 @@ def redraw(win, background, enemies, platforms):
         win.blit(ammo_on_load, (70, 105))
 
     PORTAL.draw(win)
-    for enemy in enemies:
-        enemy.update_bullets(win, platforms)
+    if boss:
+        for enemy in boss.enemy_list:
+            enemy.update_bullets(win, platforms)
+    else:
+        for enemy in enemies:
+            enemy.update_bullets(win, platforms)
 
     if DAMAGED:
         win.blit(WARN, (0, 0))
@@ -938,6 +972,7 @@ def check_portal(portal, man):
     if portal.x + portal.width > man.x + man.hit_x[man.width_num] > portal.x and portal.y + portal.height > man.y > portal.y:
         LOAD_LEVEL = True
         LEVEL_NUM += 1
+
 
 
 if __name__ == "__main__":
