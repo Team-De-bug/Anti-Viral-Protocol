@@ -614,7 +614,7 @@ LOAD_LEVEL = True
 PAUSED = False
 
 LEVELS = [level_1, level_2, level_3, level_4, level_5]
-LEVEL_NUM = 0
+LEVEL_NUM = 4
 
 DAMAGED = False
 
@@ -695,6 +695,9 @@ def main_menu(win):
     exit_button = pygame.image.load(IMAGES_PATH+"Menus/ExitButton.png")
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
 
+    global LEVEL_NUM
+    global LOAD_LEVEL
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -708,6 +711,8 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
+                LEVEL_NUM = 0
+                LOAD_LEVEL = True
                 break
         else:
             win.blit(start_button, (473, 300), (0, 0, 256, 80))
@@ -785,6 +790,10 @@ def get_help():
 
         else:
             cooldown -= 1
+
+        if 50 + 39 > mouse_hover[0] > 50 and 50 + 39 > mouse_hover[1] > 50:
+            if mouse_pressed[0]:
+                break
 
         if keys[pygame.K_ESCAPE]:
             break
@@ -887,10 +896,18 @@ img = 0
 
 def game_over(win):
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    keys = pygame.key.get_pressed()
     global img
     if img < img_limit:
         img += 1
         win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
+
+    if keys[pygame.K_ESCAPE]:
+        main_menu(win)
 
 
 def enemy_health_bar(win, enemies, man):
