@@ -109,9 +109,10 @@ class Enemy(Entity):
         self.dist_max = dist
         self.dist = dist
 
-    def update_bullets(self, win):
+    def update_bullets(self, win, platforms):
         for ammo in self.ammo_list:
-            if ammo.dist < ammo.dist_limit:
+            on_x, on_y = ammo.check_collision(platforms)
+            if ammo.dist < ammo.dist_limit and not (on_x and on_y):
                 ammo.move()
                 ammo.draw(win)
             else:
@@ -559,7 +560,7 @@ class Player(Entity):
                 self.current_weapon = 4
 
     # rendering function
-    def draw(self, win):
+    def draw(self, win, platforms):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
             #pygame.draw.rect(win, (255, 255, 255),
             #                 [self.x + self.hit_x[self.width_num], self.y, self.width_var[self.width_num], self.height], 1)
@@ -580,7 +581,7 @@ class Player(Entity):
                 win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num]+self.direction],
                          (self.x, self.y), self.frames[self.width_num])
 
-            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, self.double_damage)
+            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, platforms, self.double_damage)
 
 
     def infection_damage(self):

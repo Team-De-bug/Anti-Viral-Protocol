@@ -566,7 +566,7 @@ def redraw(win, background, enemies, platforms):
     for layer in background:
         layer.draw(win)
 
-    man.draw(win)
+    man.draw(win, platforms)
     for enemy in enemies:
         enemy.draw(win)
 
@@ -599,7 +599,7 @@ def redraw(win, background, enemies, platforms):
 
     PORTAL.draw(win)
     for enemy in enemies:
-        enemy.update_bullets(win)
+        enemy.update_bullets(win, platforms)
 
     if DAMAGED:
         win.blit(WARN, (0, 0))

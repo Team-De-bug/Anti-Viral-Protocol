@@ -43,9 +43,10 @@ class RocketLauncher(Weapons):
     ammo = shells.RPGShells
     explode_img = pygame.image.load("resources/Images/Projectiles/explosion.png")
 
-    def update_bullets(self, win, double=False):
+    def update_bullets(self, win, platforms, double=False):
         for ammo in self.ammo_list:
-            if ammo.dist < ammo.dist_limit and not ammo.exploded:
+            on_x, on_y = ammo.check_collision(platforms)
+            if ammo.dist < ammo.dist_limit and not (on_x and on_y) and not ammo.exploded:
                 ammo.move()
                 ammo.draw(win, double)
             else:
