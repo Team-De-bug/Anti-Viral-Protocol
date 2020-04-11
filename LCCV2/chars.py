@@ -180,9 +180,24 @@ class Player(Entity):
         self.infection_cooldown = 100
         self.on_healer = False
         self.healer = None
-        self.double_damage = True
+        self.double_damage = False
         self.double_damage_timer = 400
         self.double_damage_count = 3
+        self.level = 0
+
+    # Reset player for each level
+    def spawn(self):
+        self.double_damage_count = 3
+        self.hp = 100
+        self.infection = 0
+        self.weapons["pistol"].ammo_count = self.weapons["pistol"].ammo_limit
+        self.weapons["pistol"].on_load = self.weapons["pistol"].hold_limit
+        self.weapons["shotgun"].ammo_count = self.weapons["shotgun"].ammo_limit
+        self.weapons["shotgun"].on_load = self.weapons["shotgun"].hold_limit
+        self.weapons["AR"].ammo_count = self.weapons["AR"].ammo_limit
+        self.weapons["AR"].on_load = self.weapons["AR"].hold_limit
+        self.weapons["RPG"].ammo_count = self.weapons["RPG"].ammo_limit
+        self.weapons["RPG"].on_load = self.weapons["RPG"].hold_limit
 
     # Init guns
     def init_guns(self):
@@ -469,7 +484,7 @@ class Player(Entity):
                         self.weapons[weapon].ammo_count = self.weapons[weapon].ammo_limit
                 self.healer.used = True
 
-        if keys[pygame.K_f] and not self.double_damage and self.double_damage_count > 0:
+        if keys[pygame.K_f] and not self.double_damage and self.double_damage_count > 0 and self.level >= 2:
             self.double_damage = True
             self.double_damage_count -= 1
 
@@ -554,10 +569,10 @@ class Player(Entity):
             if keys[pygame.K_3]:
                 self.current_weapon = 2
 
-            if keys[pygame.K_4]:
+            if keys[pygame.K_4] and self.level >= 1:
                 self.current_weapon = 3
 
-            if keys[pygame.K_5]:
+            if keys[pygame.K_5] and self.level >= 3:
                 self.current_weapon = 4
 
     # rendering function

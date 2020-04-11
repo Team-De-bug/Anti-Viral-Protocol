@@ -45,8 +45,10 @@ mission_log = pygame.image.load(IMAGES_PATH + "Menus/mission.png")
 # loading the pause screen
 pause_screen = pygame.image.load(IMAGES_PATH + "Menus/pause.png")
 
+
 # Setting up the platform
 def level_1():
+    man.spawn()
     platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
                  TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
@@ -127,6 +129,7 @@ def level_1():
 
 
 def level_2():
+    man.spawn()
     man.x, man.y = 50, 300
     platforms = [BasePlatform(200), MovingTile(3938, 125), FloatingPlatform(0, 500),
                  FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3600, 350),
@@ -234,6 +237,7 @@ def level_2():
 
 
 def level_3():
+    man.spawn()
     man.x, man.y = 50, 50
     platforms = [BasePlatform(1500), MovingTile(3150, 250), FloatingPlatform(1550, 400),
                  FloatingPlatform(650, 250), MovingTile(1300, 350),  Boost(4100, 209),
@@ -382,6 +386,7 @@ def level_3():
 
 
 def level_4():
+    man.spawn()
     man.x, man.y = 20, 50
     platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 250),
                  FloatingPlatform(6000, 250), MovingTile(225, 250),  Boost(3375, 209), 
@@ -476,10 +481,6 @@ def level_4():
     platforms[41].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[42].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
 
-
-
-
-
     #loading The end portal
     portal = Endgate(11400, 142)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -549,9 +550,6 @@ def level_4():
     enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[16].set_max_distance(150)
 
-
-
-
     return platforms, enemies, background, portal
 
 
@@ -604,9 +602,10 @@ def main():
                 running = False
 
         if LOAD_LEVEL:
-            if LEVEL_NUM < 4:
+            if LEVEL_NUM < len(LEVELS):
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
                 mission_logger(win)
+                man.level = LEVEL_NUM
                 LOAD_LEVEL = False
             else:
                 game_over(win)
