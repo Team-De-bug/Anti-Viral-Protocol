@@ -67,17 +67,24 @@ class MovingTile(Platform):
     move_style = None
     moving_speed = 1
     speed = 1
+    occupied = False
 
     def move(self):
         if self.move_style == "x":
             self.moving_speed = self.speed
             if self.dir_x:
-                self.x += self.speed
+                if self.occupied and self.x < 800:
+                    pass
+                else:
+                    self.x += self.speed
                 self.dist_x -= self.speed
                 self.moving_dir = 1
 
             else:
-                self.x -= self.speed
+                if self.occupied and self.x > 400:
+                    pass
+                else:
+                    self.x -= self.speed
                 self.dist_x += self.speed
                 self.moving_dir = -1
 

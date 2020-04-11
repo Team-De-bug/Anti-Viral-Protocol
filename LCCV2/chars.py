@@ -457,7 +457,27 @@ class Player(Entity):
 
         # moving the character if on a moving platform
         if self.on_moving_platform and self.platform.move_style == "x":
-            self.x += self.platform.moving_speed * self.plat_move_dir
+
+            top = bg_layers[1]
+            bottom = bg_layers[0]
+
+            if 800 > self.x > 400:
+                self.x += self.platform.moving_speed * self.plat_move_dir
+
+            # scrolling
+            else:
+                for platform in platforms:
+                    platform.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                for enemy in enemies:
+                    enemy.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                top.scroll_x(self.platform.moving_speed / 2, self.plat_move_dir * -1)
+                bottom.scroll_x(self.platform.moving_speed / 3, self.plat_move_dir * -1)
+                portal.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                if self.current_weapon != 0:
+                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.platform.moving_speed, self.plat_move_dir * -1)
 
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
@@ -516,6 +536,7 @@ class Player(Entity):
                     self.y = platform.y - self.height
                 if platform.is_moving:
                     self.on_moving_platform = True
+                    self.occupied = True
                     self.plat_move_dir = platform.moving_dir
                     self.platform = platform
                 else:
@@ -548,8 +569,6 @@ class Player(Entity):
 
             if self.y > 660:
                 self.hp = 0
-
-
 
     # Changing weapon function
     def change_weapon(self, keys):

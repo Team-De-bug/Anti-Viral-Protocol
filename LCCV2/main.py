@@ -723,7 +723,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 0
+                LEVEL_NUM = 1
                 LOAD_LEVEL = True
                 img = 0
                 break
