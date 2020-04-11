@@ -39,6 +39,8 @@ man.init_guns()
 # Loading damage splash
 WARN = pygame.image.load(IMAGES_PATH + "HUD/damage.png")
 
+# Loading the mission log images
+mission_log = pygame.image.load(IMAGES_PATH + "Menus/mission.png")
 
 # Setting up the platform
 def level_1():
@@ -519,7 +521,6 @@ def level_4():
     return platforms, enemies, background, portal
 
 
-
 # Loading images for hud
 weapons_list = [pygame.image.load(IMAGES_PATH + "Weapons/gun_pistol.png"),
                 pygame.image.load(IMAGES_PATH + "Weapons/gun_shotgun.png"),
@@ -571,6 +572,7 @@ def main():
         if LOAD_LEVEL:
             if LEVEL_NUM < 4:
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                mission_logger(win)
                 LOAD_LEVEL = False
             else:
                 game_over(win)
@@ -657,6 +659,24 @@ def main_menu(win):
         else:
             win.blit(help_button, (473, 400), (0, 0, 256, 80))
 
+        pygame.display.update()
+
+
+def mission_logger(win):
+
+    global LEVEL_NUM
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RETURN]:
+            break
+
+        win.blit(mission_log, (0, 0), (1200*LEVEL_NUM, 0, 1200, 640))
+        clock.tick(30)
         pygame.display.update()
 
 
