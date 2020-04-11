@@ -274,11 +274,12 @@ class Player(Entity):
 
             # checking for collisions
             for platform in platforms:
-                on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge> platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x
 
                 if platform.Taller:
@@ -343,12 +344,13 @@ class Player(Entity):
 
             # checking for collision
             for platform in platforms:
-                on_x = platform.x + platform.width > self.x > platform.x
 
                 if self.direction == "L" and self.current_weapon != 0:
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge> platform.x
                     on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.hit_nudge + self.width_var[self.width_num] > platform.x
                 else:
-                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]> platform.x
+                    on_x = platform.x + platform.width > self.x + self.hit_x[self.width_num] > platform.x
+                    on_xw = platform.x + platform.width > self.x + self.hit_x[self.width_num] + self.width_var[self.width_num] > platform.x
 
                 if platform.Taller:
                     on_y = platform.y + platform.height > self.y > platform.y
@@ -455,7 +457,27 @@ class Player(Entity):
 
         # moving the character if on a moving platform
         if self.on_moving_platform and self.platform.move_style == "x":
-            self.x += self.platform.moving_speed * self.plat_move_dir
+
+            top = bg_layers[1]
+            bottom = bg_layers[0]
+
+            if 800 > self.x > 400:
+                self.x += self.platform.moving_speed * self.plat_move_dir
+
+            # scrolling
+            else:
+                for platform in platforms:
+                    platform.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                for enemy in enemies:
+                    enemy.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                top.scroll_x(self.platform.moving_speed / 2, self.plat_move_dir * -1)
+                bottom.scroll_x(self.platform.moving_speed / 3, self.plat_move_dir * -1)
+                portal.scroll_x(self.platform.moving_speed, self.plat_move_dir * -1)
+
+                if self.current_weapon != 0:
+                    self.weapons[self.weapon_list[self.current_weapon]].scroll_bullets(self.platform.moving_speed, self.plat_move_dir * -1)
 
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
@@ -514,6 +536,7 @@ class Player(Entity):
                     self.y = platform.y - self.height
                 if platform.is_moving:
                     self.on_moving_platform = True
+                    self.occupied = True
                     self.plat_move_dir = platform.moving_dir
                     self.platform = platform
                 else:
@@ -531,11 +554,11 @@ class Player(Entity):
                     if self.y + self.height - platform.y < 50:
                         self.y = platform.y - self.height
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x < 40 and self.y + self.height - platform.y > 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x <= 40 and self.y + self.height - platform.y >= 70:
                         self.x = platform.x - (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) - 10
                         self.on_platform = False
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) < 40 and self.y + self.height - platform.y > 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) <= 40 and self.y + self.height - platform.y >= 70:
                         self.x = platform.x + platform.width + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
                         self.on_platform = False
                 break
@@ -546,8 +569,6 @@ class Player(Entity):
 
             if self.y > 660:
                 self.hp = 0
-
-
 
     # Changing weapon function
     def change_weapon(self, keys):

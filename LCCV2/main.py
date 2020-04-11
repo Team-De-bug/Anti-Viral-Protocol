@@ -149,7 +149,7 @@ def level_2():
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
                  FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
                  FloatingPlatform(5215, 415), Boost(6800, 209), TallPlatform(-575, 236),
-                 TallPlatform(7000, 236)]
+                 TallPlatform(6900, 236)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -402,7 +402,7 @@ def level_3():
 def level_4():
     man.spawn()
     man.x, man.y = 20, 50
-    platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 250),
+    platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 300),
                  FloatingPlatform(6000, 250), MovingTile(225, 250),  Boost(3375, 209), 
                  TallPlatform(850,236), FloatingPlatform(1450, 125),FloatingPlatform(1700, 275),
                  FloatingPlatform(1810, 275), FloatingPlatform(1920, 275), 
@@ -415,9 +415,8 @@ def level_4():
                  FloatingPlatform(7500, 175), FloatingPlatform(7610, 175), MovingTile(7860, 175),
                  FloatingPlatform(8110, 400), FloatingPlatform(8650, 400), FloatingPlatform(8950, 250),
                  FloatingPlatform(9060, 250), FloatingPlatform(9350, 300), MovingTile(9600, 300),
-                 TallPlatform(9950, 236), TallPlatform(10490, 236), Boost(10050, 209),
-                 FloatingPlatform(11100, 275), FloatingPlatform(11210, 275), FloatingPlatform(11320, 275)]
-
+                 TallPlatform(10300, 236), TallPlatform(10840, 236), Boost(10550, 209),
+                 TallPlatform(-575, 236), TallPlatform(11250, 236)]
     # Setting movement of moving platform
     platforms[4].move_style = "x"
     platforms[4].dist_x_max = 394
@@ -445,8 +444,8 @@ def level_4():
     platforms[30].speed = 3
 
     platforms[36].move_style = "x"
-    platforms[36].dist_x_max = 250
-    platforms[36].dist_x = 250
+    platforms[36].dist_x_max = 375
+    platforms[36].dist_x = 375
     platforms[36].speed = 3
 
 
@@ -491,12 +490,11 @@ def level_4():
     platforms[37].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[38].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[39].load_anim(IMAGES_PATH + "Tilesets/heal.png")
-    platforms[40].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-    platforms[41].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-    platforms[42].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[40].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[41].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
 
     #loading The end portal
-    portal = Endgate(11400, 142)
+    portal = Endgate(11400, 102)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -571,7 +569,8 @@ def level_5():
     man.spawn()
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
                  FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400)]
+                 FloatingPlatform(1625, 400). TallPlatform(-575, 236),
+                 FloatingPlatform(2325, 236)]
 
 
     # Loading the images for platform
@@ -726,7 +725,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 0
+                LEVEL_NUM = 1
                 LOAD_LEVEL = True
                 img = 0
                 break
