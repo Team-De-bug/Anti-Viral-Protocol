@@ -175,8 +175,6 @@ class Player(Entity):
         self.frame = 0
         self.frame_timer = 3
         self.frame_time = 0
-        self.w_cool_down = 0
-        self.fired = False
         self.score = 0
         self.infection_cooldown = 100
         self.on_healer = False
@@ -230,6 +228,7 @@ class Player(Entity):
 
         # load sounds
         self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
+        self.health_bar = pygame.image.load(IMAGE_PATH+"HUD/health_bar.png")
 
     # Moving control
     def move(self, keys, platforms, enemies, bg_layers, portal, boss=False):
@@ -246,13 +245,14 @@ class Player(Entity):
             self.width_num = 2
 
         # firing cool down
-        if self.current_weapon > 0 and self.fired:
-            if self.w_cool_down < self.weapons[self.weapon_list[self.current_weapon]].cooldown:
-                self.w_cool_down += 1
+        if self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].fired:
+            self.weapons[self.weapon_list[self.current_weapon]].fired = True
+            if self.weapons[self.weapon_list[self.current_weapon]].cooldown < self.weapons[self.weapon_list[self.current_weapon]].cooldown_max:
+                self.weapons[self.weapon_list[self.current_weapon]].cooldown += 1
 
             else:
-                self.fired = False
-                self.w_cool_down = 0
+                self.weapons[self.weapon_list[self.current_weapon]].fired = False
+                self.weapons[self.weapon_list[self.current_weapon]].cooldown = 0
 
         # increase speed if L_shift key is pressed
         if keys[pygame.K_LSHIFT] and self.current_weapon != 4 and self.on_platform:
@@ -489,8 +489,8 @@ class Player(Entity):
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
 
-        if keys[pygame.K_SPACE] and self.current_weapon > 0 and self.w_cool_down == 0:
-            self.fired = True
+        if keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0:
+            self.weapons[self.weapon_list[self.current_weapon]].fired = True
             if self.direction == "R":
                 direction = 1
                 width = self.width * 3/2
@@ -652,3 +652,15 @@ class Player(Entity):
                             enemy.hp -= ammo.damage * 2
                         else:
                             enemy.hp -= ammo.damage
+
+    # loading the player health bar
+    def update_player_hb(self, win):
+        if self.hp < 0:
+            self.hp = 0
+        win.blit(self.health_bar, (135, 13), (0, 0, (self.hp/100) * 200, 13))
+
+    def update_weapon_cdb(self, win):
+        if self.current_weapon != 0:
+            cooldown = self.weapons[self.weapon_list[self.current_weapon]].cooldown
+            cooldown_max = self.weapons[self.weapon_list[self.current_weapon]].cooldown_max
+            pygame.draw.rect(win, (255, 255, 255), (10, 10, 20, (cooldown/cooldown_max) * 100))

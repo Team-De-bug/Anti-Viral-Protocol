@@ -96,7 +96,6 @@ def level_1():
     platforms[18].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
     platforms[19].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
 
-
     #loading The end portal
     portal = Endgate(5050, 473)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -200,7 +199,6 @@ def level_2():
     platforms[28].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
     platforms[29].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
 
-
     # loading The end portal
     portal = Endgate(7000, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -300,7 +298,6 @@ def level_3():
     platforms[35].dist_y_max = 354
     platforms[35].dist_y = 354
     platforms[35].speed = 3
-
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
@@ -448,7 +445,6 @@ def level_4():
     platforms[36].dist_x = 375
     platforms[36].speed = 3
 
-
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
     platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
@@ -582,7 +578,6 @@ def level_5():
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
-
 
     #loading The end portal
     portal = Endgate(2150, 473)
@@ -748,7 +743,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 4
+                LEVEL_NUM = 0
                 LOAD_LEVEL = True
                 img = 0
                 break
@@ -888,6 +883,8 @@ def redraw(win, background, enemies, platforms, boss=None):
         win.blit(ammo_left, (70, 66))
         win.blit(weapons_list[man.current_weapon - 1], (23, 84))
         win.blit(ammo_on_load, (70, 105))
+    man.update_player_hb(win)
+    man.update_weapon_cdb(win)
 
     PORTAL.draw(win)
     if boss:
@@ -957,9 +954,9 @@ def game_over(win):
 
 def enemy_health_bar(win, enemies, man):
     for enemy in enemies:
-        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 10, enemy.y - 17, enemy.width + 2, 14))
+        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 2, enemy.y - 18, enemy.width + 2, 14))
         if enemy.hp > 0:
-            pygame.draw.rect(win, ((1-(enemy.hp/enemy.health_max))*255, (enemy.hp/enemy.health_max)*255, 0), (enemy.x - 8 , enemy.y - 15, (enemy.hp/enemy.health_max)*enemy.width , 10))
+            pygame.draw.rect(win, ((1-(enemy.hp/enemy.health_max))*255, (enemy.hp/enemy.health_max)*255, 0), (enemy.x , enemy.y - 15, (enemy.hp/enemy.health_max)*enemy.width , 10))
         else:
             man.score += enemy.points
             enemies.pop(enemies.index(enemy))
