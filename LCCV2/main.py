@@ -45,13 +45,19 @@ mission_log = pygame.image.load(IMAGES_PATH + "Menus/mission.png")
 # loading the pause screen
 pause_screen = pygame.image.load(IMAGES_PATH + "Menus/pause.png")
 
+# vairiable for game over screen
+img_limit = 14
+img = 0
+
 
 # Setting up the platform
 def level_1():
     man.spawn()
+    man.x = 20
+    man.y = 300
     platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
-                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
+                 TallPlatform(1850,236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
                  FloatingPlatform(2500,236), FloatingPlatform(2800,300), 
                  FloatingPlatform(2910,300), BasePlatform(3650), FloatingPlatform(3350,450),
                  FloatingPlatform(3950,400), FloatingPlatform(4200,250), FloatingPlatform(4450,350),
@@ -697,6 +703,7 @@ def main_menu(win):
 
     global LEVEL_NUM
     global LOAD_LEVEL
+    global img
 
     while True:
         for event in pygame.event.get():
@@ -713,6 +720,7 @@ def main_menu(win):
             if mouse_pressed[0]:
                 LEVEL_NUM = 0
                 LOAD_LEVEL = True
+                img = 0
                 break
         else:
             win.blit(start_button, (473, 300), (0, 0, 256, 80))
@@ -888,10 +896,6 @@ def paused(win, keys):
 
     if keys[pygame.K_c] and PAUSED:
         PAUSED = False
-
-
-img_limit = 14
-img = 0
 
 
 def game_over(win):
