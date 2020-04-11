@@ -55,7 +55,7 @@ def level_1():
                  FloatingPlatform(2500,236), FloatingPlatform(2800,300), 
                  FloatingPlatform(2910,300), BasePlatform(3650), FloatingPlatform(3350,450),
                  FloatingPlatform(3950,400), FloatingPlatform(4200,250), FloatingPlatform(4450,350),
-                 FloatingPlatform(4700,350)]
+                 FloatingPlatform(4700,350),TallPlatform(-540, 236), TallPlatform(5150,236)]
     
     # Setting movement of moving platform
     platforms[4].move_style = "y"
@@ -87,6 +87,8 @@ def level_1():
     platforms[15].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[16].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[17].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
+    platforms[18].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
+    platforms[19].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
 
 
     #loading The end portal
@@ -140,7 +142,8 @@ def level_2():
                  FloatingPlatform(3700, 125), FloatingPlatform(4350, 400), FloatingPlatform(4600, 200),
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
                  FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
-                 FloatingPlatform(5215, 415), Boost(6800,209)]
+                 FloatingPlatform(5215, 415), Boost(6800, 209), TallPlatform(-575, 236),
+                 TallPlatform(7000, 236)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -188,6 +191,8 @@ def level_2():
     platforms[25].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
     platforms[26].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
     platforms[27].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[28].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
+    platforms[29].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
 
 
     # loading The end portal
