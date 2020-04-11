@@ -31,5 +31,5 @@ class Virus4(Enemy):
 # virus_boss
 class VirusBoss(Enemy):
     ammo = Virus1shell
-    height = 150
-    width = 150
+    height = 500
+    width = 500
