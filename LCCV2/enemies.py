@@ -8,6 +8,8 @@ class Virus1(Enemy):
     ammo = Virus1shell
     height = 78
     width = 78
+    hp = 100
+    health_max = 100
 
 
 # Virus_2
@@ -16,6 +18,7 @@ class Virus2(Enemy):
     height = 78
     width = 78
     hp = 200
+    health_max = 200
 
 
 # Virus3
@@ -24,6 +27,7 @@ class Virus3(Enemy):
     height = 156
     width = 156
     hp = 300
+    health_max = 300
 
 
 # Virus4
@@ -32,6 +36,7 @@ class Virus4(Enemy):
     height = 156
     width = 156
     hp = 350
+    health_max = 350
 
 
 # virus_boss
@@ -40,6 +45,7 @@ class VirusBoss(Enemy):
     height = 320
     width = 320
     hp = 500
+    health_max = 500
     spawn_cooldown = 70
 
     enemy_list = []
