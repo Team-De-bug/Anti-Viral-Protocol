@@ -633,7 +633,6 @@ class Player(Entity):
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, platforms, self.double_damage)
 
-
     def infection_damage(self):
         if self.infection_cooldown <= 0:
             self.hp -= self.infection
@@ -641,12 +640,11 @@ class Player(Entity):
         else:
             self.infection_cooldown -= 1
 
-
     def enemy_killed(self, enemies, win):
         for enemy in enemies:
             ammo_list = self.weapons[self.weapon_list[self.current_weapon]].ammo_list
             for ammo in ammo_list:
-                if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y >enemy.y:
+                if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y > enemy.y:
                     self.hit.play()
                     if self.current_weapon == 4:
                         self.weapons[self.weapon_list[self.current_weapon]].explode(ammo, win)

@@ -723,7 +723,14 @@ def main():
 
                     man.infection_damage()
                     clock.tick(30)
+
                     if boss:
+                        if boss.hp <= 0:
+                            you_win()
+                            boss = False
+
+                    if boss:
+                        boss.check_hurt(man)
                         redraw(win, BACKGROUND, ENEMIES, PLATFORMS, boss)
                     else:
                         redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
@@ -757,7 +764,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 0
+                LEVEL_NUM = 4
                 LOAD_LEVEL = True
                 img = 0
                 break
@@ -800,6 +807,22 @@ def mission_logger(win):
         clock.tick(30)
         pygame.display.update()
 
+
+# win screen
+def you_win():
+    image = pygame.image.load(IMAGES_PATH+"Menus/endgame.png")
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RETURN]:
+            break
+
+        win.blit(image, (0, 0))
+        pygame.display.update()
 
 def get_help():
     image = pygame.image.load(IMAGES_PATH+"Menus/help.png")
@@ -910,6 +933,9 @@ def redraw(win, background, enemies, platforms, boss=None):
     else:
         for enemy in enemies:
             enemy.update_bullets(win, platforms)
+
+    if boss:
+        boss.update_health_bar(win)
 
     if DAMAGED:
         win.blit(WARN, (0, 0))
