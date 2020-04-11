@@ -3,7 +3,7 @@ import os
 import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4
+from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -45,15 +45,23 @@ mission_log = pygame.image.load(IMAGES_PATH + "Menus/mission.png")
 # loading the pause screen
 pause_screen = pygame.image.load(IMAGES_PATH + "Menus/pause.png")
 
+# vairiable for game over screen
+img_limit = 14
+img = 0
+
+
 # Setting up the platform
 def level_1():
+    man.spawn()
+    man.x = 20
+    man.y = 300
     platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
-                 TallPlatform(1850,236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
+                 TallPlatform(1850,236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
                  FloatingPlatform(2500,236), FloatingPlatform(2800,300), 
                  FloatingPlatform(2910,300), BasePlatform(3650), FloatingPlatform(3350,450),
                  FloatingPlatform(3950,400), FloatingPlatform(4200,250), FloatingPlatform(4450,350),
-                 FloatingPlatform(4700,350)]
+                 FloatingPlatform(4700,350),TallPlatform(-540, 236), TallPlatform(5150,236)]
     
     # Setting movement of moving platform
     platforms[4].move_style = "y"
@@ -85,6 +93,8 @@ def level_1():
     platforms[15].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[16].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
     platforms[17].load_anim(IMAGES_PATH + "Tilesets/level_1/platform.png")
+    platforms[18].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
+    platforms[19].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
 
 
     #loading The end portal
@@ -127,6 +137,7 @@ def level_1():
 
 
 def level_2():
+    man.spawn()
     man.x, man.y = 50, 300
     platforms = [BasePlatform(200), MovingTile(3938, 125), FloatingPlatform(0, 500),
                  FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3600, 350),
@@ -137,7 +148,8 @@ def level_2():
                  FloatingPlatform(3700, 125), FloatingPlatform(4350, 400), FloatingPlatform(4600, 200),
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
                  FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
-                 FloatingPlatform(5215, 415), Boost(6800,209)]
+                 FloatingPlatform(5215, 415), Boost(6800, 209), TallPlatform(-575, 236),
+                 TallPlatform(7000, 236)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -185,6 +197,8 @@ def level_2():
     platforms[25].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
     platforms[26].load_anim(IMAGES_PATH + "Tilesets/level_2/platform.png")
     platforms[27].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[28].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
+    platforms[29].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
 
 
     # loading The end portal
@@ -201,7 +215,7 @@ def level_2():
     # Setting up Enemy
     enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1450, y=475), Virus1(x=2725, y=125),
                Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900, y=475), Virus1(x=5610, y= 500),
-               Virus2(x=6400, y=110)]
+               Virus2(x=6475, y=110)]
 
     enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
@@ -234,6 +248,7 @@ def level_2():
 
 
 def level_3():
+    man.spawn()
     man.x, man.y = 50, 50
     platforms = [BasePlatform(1500), MovingTile(3150, 250), FloatingPlatform(1550, 400),
                  FloatingPlatform(650, 250), MovingTile(1300, 350),  Boost(4100, 209),
@@ -334,8 +349,8 @@ def level_3():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_3/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_3/bg_top.png")
 
     # Setting up Enemy
     enemies = [Virus1(x=1000, y=260), Virus1(x=1600, y=500), Virus2(x=2150, y=500), Virus1(x=2000, y=150),
@@ -382,6 +397,7 @@ def level_3():
 
 
 def level_4():
+    man.spawn()
     man.x, man.y = 20, 50
     platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 250),
                  FloatingPlatform(6000, 250), MovingTile(225, 250),  Boost(3375, 209), 
@@ -476,10 +492,6 @@ def level_4():
     platforms[41].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[42].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
 
-
-
-
-
     #loading The end portal
     portal = Endgate(11400, 142)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -549,7 +561,41 @@ def level_4():
     enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[16].set_max_distance(150)
 
+    return platforms, enemies, background, portal
 
+
+def level_5():
+    man.spawn()
+    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
+                 FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
+                 FloatingPlatform(1625, 400)]
+
+
+    # Loading the images for platform
+    platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
+    platforms[2].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    
+
+    #loading The end portal
+    portal = Endgate(2150, 473)
+    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+
+    # Making the backdrop
+    background = [BackDrop(), BackDrop()]
+
+    # Loading the images for the backdrop
+    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+
+    # Setting up Enemy
+    enemies = [VirusBoss(x=800, y=100)]
+   
+    enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[0].set_max_distance(0)
 
 
     return platforms, enemies, background, portal
@@ -578,8 +624,8 @@ PORTAL = None
 LOAD_LEVEL = True
 PAUSED = False
 
-LEVELS = [level_1, level_2, level_3, level_4]
-LEVEL_NUM = 0
+LEVELS = [level_1, level_2, level_3, level_4, level_5]
+LEVEL_NUM = 4
 
 DAMAGED = False
 
@@ -604,9 +650,10 @@ def main():
                 running = False
 
         if LOAD_LEVEL:
-            if LEVEL_NUM < 4:
+            if LEVEL_NUM < len(LEVELS):
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
                 mission_logger(win)
+                man.level = LEVEL_NUM
                 LOAD_LEVEL = False
             else:
                 game_over(win)
@@ -659,6 +706,10 @@ def main_menu(win):
     exit_button = pygame.image.load(IMAGES_PATH+"Menus/ExitButton.png")
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
 
+    global LEVEL_NUM
+    global LOAD_LEVEL
+    global img
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -672,6 +723,9 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
+                LEVEL_NUM = 0
+                LOAD_LEVEL = True
+                img = 0
                 break
         else:
             win.blit(start_button, (473, 300), (0, 0, 256, 80))
@@ -749,6 +803,10 @@ def get_help():
 
         else:
             cooldown -= 1
+
+        if 50 + 39 > mouse_hover[0] > 50 and 50 + 39 > mouse_hover[1] > 50:
+            if mouse_pressed[0]:
+                break
 
         if keys[pygame.K_ESCAPE]:
             break
@@ -845,16 +903,20 @@ def paused(win, keys):
         PAUSED = False
 
 
-img_limit = 14
-img = 0
-
-
 def game_over(win):
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    keys = pygame.key.get_pressed()
     global img
     if img < img_limit:
         img += 1
         win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
+
+    if keys[pygame.K_ESCAPE]:
+        main_menu(win)
 
 
 def enemy_health_bar(win, enemies, man):
