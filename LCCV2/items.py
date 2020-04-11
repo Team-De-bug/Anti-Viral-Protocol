@@ -49,9 +49,11 @@ class Weapons:
         self.ammo.load_anim(ammo_path)
         self.sound = pygame.mixer.Sound(sound)
 
-    def update_bullets(self, win, double=False):
+    def update_bullets(self, win, platforms, double=False):
+
         for ammo in self.ammo_list:
-            if ammo.dist < ammo.dist_limit:
+            on_x, on_y = ammo.check_collision(platforms)
+            if ammo.dist < ammo.dist_limit and not(on_x and on_y):
                 ammo.move()
                 ammo.draw(win, double)
             else:
@@ -108,3 +110,14 @@ class Shells:
                 win.blit(self.anim[1], (self.x, self.y))
             else:
                 win.blit(self.anim[0], (self.x, self.y))
+
+    def check_collision(self, platforms):
+        on_x = None
+        on_y = None
+        for platform in platforms:
+            on_x = platform.x + platform.width > self.x > platform.x
+            on_y = platform.y + platform.height > self.y > platform.y
+            if on_x and on_y:
+                break
+
+        return on_x, on_y

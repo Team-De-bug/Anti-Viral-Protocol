@@ -3,6 +3,7 @@ import guns as guns
 
 IMAGE_PATH = "resources/Images/"
 
+
 # Entity class for all characters
 class Entity:
 
@@ -92,7 +93,7 @@ class Enemy(Entity):
                 else:
                     self.x += speed
 
-        if (not ((200 < player.x - self.x < 600) or not ((200 < self.x - player.x < 600))) and (check_y[0] or check_y[1])):
+        if (200 < player.x - self.x < 400) or (200 < self.x - player.x < 400) and (check_y[0] or check_y[1]):
             if self.x > player.x:
                 self.fire(self.x + self.width / 2, self.y + self.height / 2, -1)
             else:
@@ -109,9 +110,10 @@ class Enemy(Entity):
         self.dist_max = dist
         self.dist = dist
 
-    def update_bullets(self, win):
+    def update_bullets(self, win, platforms):
         for ammo in self.ammo_list:
-            if ammo.dist < ammo.dist_limit:
+            on_x, on_y = ammo.check_collision(platforms)
+            if ammo.dist < ammo.dist_limit and not (on_x and on_y):
                 ammo.move()
                 ammo.draw(win)
             else:
@@ -559,7 +561,7 @@ class Player(Entity):
                 self.current_weapon = 4
 
     # rendering function
-    def draw(self, win):
+    def draw(self, win, platforms):
         if not self.weapons[self.weapon_list[self.current_weapon]]:
             #pygame.draw.rect(win, (255, 255, 255),
             #                 [self.x + self.hit_x[self.width_num], self.y, self.width_var[self.width_num], self.height], 1)
@@ -580,7 +582,7 @@ class Player(Entity):
                 win.blit(self.weapons[self.weapon_list[self.current_weapon]].anim[self.status[self.status_num]+self.direction],
                          (self.x, self.y), self.frames[self.width_num])
 
-            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, self.double_damage)
+            self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, platforms, self.double_damage)
 
 
     def infection_damage(self):

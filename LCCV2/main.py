@@ -601,38 +601,43 @@ damage_delay = 20
 
 
 def main_menu(win):
+    menu_bg = pygame.image.load(IMAGES_PATH+"Menus/startmenu.png")
+    start_button = pygame.image.load(IMAGES_PATH+"Menus/StartButton.png")
+    exit_button = pygame.image.load(IMAGES_PATH+"Menus/ExitButton.png")
+    help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        win.fill((255, 255, 255))
+        win.blit(menu_bg, (0, 0))
         mouse_hover = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
 
-        if 460 > mouse_hover[0] > 400 and 560 > mouse_hover[1] > 500:
-            pygame.draw.rect(win, (0, 220, 20), (400, 500, 60, 30))
+        if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
+            win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
                 break
         else:
-            pygame.draw.rect(win, (0, 200, 0), (400, 500, 60, 30))
+            win.blit(start_button, (473, 300), (0, 0, 256, 80))
 
-        if 800 > mouse_hover[0] > 740 and 560 > mouse_hover[1] > 500:
-            pygame.draw.rect(win, (220, 0, 20), (740, 500, 60, 30))
+        if 473 + 256 > mouse_hover[0] > 473 and 500 + 80 > mouse_hover[1] > 500:
+            win.blit(exit_button, (473, 500), (256, 0, 256, 80))
             if mouse_pressed[0]:
                 pygame.quit()
                 quit()
 
         else:
-            pygame.draw.rect(win, (200, 0, 0), (740, 500, 60, 30))
+            win.blit(exit_button, (473, 500), (0, 0, 256, 80))
 
-        if 610 > mouse_hover[0] > 550 and 560 > mouse_hover[1] > 500:
-            pygame.draw.rect(win, (20, 0, 220), (550, 500, 60, 30))
+        if 473 + 256 > mouse_hover[0] > 473 and 400 + 80 > mouse_hover[1] > 400:
+            win.blit(help_button, (473, 400), (256, 0, 256, 80))
             if mouse_pressed[0]:
                 get_help()
         else:
-            pygame.draw.rect(win, (0, 0, 200), (550, 500, 60, 30))
+            win.blit(help_button, (473, 400), (0, 0, 256, 80))
 
         pygame.display.update()
 
@@ -692,7 +697,7 @@ def redraw(win, background, enemies, platforms):
     for layer in background:
         layer.draw(win)
 
-    man.draw(win)
+    man.draw(win, platforms)
     for enemy in enemies:
         enemy.draw(win)
 
@@ -725,7 +730,7 @@ def redraw(win, background, enemies, platforms):
 
     PORTAL.draw(win)
     for enemy in enemies:
-        enemy.update_bullets(win)
+        enemy.update_bullets(win, platforms)
 
     if DAMAGED:
         win.blit(WARN, (0, 0))
