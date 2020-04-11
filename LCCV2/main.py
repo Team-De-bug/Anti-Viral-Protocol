@@ -149,7 +149,7 @@ def level_2():
                  FloatingPlatform(4850, 300), FloatingPlatform(4960, 300), FloatingPlatform(5500, 325),
                  FloatingPlatform(5610, 325), MovingTile(5750, 325), TallPlatform(6500,236),
                  FloatingPlatform(5215, 415), Boost(6800, 209), TallPlatform(-575, 236),
-                 TallPlatform(7000, 236)]
+                 TallPlatform(7150, 236)]
 
     # Setting movement of moving platform
     platforms[4].move_style = "x"
@@ -569,7 +569,8 @@ def level_5():
     man.spawn()
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
                  FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400)]
+                 FloatingPlatform(1625, 400). TallPlatform(-575, 236),
+                 FloatingPlatform(2325, 236)]
 
 
     # Loading the images for platform
