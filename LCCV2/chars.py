@@ -663,4 +663,5 @@ class Player(Entity):
         if self.current_weapon != 0:
             cooldown = self.weapons[self.weapon_list[self.current_weapon]].cooldown
             cooldown_max = self.weapons[self.weapon_list[self.current_weapon]].cooldown_max
-            pygame.draw.rect(win, (255, 255, 255), (10, 10, 20, (cooldown/cooldown_max) * 100))
+            pygame.draw.rect(win, (255, 255, 255), (246, 69, 13, 53))
+            pygame.draw.rect(win, (31, 31, 31), (246, 69, 13, (cooldown/cooldown_max) * 53))
