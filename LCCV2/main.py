@@ -96,6 +96,7 @@ def level_1():
     platforms[18].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
     platforms[19].load_anim(IMAGES_PATH + "Tilesets/level_1/tall_platform.png")
 
+
     #loading The end portal
     portal = Endgate(5050, 473)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -199,6 +200,7 @@ def level_2():
     platforms[28].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
     platforms[29].load_anim(IMAGES_PATH + "Tilesets/level_2/tall_platform.png")
 
+
     # loading The end portal
     portal = Endgate(7000, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -298,6 +300,7 @@ def level_3():
     platforms[35].dist_y_max = 354
     platforms[35].dist_y = 354
     platforms[35].speed = 3
+
 
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_3/platform_base.png")
@@ -445,6 +448,7 @@ def level_4():
     platforms[36].dist_x = 375
     platforms[36].speed = 3
 
+
     # Loading the images for platform
     platforms[0].load_anim(IMAGES_PATH + "Tilesets/level_5/platform_base.png")
     platforms[1].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
@@ -497,14 +501,14 @@ def level_4():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_4/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_4/bg_top.png")
 
     # Setting up Enemy
     enemies = [Virus1(x=900, y=125), Virus2(x=1775, y=175), Virus1(x=2735, y=175), Virus4(x=3150, y=75),
                Virus1(x=3975, y=300), Virus2(x=4300, y=500), Virus3(x=4700, y=450), Virus1(x=5100, y=250),
                Virus1(x=5150, y=500), Virus1(x=5660, y=150), Virus2(x=7610, y=75), Virus3(x=6500, y=75),
-               Virus2(x=6025, y=150), Virus4(x=8500, y=390), Virus3(x=9060, y=75), Virus2(x=8700, y=500),
+               Virus2(x=6025, y=150), Virus4(x=8500, y=425), Virus3(x=9060, y=75), Virus2(x=8700, y=500),
                Virus4(x=10450, y=75)]
 
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
@@ -566,7 +570,7 @@ def level_5():
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
                  FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
                  FloatingPlatform(1625, 400), TallPlatform(-575, 236),
-                 FloatingPlatform(2325, 236)]
+                 FloatingPlatform(550, 325)]
 
 
     # Loading the images for platform
@@ -579,6 +583,8 @@ def level_5():
     platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
 
+
+
     #loading The end portal
     portal = Endgate(2150, 473)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
@@ -587,8 +593,8 @@ def level_5():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_5/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_5/bg_top.png")
 
     # Setting up Enemy
     enemies = []
