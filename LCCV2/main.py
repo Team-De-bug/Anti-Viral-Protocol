@@ -508,7 +508,7 @@ def level_4():
     enemies = [Virus1(x=900, y=125), Virus2(x=1775, y=175), Virus1(x=2735, y=175), Virus4(x=3150, y=75),
                Virus1(x=3975, y=300), Virus2(x=4300, y=500), Virus3(x=4700, y=450), Virus1(x=5100, y=250),
                Virus1(x=5150, y=500), Virus1(x=5660, y=150), Virus2(x=7610, y=75), Virus3(x=6500, y=75),
-               Virus2(x=6025, y=150), Virus4(x=8500, y=390), Virus3(x=9060, y=75), Virus2(x=8700, y=500),
+               Virus2(x=6025, y=150), Virus4(x=8500, y=425), Virus3(x=9060, y=75), Virus2(x=8700, y=500),
                Virus4(x=10450, y=75)]
 
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
