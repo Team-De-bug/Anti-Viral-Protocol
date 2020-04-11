@@ -603,7 +603,7 @@ def level_5():
 
     # Setting up Enemy
     enemies = []
-    boss_virus = VirusBoss(x=800, y=100)
+    boss_virus = VirusBoss(x=800, y=275)
 
     boss_virus.load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     boss_virus.set_max_distance(0)
