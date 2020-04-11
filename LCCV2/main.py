@@ -201,7 +201,7 @@ def level_2():
     # Setting up Enemy
     enemies = [Virus1(x=400, y=500), Virus1(x=1000, y=150), Virus2(x=1450, y=475), Virus1(x=2725, y=125),
                Virus2(x=3250, y=110), Virus1(x=4275, y=500), Virus2(x=4900, y=475), Virus1(x=5610, y= 500),
-               Virus2(x=6400, y=110)]
+               Virus2(x=6475, y=110)]
 
     enemies[0].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
