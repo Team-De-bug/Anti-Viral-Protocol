@@ -39,6 +39,11 @@ man.init_guns()
 # Loading damage splash
 WARN = pygame.image.load(IMAGES_PATH + "HUD/damage.png")
 
+# Loading the mission log images
+mission_log = pygame.image.load(IMAGES_PATH + "Menus/mission.png")
+
+# loading the pause screen
+pause_screen = pygame.image.load(IMAGES_PATH + "Menus/pause.png")
 
 # Setting up the platform
 def level_1():
@@ -225,8 +230,8 @@ def level_2():
     enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[8].set_max_distance(100)
 
-
     return platforms, enemies, background, portal
+
 
 def level_3():
     man.x, man.y = 50, 50
@@ -320,8 +325,6 @@ def level_3():
     platforms[35].load_anim(IMAGES_PATH + "Tilesets/level_3/moving_tile.png")
     platforms[36].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
     platforms[37].load_anim(IMAGES_PATH + "Tilesets/level_3/tall_platform.png")
-    
-
 
     #loading The end portal
     portal = Endgate(9700, 105)
@@ -391,8 +394,12 @@ def level_4():
                  FloatingPlatform(5550, 250), FloatingPlatform(5660, 250),
                  TallPlatform(6325, 236), FloatingPlatform(6925, 175), MovingTile(7100, 175),
                  FloatingPlatform(7500, 175), FloatingPlatform(7610, 175), MovingTile(7860, 175),
-                 FloatingPlatform(8110, 400)]
-    
+                 FloatingPlatform(8110, 400),
+                 FloatingPlatform(8110, 400), FloatingPlatform(8650, 400), FloatingPlatform(8950, 250),
+                 FloatingPlatform(9060, 250), FloatingPlatform(9350, 300), MovingTile(9600, 300),
+                 TallPlatform(9950, 236), TallPlatform(10490, 236), Boost(10050, 209),
+                 FloatingPlatform(11100, 275), FloatingPlatform(11210, 275), FloatingPlatform(11320, 275)]
+
     # Setting movement of moving platform
     platforms[4].move_style = "x"
     platforms[4].dist_x_max = 394
@@ -418,6 +425,11 @@ def level_4():
     platforms[30].dist_y_max = 225
     platforms[30].dist_y = 225
     platforms[30].speed = 3
+
+    platforms[36].move_style = "x"
+    platforms[36].dist_x_max = 250
+    platforms[36].dist_x = 250
+    platforms[36].speed = 3
 
 
     # Loading the images for platform
@@ -453,10 +465,24 @@ def level_4():
     platforms[29].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[30].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
     platforms[31].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[32].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[33].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[34].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[35].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[36].load_anim(IMAGES_PATH + "Tilesets/level_5/moving_tile.png")
+    platforms[37].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[38].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[39].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[40].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[41].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[42].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+
+
+
 
 
     #loading The end portal
-    portal = Endgate(8000, 473)
+    portal = Endgate(11400, 142)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -470,8 +496,9 @@ def level_4():
     enemies = [Virus1(x=900, y=125), Virus2(x=1775, y=175), Virus1(x=2735, y=175), Virus4(x=3150, y=75),
                Virus1(x=3975, y=300), Virus2(x=4300, y=500), Virus3(x=4700, y=450), Virus1(x=5100, y=250),
                Virus1(x=5150, y=500), Virus1(x=5660, y=150), Virus2(x=7610, y=75), Virus3(x=6500, y=75),
-               Virus2(x=5975, y=150), Virus4(x=8500, y=390)]
-   
+               Virus2(x=6025, y=150), Virus4(x=8500, y=390), Virus3(x=9060, y=75), Virus2(x=8700, y=500),
+               Virus4(x=10450, y=75)]
+
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
 
@@ -514,10 +541,19 @@ def level_4():
     enemies[13].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[13].set_max_distance(200)
 
+    enemies[14].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[14].set_max_distance(100)
+
+    enemies[15].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[15].set_max_distance(100)
+
+    enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[16].set_max_distance(150)
+
+
 
 
     return platforms, enemies, background, portal
-
 
 
 # Loading images for hud
@@ -571,6 +607,7 @@ def main():
         if LOAD_LEVEL:
             if LEVEL_NUM < 4:
                 PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                mission_logger(win)
                 LOAD_LEVEL = False
             else:
                 game_over(win)
@@ -610,7 +647,6 @@ def main():
                     man.infection_damage()
                     clock.tick(30)
                     redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
-
 
         pygame.display.update()
 
@@ -657,6 +693,24 @@ def main_menu(win):
         else:
             win.blit(help_button, (473, 400), (0, 0, 256, 80))
 
+        pygame.display.update()
+
+
+def mission_logger(win):
+
+    global LEVEL_NUM
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RETURN]:
+            break
+
+        win.blit(mission_log, (0, 0), (1200*LEVEL_NUM, 0, 1200, 640))
+        clock.tick(30)
         pygame.display.update()
 
 
@@ -782,7 +836,7 @@ def paused(win, keys):
         PAUSED = True
 
     if PAUSED:
-        pygame.draw.rect(win, (255, 255, 255), (500, 250, 200, 100))
+        win.blit(pause_screen, (500, 250))
         text = font_20.render("Game Paused ", 1, (0, 0, 0))
         text2 = font.render("press c to continue", 1, (0, 0, 0))
         win.blit(text, (600, 300))
