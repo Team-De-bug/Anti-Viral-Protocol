@@ -1,5 +1,6 @@
 from chars import Enemy
 from shells import Virus1shell
+import pygame
 
 
 # virus_1
@@ -48,3 +49,17 @@ class VirusBoss(Enemy):
 
         else:
             self.spawn_cooldown -= 1
+
+    def check_hurt(self, player):
+        if player.current_weapon != 0:
+            if not self.enemy_list:
+                ammo_list = player.weapons[player.weapon_list[player.current_weapon]].ammo_list
+                for ammo in ammo_list:
+                   if self.x + self.width > ammo.x > self.x and self.y + self.height > ammo.y > self.y:
+                        self.hp -= ammo.damage
+                        ammo_list.pop(ammo_list.index(ammo))
+
+    def update_health_bar(self, win):
+        if self.hp > 0:
+            pygame.draw.rect(win, (31, 31, 31), (398, 20, 402, 20))
+            pygame.draw.rect(win, (230, 230, 230), (400, 22, (self.hp/self.health_max) * 400, 20))
