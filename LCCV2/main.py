@@ -592,7 +592,7 @@ def level_5():
 
     #loading The end portal
     portal = Endgate(2150, 473)
-    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+    portal.load_anim(IMAGES_PATH + "Tilesets/vaccine.png")
 
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
