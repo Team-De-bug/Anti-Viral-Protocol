@@ -501,8 +501,8 @@ def level_4():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_4/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_4/bg_top.png")
 
     # Setting up Enemy
     enemies = [Virus1(x=900, y=125), Virus2(x=1775, y=175), Virus1(x=2735, y=175), Virus4(x=3150, y=75),
