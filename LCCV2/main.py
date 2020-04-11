@@ -1,9 +1,9 @@
 # Imports
 import os
 import pygame
-from chars import Player
-from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from LCCV2.chars import Player
+from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
