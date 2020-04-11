@@ -3,6 +3,7 @@ import guns as guns
 
 IMAGE_PATH = "resources/Images/"
 
+
 # Entity class for all characters
 class Entity:
 
@@ -92,7 +93,7 @@ class Enemy(Entity):
                 else:
                     self.x += speed
 
-        if (not ((200 < player.x - self.x < 600) or not ((200 < self.x - player.x < 600))) and (check_y[0] or check_y[1])):
+        if (200 < player.x - self.x < 400) or (200 < self.x - player.x < 400) and (check_y[0] or check_y[1]):
             if self.x > player.x:
                 self.fire(self.x + self.width / 2, self.y + self.height / 2, -1)
             else:
