@@ -6,34 +6,36 @@ import pygame
 # virus_1
 class Virus1(Enemy):
     ammo = Virus1shell
+    height = 78
+    width = 78
 
 
 # Virus_2
 class Virus2(Enemy):
     ammo = Virus1shell
-    height = 150
-    width = 150
+    height = 78
+    width = 78
 
 
 # Virus3
 class Virus3(Enemy):
     ammo = Virus1shell
-    height = 150
-    width = 150
+    height = 156
+    width = 156
 
 
 # Virus4
 class Virus4(Enemy):
     ammo = Virus1shell
-    height = 150
-    width = 150
+    height = 156
+    width = 156
 
 
 # virus_boss
 class VirusBoss(Enemy):
     ammo = Virus1shell
-    height = 500
-    width = 500
+    height = 320
+    width = 320
     spawn_cooldown = 70
 
     enemy_list = []
