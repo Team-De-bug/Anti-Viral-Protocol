@@ -394,7 +394,6 @@ def level_4():
                  FloatingPlatform(5550, 250), FloatingPlatform(5660, 250),
                  TallPlatform(6325, 236), FloatingPlatform(6925, 175), MovingTile(7100, 175),
                  FloatingPlatform(7500, 175), FloatingPlatform(7610, 175), MovingTile(7860, 175),
-                 FloatingPlatform(8110, 400),
                  FloatingPlatform(8110, 400), FloatingPlatform(8650, 400), FloatingPlatform(8950, 250),
                  FloatingPlatform(9060, 250), FloatingPlatform(9350, 300), MovingTile(9600, 300),
                  TallPlatform(9950, 236), TallPlatform(10490, 236), Boost(10050, 209),
