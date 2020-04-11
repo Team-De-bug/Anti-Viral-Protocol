@@ -569,8 +569,8 @@ def level_5():
     man.spawn()
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
                  FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400). TallPlatform(-575, 236),
-                 FloatingPlatform(2325, 236)]
+                 FloatingPlatform(1625, 400), TallPlatform(-575, 236),
+                 FloatingPlatform(550, 325)]
 
 
     # Loading the images for platform
@@ -580,6 +580,9 @@ def level_5():
     platforms[3].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[4].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
+    platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+
     
 
     #loading The end portal
