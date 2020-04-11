@@ -1,9 +1,9 @@
 # Imports
 import os
 import pygame
-from LCCV2.chars import Player
-from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from chars import Player
+from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+from enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -590,8 +590,8 @@ def level_5():
     background = [BackDrop(), BackDrop()]
 
     # Loading the images for the backdrop
-    background[0].load_anim(IMAGES_PATH + "Background/level_1/bg_bottom.png")
-    background[1].load_anim(IMAGES_PATH + "Background/level_1/bg_top.png")
+    background[0].load_anim(IMAGES_PATH + "Background/level_5/bg_bottom.png")
+    background[1].load_anim(IMAGES_PATH + "Background/level_5/bg_top.png")
 
     # Setting up Enemy
     enemies = [VirusBoss(x=800, y=100)]
