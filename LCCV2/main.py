@@ -957,9 +957,9 @@ def game_over(win):
 
 def enemy_health_bar(win, enemies, man):
     for enemy in enemies:
-        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 10, enemy.y - 17, 104, 14))
+        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 10, enemy.y - 17, enemy.width + 2, 14))
         if enemy.hp > 0:
-            pygame.draw.rect(win, (100 - enemy.hp + 50, enemy.hp + 50, 0), (enemy.x - 8, enemy.y - 15, enemy.hp, 10))
+            pygame.draw.rect(win, ((1-(enemy.hp/enemy.health_max))*255, (enemy.hp/enemy.health_max)*255, 0), (enemy.x - 8 , enemy.y - 15, (enemy.hp/enemy.health_max)*enemy.width , 10))
         else:
             man.score += enemy.points
             enemies.pop(enemies.index(enemy))

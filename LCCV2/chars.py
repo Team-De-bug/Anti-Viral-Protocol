@@ -40,6 +40,7 @@ class Enemy(Entity):
     dir_x = True
     ammo = None
     damage = 15
+    health_max = 100
 
     cooldown = 30
 
