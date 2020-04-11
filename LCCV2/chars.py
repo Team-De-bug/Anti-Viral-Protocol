@@ -228,7 +228,12 @@ class Player(Entity):
 
         # load sounds
         self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
+
+        # load bars for hud
         self.health_bar = pygame.image.load(IMAGE_PATH+"HUD/health_bar.png")
+        self.shoot = pygame.image.load(IMAGE_PATH+"HUD/shoot.png")
+        self.double_d = [pygame.image.load(IMAGE_PATH+"HUD/2x_on.png"),
+                         pygame.image.load(IMAGE_PATH+"HUD/2x_off.png")]
 
     # Moving control
     def move(self, keys, platforms, enemies, bg_layers, portal, boss=False):
@@ -657,11 +662,22 @@ class Player(Entity):
     def update_player_hb(self, win):
         if self.hp < 0:
             self.hp = 0
-        win.blit(self.health_bar, (135, 13), (0, 0, (self.hp/100) * 200, 13))
+        win.blit(self.health_bar, (96, 13), (0, 0, (self.hp/100) * 239, 13))
 
     def update_weapon_cdb(self, win):
         if self.current_weapon != 0:
             cooldown = self.weapons[self.weapon_list[self.current_weapon]].cooldown
             cooldown_max = self.weapons[self.weapon_list[self.current_weapon]].cooldown_max
-            pygame.draw.rect(win, (255, 255, 255), (246, 69, 13, 53))
-            pygame.draw.rect(win, (31, 31, 31), (246, 69, 13, (cooldown/cooldown_max) * 53))
+            pygame.draw.rect(win, (230, 230, 230), (246, 69, 13, 53))
+            pygame.draw.rect(win, (31, 31, 31), (246, 69, 13, (1-(cooldown/cooldown_max)) * 53))
+
+            if self.weapons[self.weapon_list[self.current_weapon]].fired:
+                win.blit(self.shoot, (212, 107), (0, 0, 18, 18))
+            else:
+                win.blit(self.shoot, (212, 107), (18, 0, 18, 18))
+
+    def update_double_d(self, win):
+        if self.double_damage:
+            win.blit(self.double_d[0], (968, 8))
+        else:
+            win.blit(self.double_d[1], (968, 8))

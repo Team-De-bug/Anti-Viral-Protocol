@@ -567,10 +567,10 @@ def level_4():
 
 def level_5():
     man.spawn()
-    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),
-                 FloatingPlatform(325, 225), FloatingPlatform(1350, 225),
-                 FloatingPlatform(1625, 400), TallPlatform(-575, 236),
-                 FloatingPlatform(550, 325)]
+    platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),FloatingPlatform(325, 225), 
+                 FloatingPlatform(1250, 175),FloatingPlatform(1725, 400), TallPlatform(-575, 236),
+                 FloatingPlatform(550, 325), Boost(350,200), FloatingPlatform(790, 175),
+                 Boost(1760, 375), FloatingPlatform(1540, 250)]
 
 
     # Loading the images for platform
@@ -582,12 +582,17 @@ def level_5():
     platforms[5].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
     platforms[6].load_anim(IMAGES_PATH + "Tilesets/level_5/tall_platform.png")
     platforms[7].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[8].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[9].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    platforms[10].load_anim(IMAGES_PATH + "Tilesets/heal.png")
+    platforms[11].load_anim(IMAGES_PATH + "Tilesets/level_5/platform.png")
+    
 
 
 
     #loading The end portal
     portal = Endgate(2150, 473)
-    portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
+    portal.load_anim(IMAGES_PATH + "Tilesets/vaccine.png")
 
     # Making the backdrop
     background = [BackDrop(), BackDrop()]
@@ -708,10 +713,13 @@ def main():
                     if man.current_weapon != 0:
                         if boss:
                             man.enemy_killed(boss.enemy_list, win)
-                            hit_player(man, boss.enemy_list)
                         else:
                             man.enemy_killed(ENEMIES, win)
-                            hit_player(man, ENEMIES)
+
+                    if boss:
+                        hit_player(man, boss.enemy_list)
+                    else:
+                        hit_player(man, ENEMIES)
 
                     man.infection_damage()
                     clock.tick(30)
@@ -749,7 +757,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
-                LEVEL_NUM = 4
+                LEVEL_NUM = 0
                 LOAD_LEVEL = True
                 img = 0
                 break
@@ -891,6 +899,9 @@ def redraw(win, background, enemies, platforms, boss=None):
         win.blit(ammo_on_load, (70, 105))
     man.update_player_hb(win)
     man.update_weapon_cdb(win)
+
+    if LEVEL_NUM >= 2:
+        man.update_double_d(win)
 
     PORTAL.draw(win)
     if boss:
