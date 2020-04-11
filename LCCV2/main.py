@@ -670,8 +670,8 @@ def main():
                 man.level = LEVEL_NUM
                 LOAD_LEVEL = False
             else:
-                game_over(win)
-                clock.tick(5)
+                credits(win)
+                main_menu(win)
 
         else:
 
@@ -686,7 +686,10 @@ def main():
                     clock.tick(5)
 
                 else:
-                    check_portal(PORTAL, man)
+                    if boss:
+                        check_portal(PORTAL, man, boss)
+                    else:
+                        check_portal(PORTAL, man)
                     keys = pygame.key.get_pressed()
                     paused(win, keys)
 
@@ -731,6 +734,7 @@ def main():
 
                     if boss:
                         boss.check_hurt(man)
+                        boss.kill_on_contact(man)
                         redraw(win, BACKGROUND, ENEMIES, PLATFORMS, boss)
                     else:
                         redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
@@ -739,6 +743,26 @@ def main():
 
 
 damage_delay = 20
+
+
+def credits(win):
+    num = 0
+    image = pygame.image.load(IMAGES_PATH+"Menus/credits.png")
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RETURN]:
+            break
+        win.blit(image, (0, num * -1))
+        num += 1
+        if num > 4800:
+            break
+        clock.tick(40)
+        pygame.display.update()
 
 
 def main_menu(win):
@@ -786,6 +810,10 @@ def main_menu(win):
                 get_help()
         else:
             win.blit(help_button, (473, 400), (0, 0, 256, 80))
+
+        if 869 + 199 > mouse_hover[0] > 869 and 569 + 57 > mouse_hover[1] > 569:
+            if mouse_pressed[0]:
+                credits(win)
 
         pygame.display.update()
 
@@ -1006,10 +1034,10 @@ def enemy_health_bar(win, enemies, man):
 
 
 # next level
-def check_portal(portal, man):
+def check_portal(portal, man, boss=False):
     global LOAD_LEVEL
     global LEVEL_NUM
-    if portal.x + portal.width > man.x + man.hit_x[man.width_num] > portal.x and portal.y + portal.height > man.y > portal.y:
+    if portal.x + portal.width > man.x + man.hit_x[man.width_num] > portal.x and portal.y + portal.height > man.y > portal.y and not boss:
         LOAD_LEVEL = True
         LEVEL_NUM += 1
 

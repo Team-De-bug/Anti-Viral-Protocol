@@ -54,7 +54,7 @@ class VirusBoss(Enemy):
     health_bar = pygame.image.load("resources/Images/HUD/bossbar.png")
 
     def spawn_enemies(self, player):
-        if self.spawn_cooldown <= 0:
+        if self.spawn_cooldown <= 0 and len(self.enemy_list) < 11:
             self.spawn_cooldown = 70
             if 700 > player.x - self.x > 200 or 700 > self.x - player.x > 200:
                 self.enemy_list.append(self.enemy(self.x - 50, 500))
@@ -77,3 +77,7 @@ class VirusBoss(Enemy):
         if self.hp > 0:
             pygame.draw.rect(win, (31, 31, 31), (398 + 30, 20, 404, 24))
             win.blit(self.health_bar, (430, 22), (0, 0, (self.hp/self.health_max) * 400, 20))
+
+    def kill_on_contact(self, player):
+        if self.x + self.width > player.x > self.x and self.y + self.height > player.y > self.y:
+            player.hp = 0
