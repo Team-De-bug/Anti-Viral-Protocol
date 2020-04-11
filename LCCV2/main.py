@@ -836,10 +836,10 @@ def paused(win, keys):
 
     if PAUSED:
         win.blit(pause_screen, (500, 250))
-        text = font_20.render("Game Paused ", 1, (0, 0, 0))
-        text2 = font.render("press c to continue", 1, (0, 0, 0))
-        win.blit(text, (600, 300))
-        win.blit(text2, (600, 320))
+        text = font_20.render("Game Paused ", 1, (219, 219, 219))
+        text2 = font.render("Press C to continue", 1, (219, 219, 219))
+        win.blit(text, (550, 275))
+        win.blit(text2, (545, 300))
 
     if keys[pygame.K_c] and PAUSED:
         PAUSED = False
