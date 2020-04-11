@@ -10,6 +10,7 @@ class Pistol(Weapons):
     hold_limit = 7
     on_load = 7
     cooldown = 5
+    cooldown_max = 5
     ammo = shells.PistolShells
 
 
@@ -20,6 +21,7 @@ class Shotgun(Weapons):
     hold_limit = 5
     on_load = 5
     cooldown = 20
+    cooldown_max = 20
     ammo = shells.ShotShells
 
 
@@ -30,6 +32,7 @@ class MachineGun(Weapons):
     hold_limit = 30
     on_load = 30
     cooldown = 2
+    cooldown_max = 2
     ammo = shells.ARShells
 
 
@@ -40,6 +43,7 @@ class RocketLauncher(Weapons):
     hold_limit = 5
     on_load = 5
     cooldown = 60
+    cooldown_max = 60
     ammo = shells.RPGShells
     explode_img = pygame.image.load("resources/Images/Projectiles/explosion.png")
 
