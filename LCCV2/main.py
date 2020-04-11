@@ -191,7 +191,7 @@ def level_2():
 
 
     # loading The end portal
-    portal = Endgate(6900, 106)
+    portal = Endgate(7000, 106)
     portal.load_anim(IMAGES_PATH + "Tilesets/endgate.png")
 
     # Making the backdrop
@@ -399,7 +399,6 @@ def level_4():
                  FloatingPlatform(5550, 250), FloatingPlatform(5660, 250),
                  TallPlatform(6325, 236), FloatingPlatform(6925, 175), MovingTile(7100, 175),
                  FloatingPlatform(7500, 175), FloatingPlatform(7610, 175), MovingTile(7860, 175),
-                 FloatingPlatform(8110, 400),
                  FloatingPlatform(8110, 400), FloatingPlatform(8650, 400), FloatingPlatform(8950, 250),
                  FloatingPlatform(9060, 250), FloatingPlatform(9350, 300), MovingTile(9600, 300),
                  TallPlatform(9950, 236), TallPlatform(10490, 236), Boost(10050, 209),
@@ -836,10 +835,10 @@ def paused(win, keys):
 
     if PAUSED:
         win.blit(pause_screen, (500, 250))
-        text = font_20.render("Game Paused ", 1, (0, 0, 0))
-        text2 = font.render("press c to continue", 1, (0, 0, 0))
-        win.blit(text, (600, 300))
-        win.blit(text2, (600, 320))
+        text = font_20.render("Game Paused ", 1, (219, 219, 219))
+        text2 = font.render("Press C to continue", 1, (219, 219, 219))
+        win.blit(text, (550, 275))
+        win.blit(text2, (545, 300))
 
     if keys[pygame.K_c] and PAUSED:
         PAUSED = False
