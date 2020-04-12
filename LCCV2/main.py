@@ -774,7 +774,7 @@ def main_menu(win):
     exit_button = pygame.image.load(IMAGES_PATH+"Menus/ExitButton.png")
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
 
-    pygame.mixer.music.load("resources/Sounds/Credits.ogg")
+    pygame.mixer.music.load("resources/Sounds/Main_Menu.ogg")
     pygame.mixer.music.play(-1)
 
     global LEVEL_NUM
