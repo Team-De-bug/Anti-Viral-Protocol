@@ -1041,7 +1041,7 @@ def game_over(win):
         img += 1
         win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
 
-    if keys[pygame.K_ESCAPE]:
+    if keys[pygame.K_RETURN]:
         main_menu(win)
 
 
