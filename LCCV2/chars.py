@@ -494,12 +494,12 @@ class Player(Entity):
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
 
-        if keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0:
+        if (keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0
+                and self.weapons[self.weapon_list[self.current_weapon]].on_load > 0):
             self.weapons[self.weapon_list[self.current_weapon]].fired = True
             if self.direction == "R":
                 direction = 1
                 width = self.width * 3/2
-
             else:
                 direction = -1
                 width = 0
@@ -563,14 +563,14 @@ class Player(Entity):
                     self.healer = None
 
                 if platform.Taller:
-                    if self.y + self.height - platform.y < 50:
+                    if self.y + self.height - platform.y < 20:
                         self.y = platform.y - self.height
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x <= 40 and self.y + self.height - platform.y >= 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - platform.x <= 40 and self.y + self.height - platform.y >= 21:
                         self.x = platform.x - (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) - 10
                         self.on_platform = False
 
-                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) <= 40 and self.y + self.height - platform.y >= 70:
+                    elif (self.x + self.hit_x[self.width_num] + self.width_var[self.width_num]) - (platform.x + platform.width) <= 40 and self.y + self.height - platform.y >= 21:
                         self.x = platform.x + platform.width + (self.hit_x[self.width_num] + self.width_var[self.width_num] + self.hit_nudge) + 10
                         self.on_platform = False
                 break

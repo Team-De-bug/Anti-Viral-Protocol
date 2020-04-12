@@ -223,25 +223,25 @@ def level_2():
     enemies[1].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[1].set_max_distance(100)
 
-    enemies[2].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[2].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_2_")
     enemies[2].set_max_distance(200)
 
     enemies[3].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[3].set_max_distance(100)
 
-    enemies[4].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[4].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_2_")
     enemies[4].set_max_distance(200)
 
     enemies[5].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[5].set_max_distance(100)
 
-    enemies[6].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[6].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_2_")
     enemies[6].set_max_distance(200)
 
     enemies[7].load_anim(IMAGES_PATH + "Characters/Virus/Virus_1/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
     enemies[7].set_max_distance(100)
 
-    enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_1_")
+    enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_2_")
     enemies[8].set_max_distance(100)
 
     return platforms, enemies, background, portal
@@ -366,7 +366,7 @@ def level_3():
     enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[1].set_max_distance(100)
 
-    enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[2].set_max_distance(250)
 
     enemies[3].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
@@ -375,25 +375,25 @@ def level_3():
     enemies[4].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[4].set_max_distance(100)
 
-    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[5].set_max_distance(200)
 
     enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[6].set_max_distance(100)
 
-    enemies[7].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[7].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[7].set_max_distance(150)
 
-    enemies[8].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[8].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[8].set_max_distance(200)
 
-    enemies[9].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[9].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[9].set_max_distance(200)
 
     enemies[10].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[10].set_max_distance(100)
 
-    enemies[11].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[11].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[11].set_max_distance(200)
 
     return platforms, enemies, background, portal
@@ -514,22 +514,22 @@ def level_4():
     enemies[0].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[0].set_max_distance(200)
 
-    enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[1].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[1].set_max_distance(150)
 
     enemies[2].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[2].set_max_distance(100)
 
-    enemies[3].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[3].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_4_")
     enemies[3].set_max_distance(150)
 
     enemies[4].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[4].set_max_distance(10)
 
-    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[5].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[5].set_max_distance(100)
 
-    enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[6].set_max_distance(100)
 
     enemies[7].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
@@ -541,25 +541,25 @@ def level_4():
     enemies[9].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[9].set_max_distance(100)
 
-    enemies[10].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[10].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[10].set_max_distance(150)
 
-    enemies[11].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[11].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[11].set_max_distance(100)
 
-    enemies[12].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[12].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[12].set_max_distance(0)
 
-    enemies[13].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[13].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_4_")
     enemies[13].set_max_distance(200)
 
-    enemies[14].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[14].load_anim(IMAGES_PATH+"Characters/Virus/Virus_3/idle.png", IMAGES_PATH+"Projectiles/virus_3_")
     enemies[14].set_max_distance(100)
 
-    enemies[15].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[15].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[15].set_max_distance(100)
 
-    enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_4_")
     enemies[16].set_max_distance(150)
 
     return platforms, enemies, background, portal
@@ -605,7 +605,7 @@ def level_5():
     enemies = []
     boss_virus = VirusBoss(x=800, y=275)
 
-    boss_virus.load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
+    boss_virus.load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     boss_virus.set_max_distance(0)
 
     return platforms, enemies, background, portal, boss_virus
@@ -1025,9 +1025,9 @@ def game_over(win):
 
 def enemy_health_bar(win, enemies, man):
     for enemy in enemies:
-        pygame.draw.rect(win, (50, 50, 50), (enemy.x - 2, enemy.y - 18, enemy.width + 2, 14))
+        pygame.draw.rect(win, (31, 31, 31), (enemy.x - 2, enemy.y - 17, enemy.width + 4, 14))
         if enemy.hp > 0:
-            pygame.draw.rect(win, ((1-(enemy.hp/enemy.health_max))*255, (enemy.hp/enemy.health_max)*255, 0), (enemy.x , enemy.y - 15, (enemy.hp/enemy.health_max)*enemy.width , 10))
+            pygame.draw.rect(win, ((1-(enemy.hp/enemy.health_max))*255, (enemy.hp/enemy.health_max)*255, 0), (enemy.x, enemy.y - 15, (enemy.hp/enemy.health_max)*enemy.width, 10))
         else:
             man.score += enemy.points
             enemies.pop(enemies.index(enemy))
