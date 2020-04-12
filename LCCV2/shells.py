@@ -1,5 +1,5 @@
-from items import Shells
 import pygame
+from items import Shells
 
 
 # defining and creating the bullets for each gun
@@ -32,6 +32,7 @@ class RPGShells(Shells):
     exploded = False
     explode_delay = 4
     explode_stage = 0
+    explode_played = False
 
 
 class PistolShells(Shells):

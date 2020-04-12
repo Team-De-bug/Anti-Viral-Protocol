@@ -1,7 +1,8 @@
-from items import Weapons
-import shells
 import pygame
+import shells
+from items import Weapons
 
+pygame.mixer.init()
 
 # Pistol
 class Pistol(Weapons):
@@ -42,6 +43,7 @@ class RocketLauncher(Weapons):
     cooldown_max = 60
     ammo = shells.RPGShells
     explode_img = pygame.image.load("resources/Images/Projectiles/explosion.png")
+    explode_sound = pygame.mixer.Sound("resources/Sounds/Explode.wav")
 
     def update_bullets(self, win, platforms, double=False):
         for ammo in self.ammo_list:
@@ -55,6 +57,10 @@ class RocketLauncher(Weapons):
     def explode(self, ammo, win):
         ammo.exploded = True
         ammo.vel = 0
+        if not ammo.explode_played:
+            ammo.explode_played = True
+            self.explode_sound.play()
+
         if ammo.explode_delay <= 0:
             ammo.explode_delay = 4
             if ammo.explode_stage < 5:
