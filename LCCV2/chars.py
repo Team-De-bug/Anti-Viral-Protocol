@@ -509,7 +509,7 @@ class Player(Entity):
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
         # restock if on healer
-        if keys[pygame.K_r] and self.on_healer:
+        if keys[pygame.K_r] and self.on_healer and self.on_platform:
             self.hp = 100
             if not self.healer.used:
                 for weapon in self.weapon_list:
