@@ -937,6 +937,9 @@ def redraw(win, background, color, enemies, platforms, boss=None):
 
     man.draw(win, platforms)
 
+    for platform in platforms:
+        platform.draw(win)
+
     if boss:
         boss.draw(win)
         for enemy in boss.enemy_list:
@@ -947,9 +950,6 @@ def redraw(win, background, color, enemies, platforms, boss=None):
         for enemy in enemies:
             enemy.draw(win)
         enemy_health_bar(win, enemies, man)
-
-    for platform in platforms:
-        platform.draw(win)
 
     # Stats part
     win.blit(hud, (0, 0))
@@ -1064,7 +1064,6 @@ def check_portal(portal, man, boss=False):
     if portal.x + portal.width > man.x + man.hit_x[man.width_num] > portal.x and portal.y + portal.height > man.y > portal.y and not boss:
         LOAD_LEVEL = True
         LEVEL_NUM += 1
-
 
 
 if __name__ == "__main__":
