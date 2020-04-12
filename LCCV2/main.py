@@ -1,10 +1,9 @@
 # Imports
 import os
 import pygame
-from LCCV2.chars import Player
-from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
-from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
-from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from chars import Player
+from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+from enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -56,7 +55,7 @@ def level_1():
     man.spawn()
     man.x = 20
     man.y = 300
-    color = (200, 200, 200)
+    color = (104, 98, 114)
     platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
                  TallPlatform(1850,236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
@@ -141,7 +140,7 @@ def level_1():
 def level_2():
     man.spawn()
     man.x, man.y = 50, 300
-    color = (200, 200, 200)
+    color = (54, 178, 218)
     platforms = [BasePlatform(200), MovingTile(3938, 125), FloatingPlatform(0, 500),
                  FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3600, 350),
                  TallPlatform(2500, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
@@ -253,7 +252,7 @@ def level_2():
 def level_3():
     man.spawn()
     man.x, man.y = 50, 50
-    color = (200, 200, 200)
+    color = (107, 125, 131)
     platforms = [BasePlatform(1500), MovingTile(3150, 250), FloatingPlatform(1550, 400),
                  FloatingPlatform(650, 250), MovingTile(1300, 350),  Boost(4100, 209),
                  TallPlatform(0, 236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
@@ -406,7 +405,7 @@ def level_3():
 def level_4():
     man.spawn()
     man.x, man.y = 20, 50
-    color = (200, 200, 200)
+    color = (75, 75, 75)
     platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 300),
                  FloatingPlatform(6000, 250), MovingTile(225, 250),  Boost(3375, 209), 
                  TallPlatform(850,236), FloatingPlatform(1450, 125),FloatingPlatform(1700, 275),
@@ -572,7 +571,7 @@ def level_4():
 
 def level_5():
     man.spawn()
-    color = (200, 200, 200)
+    color = (75, 75, 75)
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),FloatingPlatform(325, 225), 
                  FloatingPlatform(1250, 175),FloatingPlatform(1725, 400), TallPlatform(-575, 236),
                  FloatingPlatform(550, 325), Boost(350,200), FloatingPlatform(790, 175),
