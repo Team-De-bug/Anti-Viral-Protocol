@@ -4,6 +4,7 @@ import pygame
 from LCCV2.chars import Player
 from LCCV2.platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
 from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from LCCV2.enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -55,6 +56,7 @@ def level_1():
     man.spawn()
     man.x = 20
     man.y = 300
+    color = (200, 200, 200)
     platforms = [BasePlatform(0), MovingTile(3150, 300), FloatingPlatform(300, 400),
                  FloatingPlatform(650, 250),MovingTile(1650, 236),  Boost(2250, 209), 
                  TallPlatform(1850,236), FloatingPlatform(1000, 350), FloatingPlatform(1110, 350),
@@ -133,12 +135,13 @@ def level_1():
     enemies[6].load_anim(IMAGES_PATH+"Characters/Virus/Virus_1/idle.png", IMAGES_PATH+"Projectiles/virus_1_")
     enemies[6].set_max_distance(100)
 
-    return platforms, enemies, background, portal
+    return platforms, enemies, background, color, portal
 
 
 def level_2():
     man.spawn()
     man.x, man.y = 50, 300
+    color = (200, 200, 200)
     platforms = [BasePlatform(200), MovingTile(3938, 125), FloatingPlatform(0, 500),
                  FloatingPlatform(450, 400), MovingTile(1800, 350), Boost(3600, 350),
                  TallPlatform(2500, 236), FloatingPlatform(810, 250), FloatingPlatform(920, 250),
@@ -244,12 +247,13 @@ def level_2():
     enemies[8].load_anim(IMAGES_PATH + "Characters/Virus/Virus_2/idle.png", IMAGES_PATH + "Projectiles/virus_2_")
     enemies[8].set_max_distance(100)
 
-    return platforms, enemies, background, portal
+    return platforms, enemies, background, color, portal
 
 
 def level_3():
     man.spawn()
     man.x, man.y = 50, 50
+    color = (200, 200, 200)
     platforms = [BasePlatform(1500), MovingTile(3150, 250), FloatingPlatform(1550, 400),
                  FloatingPlatform(650, 250), MovingTile(1300, 350),  Boost(4100, 209),
                  TallPlatform(0, 236), FloatingPlatform(1000, 350),FloatingPlatform(1110, 350),
@@ -396,12 +400,13 @@ def level_3():
     enemies[11].load_anim(IMAGES_PATH+"Characters/Virus/Virus_2/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     enemies[11].set_max_distance(200)
 
-    return platforms, enemies, background, portal
+    return platforms, enemies, background, color, portal
 
 
 def level_4():
     man.spawn()
     man.x, man.y = 20, 50
+    color = (200, 200, 200)
     platforms = [BasePlatform(4000), MovingTile(2075, 275), FloatingPlatform(0, 300),
                  FloatingPlatform(6000, 250), MovingTile(225, 250),  Boost(3375, 209), 
                  TallPlatform(850,236), FloatingPlatform(1450, 125),FloatingPlatform(1700, 275),
@@ -562,11 +567,12 @@ def level_4():
     enemies[16].load_anim(IMAGES_PATH+"Characters/Virus/Virus_4/idle.png", IMAGES_PATH+"Projectiles/virus_4_")
     enemies[16].set_max_distance(150)
 
-    return platforms, enemies, background, portal
+    return platforms, enemies, background, color, portal
 
 
 def level_5():
     man.spawn()
+    color = (200, 200, 200)
     platforms = [BasePlatform(0), BasePlatform(600), FloatingPlatform(0, 400),FloatingPlatform(325, 225), 
                  FloatingPlatform(1250, 175),FloatingPlatform(1725, 400), TallPlatform(-575, 236),
                  FloatingPlatform(550, 325), Boost(350,200), FloatingPlatform(790, 175),
@@ -608,7 +614,7 @@ def level_5():
     boss_virus.load_anim(IMAGES_PATH+"Characters/Virus/Virus_Boss/idle.png", IMAGES_PATH+"Projectiles/virus_2_")
     boss_virus.set_max_distance(0)
 
-    return platforms, enemies, background, portal, boss_virus
+    return platforms, enemies, background, color,portal, boss_virus
 
 
 # Loading images for hud
@@ -643,13 +649,13 @@ DAMAGED = False
 def main():
     running = True
 
-    global LOAD_LEVEL
     global PLATFORMS
     global ENEMIES
     global BACKGROUND
     global PORTAL
     global LEVELS
     global LEVEL_NUM
+    global LOAD_LEVEL
 
     main_menu(win)
     boss = None
@@ -662,9 +668,9 @@ def main():
         if LOAD_LEVEL:
             if LEVEL_NUM < len(LEVELS):
                 if LEVEL_NUM < 4:
-                    PLATFORMS, ENEMIES, BACKGROUND, PORTAL = LEVELS[LEVEL_NUM]()
+                    PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL = LEVELS[LEVEL_NUM]()
                 else:
-                    PLATFORMS, ENEMIES, BACKGROUND, PORTAL, boss = LEVELS[LEVEL_NUM]()
+                    PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL, boss = LEVELS[LEVEL_NUM]()
 
                 mission_logger(win)
                 man.level = LEVEL_NUM
@@ -735,9 +741,9 @@ def main():
                     if boss:
                         boss.check_hurt(man)
                         boss.kill_on_contact(man)
-                        redraw(win, BACKGROUND, ENEMIES, PLATFORMS, boss)
+                        redraw(win, BACKGROUND, color, ENEMIES, PLATFORMS, boss)
                     else:
-                        redraw(win, BACKGROUND, ENEMIES, PLATFORMS)
+                        redraw(win, BACKGROUND, color, ENEMIES, PLATFORMS)
 
         pygame.display.update()
 
@@ -762,8 +768,11 @@ def credits(win):
         if keys[pygame.K_RETURN] or num > 4800:
             pygame.mixer.music.stop()
             break
+        if keys[pygame.K_DOWN]:
+            num += 2
+
         win.blit(image, (0, num * -1))
-        num += 1
+        num += 2
         clock.tick(40)
         pygame.display.update()
 
@@ -822,6 +831,8 @@ def main_menu(win):
             if mouse_pressed[0]:
                 pygame.mixer.music.stop()
                 credits(win)
+                pygame.mixer.music.load("resources/Sounds/Main_Menu.ogg")
+                pygame.mixer.music.play(-1)
 
         pygame.display.update()
 
@@ -912,12 +923,12 @@ def get_help():
 
 
 # draw function
-def redraw(win, background, enemies, platforms, boss=None):
+def redraw(win, background, color, enemies, platforms, boss=None):
 
     global DAMAGED
     global WARN
     global damage_delay
-    win.fill((104, 98, 112))
+    win.fill(color)
 
     for layer in background:
         layer.draw(win)
@@ -1030,7 +1041,7 @@ def game_over(win):
         img += 1
         win.blit(game_over_img, (0, 0), (img * 1200, 0, 1200, 640))
 
-    if keys[pygame.K_ESCAPE]:
+    if keys[pygame.K_RETURN]:
         main_menu(win)
 
 
