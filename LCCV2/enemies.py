@@ -1,6 +1,6 @@
 from chars import Enemy
-from shells import Virus1shell
 import pygame
+from shells import *
 
 
 # virus_1
@@ -14,7 +14,7 @@ class Virus1(Enemy):
 
 # Virus_2
 class Virus2(Enemy):
-    ammo = Virus1shell
+    ammo = Virus2shell
     height = 78
     width = 78
     hp = 200
@@ -23,7 +23,7 @@ class Virus2(Enemy):
 
 # Virus3
 class Virus3(Enemy):
-    ammo = Virus1shell
+    ammo = Virus4shell
     height = 156
     width = 156
     hp = 300
@@ -32,7 +32,7 @@ class Virus3(Enemy):
 
 # Virus4
 class Virus4(Enemy):
-    ammo = Virus1shell
+    ammo = Virus4shell
     height = 156
     width = 156
     hp = 350

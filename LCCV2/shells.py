@@ -40,7 +40,8 @@ class PistolShells(Shells):
     
 
 class Virus1shell(Shells):
-    dist_limit = 500
+    dist_limit = 400
+    damage = 5
 
     # animation loader function
     @classmethod
@@ -54,3 +55,15 @@ class Virus1shell(Shells):
             win.blit(self.anim[1], (self.x, self.y))
         else:
             win.blit(self.anim[0], (self.x, self.y))
+
+
+class Virus2shell(Virus1shell):
+    damage = 10
+
+
+class Virus3shell(Virus1shell):
+    damage = 15
+
+
+class Virus4shell(Virus1shell):
+    damage = 20
