@@ -1,9 +1,12 @@
 # Imports
 import os
+import sys
+
 import pygame
 from chars import Player
-from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
 from enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+
 # Setting up the mixer for audio
 pygame.mixer.init()
 
@@ -761,7 +764,7 @@ def credits(win):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RETURN] or num > 4800:
@@ -793,7 +796,7 @@ def main_menu(win):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         win.blit(menu_bg, (0, 0))
         mouse_hover = pygame.mouse.get_pos()
@@ -814,7 +817,7 @@ def main_menu(win):
             win.blit(exit_button, (473, 500), (256, 0, 256, 80))
             if mouse_pressed[0]:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         else:
             win.blit(exit_button, (473, 500), (0, 0, 256, 80))
@@ -843,7 +846,7 @@ def mission_logger(win):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RETURN]:
@@ -862,7 +865,7 @@ def you_win():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RETURN]:
@@ -883,7 +886,7 @@ def get_help():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(0)
 
         keys = pygame.key.get_pressed()
         mouse_hover = pygame.mouse.get_pos()
