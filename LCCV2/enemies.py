@@ -75,8 +75,7 @@ class VirusBoss(Enemy):
 
     def update_health_bar(self, win):
         if self.hp > 0:
-            pygame.draw.rect(win, (31, 31, 31), (398 + 30, 20, 404, 24))
-            win.blit(self.health_bar, (430, 22), (0, 0, (self.hp/self.health_max) * 400, 20))
+            win.blit(self.health_bar, (430, 22), (0, 0, (self.hp/self.health_max) * 500, 20))
 
     def kill_on_contact(self, player):
         if self.x + self.width > player.x > self.x and self.y + self.height > player.y > self.y:
