@@ -820,6 +820,7 @@ def main_menu(win):
 
         if 869 + 199 > mouse_hover[0] > 869 and 569 + 57 > mouse_hover[1] > 569:
             if mouse_pressed[0]:
+                pygame.mixer.music.stop()
                 credits(win)
 
         pygame.display.update()
