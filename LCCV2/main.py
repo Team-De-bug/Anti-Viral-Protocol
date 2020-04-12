@@ -875,7 +875,7 @@ def you_win():
 
 def get_help():
     image = pygame.image.load(IMAGES_PATH+"Menus/help.png")
-    pages_max = 5
+    pages_max = 6
     pages = 0
     cooldown = 2
 
