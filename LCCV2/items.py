@@ -27,14 +27,15 @@ class Weapons:
 
     # Reloading ammo function
     def reload(self):
-        if self.on_load >= 0:
-            if self.ammo_count > self.hold_limit:
-                self.ammo_count -= self.hold_limit - self.on_load
-                self.on_load = self.hold_limit
-            else:
-                if self.ammo_count > 0:
-                    self.on_load = self.ammo_count
-                    self.ammo_count = 0
+        if self.on_load <= 0:
+            if self.hold_limit > self.on_load >= 0:
+                if self.ammo_count >= self.hold_limit:
+                    self.ammo_count -= self.hold_limit - self.on_load
+                    self.on_load = self.hold_limit
+                else:
+                    if self.ammo_count > 0:
+                        self.on_load = self.ammo_count
+                        self.ammo_count = 0
 
     # Loading ammo function
     def load_ammo(self, bullets):
