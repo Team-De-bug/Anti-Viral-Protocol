@@ -24,7 +24,7 @@ hud = pygame.image.load(IMAGES_PATH + "HUD/hud.png")
 
 # Setting the screen up
 win = pygame.display.set_mode((1200, 640))
-pygame.display.set_caption("LCC GAME")
+pygame.display.set_caption("Anti-Viral Protocol")
 ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
