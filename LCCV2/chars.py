@@ -494,12 +494,12 @@ class Player(Entity):
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
 
-        if keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0:
+        if (keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0
+                and self.weapons[self.weapon_list[self.current_weapon]].on_load > 0):
             self.weapons[self.weapon_list[self.current_weapon]].fired = True
             if self.direction == "R":
                 direction = 1
                 width = self.width * 3/2
-
             else:
                 direction = -1
                 width = 0
