@@ -1,5 +1,5 @@
-import pygame
 import guns as guns
+import pygame
 
 IMAGE_PATH = "resources/Images/"
 
@@ -505,11 +505,11 @@ class Player(Entity):
                 width = 0
             self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
-        if keys[pygame.K_e] and not keys[pygame.K_SPACE] and self.current_weapon != 0:
+        if keys[pygame.K_r] and not keys[pygame.K_SPACE] and self.current_weapon != 0:
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
         # restock if on healer
-        if keys[pygame.K_r] and self.on_healer and self.on_platform:
+        if keys[pygame.K_e] and self.on_healer and self.on_platform:
             self.hp = 100
             if not self.healer.used:
                 for weapon in self.weapon_list:
