@@ -748,6 +748,10 @@ damage_delay = 20
 def credits(win):
     num = 0
     image = pygame.image.load(IMAGES_PATH+"Menus/credits.png")
+
+    pygame.mixer.music.load("resources/Sounds/Credits.ogg")
+    pygame.mixer.music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -755,12 +759,11 @@ def credits(win):
                 quit()
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RETURN]:
+        if keys[pygame.K_RETURN] or num > 4800:
+            pygame.mixer.stop()
             break
         win.blit(image, (0, num * -1))
         num += 1
-        if num > 4800:
-            break
         clock.tick(40)
         pygame.display.update()
 
@@ -770,6 +773,9 @@ def main_menu(win):
     start_button = pygame.image.load(IMAGES_PATH+"Menus/StartButton.png")
     exit_button = pygame.image.load(IMAGES_PATH+"Menus/ExitButton.png")
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
+
+    pygame.mixer.music.load("resources/Sounds/Credits.ogg")
+    pygame.mixer.music.play(-1)
 
     global LEVEL_NUM
     global LOAD_LEVEL
@@ -788,6 +794,7 @@ def main_menu(win):
         if 473 + 256 > mouse_hover[0] > 473 and 300 + 80 > mouse_hover[1] > 300:
             win.blit(start_button, (473, 300), (256, 0, 256, 80))
             if mouse_pressed[0]:
+                pygame.mixer.music.stop()
                 LEVEL_NUM = 0
                 LOAD_LEVEL = True
                 img = 0
@@ -839,6 +846,7 @@ def mission_logger(win):
 # win screen
 def you_win():
     image = pygame.image.load(IMAGES_PATH+"Menus/endgame.png")
+    pygame.mixer.music.load("resource/Sounds/Ending.ogg")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -847,10 +855,12 @@ def you_win():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RETURN]:
+            pygame.mixer.music.stop()
             break
 
         win.blit(image, (0, 0))
         pygame.display.update()
+
 
 def get_help():
     image = pygame.image.load(IMAGES_PATH+"Menus/help.png")
