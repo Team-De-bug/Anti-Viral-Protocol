@@ -3,3 +3,5 @@
 .vscode
 .idea
 *.pyc
+build
+setup.py
