@@ -768,9 +768,11 @@ def credits(win):
         if keys[pygame.K_RETURN] or num > 4800:
             pygame.mixer.music.stop()
             break
+        if keys[pygame.K_DOWN]:
+            num += 2
 
         win.blit(image, (0, num * -1))
-        num += 1
+        num += 2
         clock.tick(40)
         pygame.display.update()
 
