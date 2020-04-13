@@ -599,7 +599,7 @@ def level_4():
 def level_5():
     # set man Spawn
     man.spawn()
-    man.x, man.y = 20, 200
+    man.x, man.y = 20, 250
 
     # Set background color of level
     color = (75, 75, 75)
