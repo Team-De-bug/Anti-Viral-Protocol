@@ -14,6 +14,7 @@ class Weapons:
 
     ammo = None
 
+    # Initializing the weapons
     def __init__(self):
         self.ammo_list = []
         self.anim = {}
@@ -27,14 +28,15 @@ class Weapons:
 
     # Reloading ammo function
     def reload(self):
-        if self.on_load >= 0:
-            if self.ammo_count > self.hold_limit:
-                self.ammo_count -= self.hold_limit - self.on_load
-                self.on_load = self.hold_limit
-            else:
-                if self.ammo_count > 0:
-                    self.on_load = self.ammo_count
-                    self.ammo_count = 0
+        if self.on_load <= 0:
+            if self.hold_limit > self.on_load >= 0:
+                if self.ammo_count >= self.hold_limit:
+                    self.ammo_count -= self.hold_limit - self.on_load
+                    self.on_load = self.hold_limit
+                else:
+                    if self.ammo_count > 0:
+                        self.on_load = self.ammo_count
+                        self.ammo_count = 0
 
     # Loading ammo function
     def load_ammo(self, bullets):
@@ -52,6 +54,7 @@ class Weapons:
         self.ammo.load_anim(ammo_path)
         self.sound = pygame.mixer.Sound(sound)
 
+    # updating the on screen bullets
     def update_bullets(self, win, platforms, double=False):
 
         for ammo in self.ammo_list:
@@ -62,11 +65,13 @@ class Weapons:
             else:
                 self.ammo_list.pop(self.ammo_list.index(ammo))
 
+    # scrolling the bullets as the player walks
     def scroll_bullets(self, vel, direction):
         for ammo in self.ammo_list:
             ammo.scroll_x(vel, direction)
 
 
+# Shells/Bullets class
 class Shells:
 
     dist_limit = 1000
@@ -75,14 +80,14 @@ class Shells:
     width = 20
     height = 10
 
-    # setting up the bullet loc
+    # Setting up the bullet loc
     def __init__(self, x, y, direction):
         self.x = x
         self.y = y
         self.dist = 0
         self.direction = direction
 
-    # animation loader function
+    # Loading the animation function
     @classmethod
     def load_anim(cls, path):
 
@@ -91,17 +96,20 @@ class Shells:
                     pygame.image.load(path + "2x_R.png"),
                     pygame.image.load(path + "2x_L.png")]
 
-    # scrolling function
+    # Scrolling function
     def scroll_x(self, vel, direction):
         self.x += vel * direction
 
+    # Moving the bullet in the fired direction
     def move(self):
         if self.dist < self.dist_limit:
             self.x += self.vel * self.direction
             self.dist += self.vel
 
+    # Drawing the bullet on screen
     def draw(self, win, double):
 
+        # Checking if double damage is on
         if double:
             if self.direction > 0:
                 win.blit(self.anim[2], (self.x, self.y))
@@ -114,6 +122,7 @@ class Shells:
             else:
                 win.blit(self.anim[0], (self.x, self.y))
 
+    # Checking for collision with platforms
     def check_collision(self, platforms):
         on_x = None
         on_y = None

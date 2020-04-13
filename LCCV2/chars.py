@@ -55,8 +55,6 @@ class Enemy(Entity):
     # load anim_function
     def load_anim(self, path, ammo_path):
         self.anim = pygame.image.load(path)
-        #self.moving = pygame.image.load(path)
-        #self.attack = pygame.image.load(path)
         self.ammo.load_anim(ammo_path)
 
     # Move function fall back
@@ -64,11 +62,13 @@ class Enemy(Entity):
         check_y = [player.y + player.height > self.y > player.y,
                    player.y + player.height > self.y + self.width > player.y]
 
+        # checking if on the player
         if 0 < abs(player.x - self.x) < 10:
             self.on_player = True
         else:
             self.on_player = False
 
+        # Checking if player not in range or tracking is disabled
         if (not ((0 < abs(player.x - self.x) < 400) and (check_y[0] or check_y[1]))) or (not self.Tracking):
 
             if self.dir_x:
@@ -86,7 +86,7 @@ class Enemy(Entity):
                 self.dir_x = False
 
         else:
-
+            # if tracking enabled then go towards player
             if not self.on_player and self.Tracking:
                 if self.x > player.x:
                     self.x -= speed
@@ -94,23 +94,27 @@ class Enemy(Entity):
                 else:
                     self.x += speed
 
+        # checking if player is in firing range
         if (200 < player.x - self.x < 400) or (200 < self.x - player.x < 400) and (check_y[0] or check_y[1]):
             if self.x > player.x:
                 self.fire(self.x + self.width / 2, self.y + self.height / 2, -1)
             else:
                 self.fire(self.x + self.width / 2, self.y + self.height / 2, 1)
 
-    # Draw method fallback
+    # Draw method for the enemies
     def draw(self, win):
         win.blit(self.anim, (self.x, self.y))
 
+    # scroll funnction
     def scroll_x(self, speed, direction):
         self.x += speed * direction
 
+    # function to set the max patrolling distance
     def set_max_distance(self, dist):
         self.dist_max = dist
         self.dist = dist
 
+    # function to update bullets fired by the enemies
     def update_bullets(self, win, platforms):
         for ammo in self.ammo_list:
             on_x, on_y = ammo.check_collision(platforms)
@@ -120,10 +124,12 @@ class Enemy(Entity):
             else:
                 self.ammo_list.pop(self.ammo_list.index(ammo))
 
+    # function to scroll enemy bullets
     def scroll_bullets(self, vel, direction):
         for ammo in self.ammo_list:
             ammo.scroll_x(vel, direction)
 
+    # Fire function for enemy to fire bullets
     def fire(self, x, y, direction):
         if self.cooldown <= 0:
             self.cooldown = 60
@@ -132,6 +138,7 @@ class Enemy(Entity):
         else:
             self.cooldown -= 1
 
+    # function to check for meele attack on player
     def hurt_player(self, player):
         if player.x + player.width > self.x > player.x and player.y + player.height > self.y > player.y:
             if self.meele_cooldown <= 0:
@@ -160,6 +167,7 @@ class Player(Entity):
     frames = [(0, 0, 128, 128), (129, 0, 128, 128), (259, 0, 128, 128), (385, 0, 128, 128),
               (513, 0, 128, 128), (641, 0, 128, 128), (769, 0, 128, 128), (897, 0, 128, 128)]
 
+    # Player initializing function
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.status = ["idle_", "walking_"]
@@ -189,6 +197,8 @@ class Player(Entity):
         self.double_damage_count = 3
         self.hp = 100
         self.infection = 0
+
+        # Setting the weapons back to full load
         self.weapons["pistol"].ammo_count = self.weapons["pistol"].ammo_limit
         self.weapons["pistol"].on_load = self.weapons["pistol"].hold_limit
         self.weapons["shotgun"].ammo_count = self.weapons["shotgun"].ammo_limit
@@ -494,6 +504,7 @@ class Player(Entity):
         if self.on_moving_platform and self.platform.move_style == "y":
             self.y += self.platform.moving_speed * self.plat_move_dir
 
+        # Firing the bullets if the conditions are met
         if (keys[pygame.K_SPACE] and self.current_weapon > 0 and self.weapons[self.weapon_list[self.current_weapon]].cooldown <= 0
                 and self.weapons[self.weapon_list[self.current_weapon]].on_load > 0):
             self.weapons[self.weapon_list[self.current_weapon]].fired = True
@@ -505,6 +516,7 @@ class Player(Entity):
                 width = 0
             self.weapons[self.weapon_list[self.current_weapon]].fire(self.x+width, self.y+40, direction)
 
+        # Call reload function of the guns if conditions met
         if keys[pygame.K_r] and not keys[pygame.K_SPACE] and self.current_weapon != 0:
             self.weapons[self.weapon_list[self.current_weapon]].reload()
 
@@ -519,10 +531,12 @@ class Player(Entity):
                         self.weapons[weapon].ammo_count = self.weapons[weapon].ammo_limit
                 self.healer.used = True
 
+        # Conditions to enable Double Damage
         if keys[pygame.K_f] and not self.double_damage and self.double_damage_count > 0 and self.level >= 2:
             self.double_damage = True
             self.double_damage_count -= 1
 
+        # updating the double damage timer
         if self.double_damage:
             if self.double_damage_timer > 0:
                 self.double_damage_timer -= 1
@@ -544,8 +558,12 @@ class Player(Entity):
             if (platform.y + platform.height) > (self.y + self.height) >= platform.y and x_on_platform:
                 self.on_platform = True
                 self.vel = 0
-                if self.y+self.height - platform.y < 40 and not platform.Taller:
+
+                # Setting the player back on platform if he falls into the platform
+                if self.y+self.height - platform.y < 20 and not platform.Taller:
                     self.y = platform.y - self.height
+
+                # Checking if on Moving Platform
                 if platform.is_moving:
                     self.on_moving_platform = True
                     self.occupied = True
@@ -554,6 +572,7 @@ class Player(Entity):
                 else:
                     self.on_moving_platform = False
 
+                # Checking if on healer(boost) platform
                 if platform.healer:
                     self.infection = 0
                     self.on_healer = True
@@ -562,6 +581,7 @@ class Player(Entity):
                     self.on_healer = False
                     self.healer = None
 
+                # checking if on a tall platform
                 if platform.Taller:
                     if self.y + self.height - platform.y < 20:
                         self.y = platform.y - self.height
@@ -585,10 +605,12 @@ class Player(Entity):
     # Changing weapon function
     def change_weapon(self, keys):
 
+        # Checking if any ammo is still on screen
         if self.current_weapon != 0:
             if not self.weapons[self.weapon_list[self.current_weapon]].ammo_list:
                 can_switch = True
             else:
+                # if no ammo on screen then allow player to switch weapons
                 can_switch = False
         else:
             can_switch = True
@@ -633,6 +655,7 @@ class Player(Entity):
 
             self.weapons[self.weapon_list[self.current_weapon]].update_bullets(win, platforms, self.double_damage)
 
+    # if player infected then damage player over time
     def infection_damage(self):
         if self.infection_cooldown <= 0:
             self.hp -= self.infection
@@ -640,28 +663,34 @@ class Player(Entity):
         else:
             self.infection_cooldown -= 1
 
+    # check if enemy is hurt by bullets
     def enemy_killed(self, enemies, win):
         for enemy in enemies:
             ammo_list = self.weapons[self.weapon_list[self.current_weapon]].ammo_list
             for ammo in ammo_list:
                 if enemy.width + enemy.x > ammo.x > enemy.x and enemy.y + enemy.height > ammo.y > enemy.y:
+                    # playing the hit sound as the enemy is hit by the player
                     self.hit.play()
+                    # if weapon is RPG then explode shell
                     if self.current_weapon == 4:
                         self.weapons[self.weapon_list[self.current_weapon]].explode(ammo, win)
                     else:
                         ammo_list.pop(ammo_list.index(ammo))
+
                     if enemy.hp > 0:
+                        # do double the damage if double damage is on
                         if self.double_damage:
                             enemy.hp -= ammo.damage * 2
                         else:
                             enemy.hp -= ammo.damage
 
-    # loading the player health bar
+    # Update function for player health bar
     def update_player_hb(self, win):
         if self.hp < 0:
             self.hp = 0
         win.blit(self.health_bar, (96, 13), (0, 0, (self.hp/100) * 239, 13))
 
+    # Update function for weapon cooldown bar and fire indicator
     def update_weapon_cdb(self, win):
         if self.current_weapon != 0:
             cooldown = self.weapons[self.weapon_list[self.current_weapon]].cooldown
@@ -674,6 +703,7 @@ class Player(Entity):
             else:
                 win.blit(self.shoot, (212, 107), (18, 0, 18, 18))
 
+    # Update function to draw double damage indicator
     def update_double_d(self, win):
         if self.double_damage:
             win.blit(self.double_d[0], (968, 8))
