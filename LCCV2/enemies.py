@@ -1,5 +1,5 @@
-from chars import Enemy
 import pygame
+from chars import Enemy
 from shells import *
 
 
@@ -23,7 +23,7 @@ class Virus2(Enemy):
 
 # Virus3
 class Virus3(Enemy):
-    ammo = Virus4shell
+    ammo = Virus3shell
     height = 156
     width = 156
     hp = 300
@@ -51,12 +51,16 @@ class VirusBoss(Enemy):
     enemy_list = []
     enemy = Virus2
 
+    # Loading the boss health bar
     health_bar = pygame.image.load("resources/Images/HUD/bossbar.png")
 
+    # Function to spawn enemies
     def spawn_enemies(self, player):
+        # checking if there is room to spawn enemies
         if self.spawn_cooldown <= 0 and len(self.enemy_list) < 11:
             self.spawn_cooldown = 70
-            if 700 > player.x - self.x > 200 or 700 > self.x - player.x > 200:
+            # checking for the distance from player
+            if 700 > player.x - self.x or 700 > self.x - player.x:
                 self.enemy_list.append(self.enemy(self.x - 50, 500))
                 self.enemy_list[-1].load_anim("resources/Images/Characters/Virus/Virus_2/idle.png", "resources/Images/Projectiles/virus_1_")
                 self.enemy_list[-1].Tracking = True
@@ -64,6 +68,7 @@ class VirusBoss(Enemy):
         else:
             self.spawn_cooldown -= 1
 
+    # Checking for damage by player
     def check_hurt(self, player):
         if player.current_weapon != 0:
             if not self.enemy_list:
@@ -73,10 +78,12 @@ class VirusBoss(Enemy):
                         self.hp -= ammo.damage
                         ammo_list.pop(ammo_list.index(ammo))
 
+    # Update function for boss health-bar
     def update_health_bar(self, win):
         if self.hp > 0:
             win.blit(self.health_bar, (430, 22), (0, 0, (self.hp/self.health_max) * 500, 20))
 
+    # function to kill player if in the virus
     def kill_on_contact(self, player):
         if self.x + self.width > player.x > self.x and self.y + self.height > player.y > self.y:
             player.hp = 0

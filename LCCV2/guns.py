@@ -2,7 +2,9 @@ import pygame
 import shells
 from items import Weapons
 
+# Setting up the mixer for sounds
 pygame.mixer.init()
+
 
 # Pistol
 class Pistol(Weapons):
@@ -45,6 +47,7 @@ class RocketLauncher(Weapons):
     explode_img = pygame.image.load("resources/Images/Projectiles/explosion.png")
     explode_sound = pygame.mixer.Sound("resources/Sounds/Explode.wav")
 
+    # Overreide for update bullets function
     def update_bullets(self, win, platforms, double=False):
         for ammo in self.ammo_list:
             on_x, on_y = ammo.check_collision(platforms)
@@ -54,6 +57,7 @@ class RocketLauncher(Weapons):
             else:
                 self.explode(ammo, win)
 
+    # function to play the explosion image and sounds
     def explode(self, ammo, win):
         ammo.exploded = True
         ammo.vel = 0

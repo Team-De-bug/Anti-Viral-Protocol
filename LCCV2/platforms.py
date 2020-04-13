@@ -8,6 +8,7 @@ class Platform:
     healer = False
     Taller = False
 
+    # Setting the x, y position of the platform
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -36,6 +37,7 @@ class TallPlatform(Platform):
     Taller = True
 
 
+# Only for testing puroses
 class MockPlatform(Platform):
 
     x = 5
@@ -69,6 +71,7 @@ class MovingTile(Platform):
     speed = 1
     occupied = False
 
+    # Move function for the moving platforms
     def move(self):
         if self.move_style == "x":
             self.moving_speed = self.speed
