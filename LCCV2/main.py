@@ -703,6 +703,7 @@ def main():
                 # Checking for Boss level
                 if LEVEL_NUM < 4:
                     PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL = LEVELS[LEVEL_NUM]()
+                    boss = False
                 else:
                     PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL, boss = LEVELS[LEVEL_NUM]()
 
