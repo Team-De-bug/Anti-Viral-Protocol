@@ -599,6 +599,7 @@ def level_4():
 def level_5():
     # set man Spawn
     man.spawn()
+    man.x, man.y = 20, 250
 
     # Set background color of level
     color = (75, 75, 75)
@@ -703,6 +704,7 @@ def main():
                 # Checking for Boss level
                 if LEVEL_NUM < 4:
                     PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL = LEVELS[LEVEL_NUM]()
+                    boss = False
                 else:
                     PLATFORMS, ENEMIES, BACKGROUND, color, PORTAL, boss = LEVELS[LEVEL_NUM]()
 

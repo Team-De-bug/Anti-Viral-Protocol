@@ -194,6 +194,7 @@ class Player(Entity):
 
     # Reset player for each level
     def spawn(self):
+        self.current_weapon = 0
         self.double_damage_count = 3
         self.hp = 100
         self.infection = 0
