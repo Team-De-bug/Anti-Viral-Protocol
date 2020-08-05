@@ -6,4 +6,4 @@
 
 ## A Game by ![Team De-Bug](https://i.imgur.com/C3eA4g8.png)
 
-You can find the wiki [here](https://github.com/RishiMenon2004/Anti-Viral-Protocol/wiki) for things such as controls, story and gamplay.
+You can find the wiki [here](https://github.com/Team-De-bug/Anti-Viral-Protocol/wiki) for things such as controls, story and gamplay.
