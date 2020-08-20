@@ -220,13 +220,13 @@ class Player(Entity):
 
         # loading the gun animations
         self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
-                                         IMAGE_PATH + "Projectiles/pistol_", "resources/Sounds/Shoot_Pistol_1.wav")
+                                         IMAGE_PATH + "Projectiles/pistol_", "resources/8D_Sounds/8D_Shoot_Pistol_1.wav")
         self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
-                                          IMAGE_PATH + "Projectiles/shotgun", "resources/Sounds/Shotgun.wav")
+                                          IMAGE_PATH + "Projectiles/shotgun", "resources/8D_Sounds/8D_Shotgun.wav")
         self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
-                                      IMAGE_PATH + "Projectiles/rpg_", "resources/Sounds/RPG.wav")
+                                      IMAGE_PATH + "Projectiles/rpg_", "resources/8D_Sounds/8D_RPG.wav")
         self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
-                                     IMAGE_PATH + "Projectiles/ar_", "resources/Sounds/Shoot_AR_1.wav")
+                                     IMAGE_PATH + "Projectiles/ar_", "resources/8D_Sounds/8D_Shoot_AR_1.wav")
 
     # loading animation function
     def load_anim(self, path):
@@ -238,7 +238,7 @@ class Player(Entity):
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
         # load sounds
-        self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
+        self.hit = pygame.mixer.Sound("resources/8D_Sounds/8D_hit.wav")
 
         # load bars for hud
         self.health_bar = pygame.image.load(IMAGE_PATH+"HUD/health_bar.png")
