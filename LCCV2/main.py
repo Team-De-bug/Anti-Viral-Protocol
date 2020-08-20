@@ -811,7 +811,7 @@ def credits(win):
     image = pygame.image.load(IMAGES_PATH+"Menus/credits.png")
 
     # Loading and playing the credits music
-    pygame.mixer.music.load("resources/Sounds/Credits.ogg")
+    pygame.mixer.music.load("resources/Sounds/8D_Credits.ogg")
     pygame.mixer.music.play(-1)
 
     while True:
@@ -846,7 +846,7 @@ def main_menu(win):
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
 
     # Loading and playing the main menu music
-    pygame.mixer.music.load("resources/Sounds/Main_Menu.ogg")
+    pygame.mixer.music.load("resources/Sounds/8D_Main_Menu.ogg")
     pygame.mixer.music.play(-1)
 
     global LEVEL_NUM
