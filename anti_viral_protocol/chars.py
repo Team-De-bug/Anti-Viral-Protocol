@@ -1,7 +1,10 @@
 from . import guns
 import pygame
+import os
 
-IMAGE_PATH = "resources/Images/"
+# Working file paths
+BASE_PATH = os.path.dirname(__file__)
+IMAGES_PATH = os.path.join(BASE_PATH, 'resources/Images/')
 
 
 # Entity class for all characters
@@ -219,14 +222,14 @@ class Player(Entity):
         self.weapons["AR"] = guns.MachineGun()
 
         # loading the gun animations
-        self.weapons["pistol"].load_anim(IMAGE_PATH + "Characters/Player/Pistol/",
-                                         IMAGE_PATH + "Projectiles/pistol_", "resources/Sounds/Shoot_Pistol_1.wav")
-        self.weapons["shotgun"].load_anim(IMAGE_PATH + "Characters/Player/Shotgun/",
-                                          IMAGE_PATH + "Projectiles/shotgun", "resources/Sounds/Shotgun.wav")
-        self.weapons["RPG"].load_anim(IMAGE_PATH + "Characters/Player/RPG/",
-                                      IMAGE_PATH + "Projectiles/rpg_", "resources/Sounds/RPG.wav")
-        self.weapons["AR"].load_anim(IMAGE_PATH + "Characters/Player/AR/",
-                                     IMAGE_PATH + "Projectiles/ar_", "resources/Sounds/Shoot_AR_1.wav")
+        self.weapons["pistol"].load_anim(IMAGES_PATH + "Characters/Player/Pistol/",
+                                         IMAGES_PATH + "Projectiles/pistol_", BASE_PATH + "/resources/Sounds/Shoot_Pistol_1.wav")
+        self.weapons["shotgun"].load_anim(IMAGES_PATH + "Characters/Player/Shotgun/",
+                                          IMAGES_PATH + "Projectiles/shotgun", BASE_PATH + "/resources/Sounds/Shotgun.wav")
+        self.weapons["RPG"].load_anim(IMAGES_PATH + "Characters/Player/RPG/",
+                                      IMAGES_PATH + "Projectiles/rpg_", BASE_PATH + "/resources/Sounds/RPG.wav")
+        self.weapons["AR"].load_anim(IMAGES_PATH + "Characters/Player/AR/",
+                                     IMAGES_PATH + "Projectiles/ar_", BASE_PATH + "/resources/Sounds/Shoot_AR_1.wav")
 
     # loading animation function
     def load_anim(self, path):
@@ -238,13 +241,13 @@ class Player(Entity):
         self.anim["walking_L"] = pygame.image.load(path+"no_weapons/walking_L.png")
 
         # load sounds
-        self.hit = pygame.mixer.Sound("resources/Sounds/hit.wav")
+        self.hit = pygame.mixer.Sound(BASE_PATH + "/resources/Sounds/hit.wav")
 
         # load bars for hud
-        self.health_bar = pygame.image.load(IMAGE_PATH+"HUD/health_bar.png")
-        self.shoot = pygame.image.load(IMAGE_PATH+"HUD/shoot.png")
-        self.double_d = [pygame.image.load(IMAGE_PATH+"HUD/2x_on.png"),
-                         pygame.image.load(IMAGE_PATH+"HUD/2x_off.png")]
+        self.health_bar = pygame.image.load(IMAGES_PATH + "HUD/health_bar.png")
+        self.shoot = pygame.image.load(IMAGES_PATH + "HUD/shoot.png")
+        self.double_d = [pygame.image.load(IMAGES_PATH + "HUD/2x_on.png"),
+                         pygame.image.load(IMAGES_PATH + "HUD/2x_off.png")]
 
     # Moving control
     def move(self, keys, platforms, enemies, bg_layers, portal, boss=False):

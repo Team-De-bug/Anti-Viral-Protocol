@@ -1,9 +1,14 @@
+import os
 import pygame
 from . import shells
 from .items import Weapons
 
 # Setting up the mixer for sounds
 pygame.mixer.init()
+
+# Working file paths
+BASE_PATH = os.path.dirname(__file__)
+RES_PATH = os.path.join(BASE_PATH, 'resources/')
 
 
 # Pistol
@@ -44,8 +49,8 @@ class RocketLauncher(Weapons):
     on_load = 5
     cooldown_max = 60
     ammo = shells.RPGShells
-    explode_img = pygame.image.load("resources/Images/Projectiles/explosion.png")
-    explode_sound = pygame.mixer.Sound("resources/Sounds/Explode.wav")
+    explode_img = pygame.image.load(RES_PATH + "/Images/Projectiles/explosion.png")
+    explode_sound = pygame.mixer.Sound(RES_PATH + "/Sounds/Explode.wav")
 
     # Overreide for update bullets function
     def update_bullets(self, win, platforms, double=False):

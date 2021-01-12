@@ -6,17 +6,17 @@ from .chars import Player
 from .enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
 from .platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
 
+# Working file paths
+BASE_PATH = os.path.dirname(__file__)
+IMAGES_PATH = os.path.join(BASE_PATH, 'resources/Images/')
 
 # Setting up the mixer for audio
 pygame.mixer.init()
 
 # Setting up the font
 pygame.font.init()
-font = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 14)
-font_20 = pygame.font.Font("resources/fonts/DJB Get Digital.ttf", 20)
-
-# Working file paths
-IMAGES_PATH = 'resources/Images/'
+font = pygame.font.Font(BASE_PATH + "/resources/fonts/DJB Get Digital.ttf", 14)
+font_20 = pygame.font.Font(BASE_PATH + "/resources/fonts/DJB Get Digital.ttf", 20)
 
 # Starting pygame
 pygame.init()
@@ -27,7 +27,7 @@ hud = pygame.image.load(IMAGES_PATH + "HUD/hud.png")
 # Setting the screen up
 win = pygame.display.set_mode((1200, 640))
 pygame.display.set_caption("Anti-Viral Protocol")
-ICON = pygame.image.load(os.path.join(IMAGES_PATH+"Icon/", 'GameIcon_64.png'))
+ICON = pygame.image.load(os.path.join(IMAGES_PATH + "Icon/", 'GameIcon_64.png'))
 pygame.display.set_icon(ICON)
 
 
@@ -36,7 +36,7 @@ clock = pygame.time.Clock()
 
 # Setting up the player
 man = Player(x=100, y=100)
-man.load_anim(IMAGES_PATH+"Characters/Player/")
+man.load_anim(IMAGES_PATH + "Characters/Player/")
 man.init_guns()
 
 # Loading damage splash
@@ -811,7 +811,7 @@ def credits(win):
     image = pygame.image.load(IMAGES_PATH+"Menus/credits.png")
 
     # Loading and playing the credits music
-    pygame.mixer.music.load("resources/Sounds/Credits.ogg")
+    pygame.mixer.music.load(BASE_PATH + "/resources/Sounds/Credits.ogg")
     pygame.mixer.music.play(-1)
 
     while True:
@@ -846,7 +846,7 @@ def main_menu(win):
     help_button = pygame.image.load(IMAGES_PATH+"Menus/HelpButton.png")
 
     # Loading and playing the main menu music
-    pygame.mixer.music.load("resources/Sounds/Main_Menu.ogg")
+    pygame.mixer.music.load(BASE_PATH + "/resources/Sounds/Main_Menu.ogg")
     pygame.mixer.music.play(-1)
 
     global LEVEL_NUM
@@ -901,7 +901,7 @@ def main_menu(win):
             if mouse_pressed[0]:
                 pygame.mixer.music.stop()
                 credits(win)
-                pygame.mixer.music.load("resources/Sounds/Main_Menu.ogg")
+                pygame.mixer.music.load(BASE_PATH + "/resources/Sounds/Main_Menu.ogg")
                 pygame.mixer.music.play(-1)
 
         pygame.display.update()
@@ -930,7 +930,7 @@ def mission_logger(win):
 def you_win():
     #loading the images and sound
     image = pygame.image.load(IMAGES_PATH+"Menus/endgame.png")
-    pygame.mixer.music.load("resource/Sounds/Ending.ogg")
+    pygame.mixer.music.load(BASE_PATH + "resource/Sounds/Ending.ogg")
     pygame.mixer.music.play(-1)
 
     while True:

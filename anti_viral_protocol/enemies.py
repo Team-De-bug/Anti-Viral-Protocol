@@ -1,6 +1,11 @@
 import pygame
 from .chars import Enemy
 from .shells import *
+import os
+
+# Working file paths
+BASE_PATH = os.path.dirname(__file__)
+IMAGES_PATH = os.path.join(BASE_PATH, 'resources/Images/')
 
 
 # virus_1
@@ -52,7 +57,7 @@ class VirusBoss(Enemy):
     enemy = Virus2
 
     # Loading the boss health bar
-    health_bar = pygame.image.load("resources/Images/HUD/bossbar.png")
+    health_bar = pygame.image.load(IMAGES_PATH + "HUD/bossbar.png")
 
     # Function to spawn enemies
     def spawn_enemies(self, player):
@@ -62,7 +67,8 @@ class VirusBoss(Enemy):
             # checking for the distance from player
             if 700 > player.x - self.x or 700 > self.x - player.x:
                 self.enemy_list.append(self.enemy(self.x - 50, 500))
-                self.enemy_list[-1].load_anim("resources/Images/Characters/Virus/Virus_2/idle.png", "resources/Images/Projectiles/virus_1_")
+                self.enemy_list[-1].load_anim(IMAGES_PATH + "/Characters/Virus/Virus_2/idle.png",
+                                              IMAGES_PATH + "Projectiles/virus_1_")
                 self.enemy_list[-1].Tracking = True
 
         else:
