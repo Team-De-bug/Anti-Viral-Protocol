@@ -676,7 +676,7 @@ DAMAGED = False
 
 
 # Running the game
-def main():
+def run():
     running = True
 
     global PLATFORMS
@@ -1174,4 +1174,4 @@ def check_portal(portal, man, boss=False):
 
 
 if __name__ == "__main__":
-    main()
+    run()
