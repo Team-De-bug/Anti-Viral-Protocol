@@ -1,6 +1,6 @@
 import pygame
-from chars import Enemy
-from shells import *
+from .chars import Enemy
+from .shells import *
 
 
 # virus_1

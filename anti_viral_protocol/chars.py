@@ -1,4 +1,4 @@
-import guns as guns
+from . import guns
 import pygame
 
 IMAGE_PATH = "resources/Images/"

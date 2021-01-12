@@ -16,7 +16,6 @@ setup(
     name='Anti-Viral-Protocol',
     version='1.0.1',
     packages=['anti_viral_protocol'],
-    license_file='LICENSE',
     url='https://github.com/Team-De-bug/Anti-Viral-Protocol',
     author='marudhu',
     author_email='marudhupaandian@gmail.com',

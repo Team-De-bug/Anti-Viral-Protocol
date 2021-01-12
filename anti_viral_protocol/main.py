@@ -1,11 +1,11 @@
 # Imports
 import os
 import sys
-
 import pygame
-from chars import Player
-from enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
-from platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+from .chars import Player
+from .enemies import Virus1, Virus2, Virus3, Virus4, VirusBoss
+from .platforms import BackDrop, FloatingPlatform, MovingTile, BasePlatform, Boost, TallPlatform, Endgate
+
 
 # Setting up the mixer for audio
 pygame.mixer.init()

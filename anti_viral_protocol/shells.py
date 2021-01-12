@@ -1,5 +1,5 @@
 import pygame
-from items import Shells
+from .items import Shells
 
 
 # defining and creating the bullets for each gun

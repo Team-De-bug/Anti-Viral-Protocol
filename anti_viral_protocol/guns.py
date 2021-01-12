@@ -1,6 +1,6 @@
 import pygame
-import shells
-from items import Weapons
+from . import shells
+from .items import Weapons
 
 # Setting up the mixer for sounds
 pygame.mixer.init()
