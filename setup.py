@@ -38,5 +38,6 @@ setup(
         "Topic :: Games/Entertainment :: Side-Scrolling/Arcade Games",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
-                 ]
+                 ],
+    scripts=['bin/run.py']
 )
