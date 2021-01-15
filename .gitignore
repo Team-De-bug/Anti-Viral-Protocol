@@ -8,3 +8,4 @@ build
 dist
 Frameworks
 /venv/
+*.snap
